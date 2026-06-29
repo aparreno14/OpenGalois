@@ -1,278 +1,363 @@
 # OpenGalois
 
-OpenGalois is an open-source **glass-box** library for polynomials over (\mathbb{Q}) of degree **1..5**.
+OpenGalois is a Python library for **glass-box Galois analysis** of polynomials over (\mathbb{Q}) of degree at most 5.
 
-Instead of returning an opaque statement such as “(G = S_5)”, OpenGalois produces a
-**proof-carrying certificate** (JSON) whose mathematical claims can be checked by an
-**independent verifier** using exact arithmetic and an explicit ruleset.
+It computes Galois groups, determines solvability by radicals, and, when supported, produces radical expressions for the roots. Unlike a black-box computer algebra system, OpenGalois also emits a **proof-carrying JSON certificate**: a structured derivation that can be checked by an independent verifier using exact arithmetic and an explicit ruleset.
 
-The project is aimed at **auditable mathematics**:
+The guiding principle is simple:
 
-* every accepted conclusion is backed by explicit facts and rules,
-* the verifier checks only the normative proof payload,
-* human-readable explanations are derived from the same certificate, with no hidden reasoning.
+> the result should not only be computed; it should be auditable.
 
-Core outputs:
-
-* a **certificate** (JSON; proof-carrying),
-* an **independent verifier**: `verify(certificate)`,
-* an **explanation renderer** derived only from the certificate.
+OpenGalois is research software, currently in pre-alpha status.
 
 ---
 
-## Project status
+## What OpenGalois is
 
-Pre-alpha / under active development.
+OpenGalois is designed around three goals.
 
-The project is currently transitioning from a legacy **v2** model to a more explicit and verifier-friendly
-**v3** model.
+1. **Exact algebraic computation**
 
-### Formats: v2 vs v3
+   Computations are performed over (\mathbb{Q}), using exact rational arithmetic. The project deliberately avoids floating-point approximations in the mathematical core.
 
-* **v2 (schema 2.0.0)**: legacy implemented format, based on proof trees and lemma-oriented reasoning.
-* **v3 (schema 3.0.0)**: current target architecture, based on **Facts + Objects + Rules** and an explicit
-  fact graph.
+2. **Proof-carrying output**
 
-The public contract that matters is the **certificate format + verifier**.
-Internal algorithms, backend choices, UI summaries, and convenience metadata are secondary and
-non-normative unless explicitly referenced by the proof.
+   The output is not just a label such as `S5` or `D4`. OpenGalois emits a certificate containing the mathematical objects, facts, rules, and premises used to justify the conclusion.
 
----
+3. **Human-readable explanations**
 
-## What “glass-box” means in OpenGalois
+   The same certificate can be rendered as a mathematical explanation. The explanation is non-normative: it is derived from the certificate, but the certificate and verifier remain the source of truth.
 
-OpenGalois is designed so that a verifier does not need to trust an internal CAS session, a hidden search
-procedure, or a prose explanation.
-
-A certificate is accepted only because its **normative proof payload** is valid.
-
-In particular:
-
-* facts are explicit,
-* referenced mathematical objects are explicit,
-* rules are explicit,
-* premises are explicit,
-* rule-local evidence is explicit whenever needed.
-
-This makes OpenGalois different from a black-box algebra package: the result is not merely a label,
-but a checkable derivation.
+OpenGalois is not intended to compete with large general-purpose systems such as SageMath, PARI/GP, Magma, Mathematica, or Maple. Its purpose is narrower: to make the computation of Galois groups and radical expressions for low-degree polynomials transparent, reproducible, and independently checkable.
 
 ---
 
-## What “proof-carrying” means in the v3 model
+## Mathematical scope
 
-A v3 certificate is meant to be read as a derivation over a **fact graph**.
+OpenGalois currently targets polynomials
+
+[
+f \in \mathbb{Q}[x], \qquad 1 \leq \deg(f) \leq 5.
+]
+
+The current core ruleset is:
+
+```text
+le5-core@1
+```
+
+Supported analysis includes:
+
+* factorization over (\mathbb{Q}[x]);
+* irreducibility detection;
+* discriminant computation;
+* rational square and non-square checks;
+* Galois group classification for degrees (1) through (5);
+* reducible cases via the splitting fields of irreducible factors;
+* solvability by radicals;
+* radical expressions for supported solvable cases;
+* certificate verification;
+* explanation rendering in Markdown, LaTeX, and PDF.
+
+### Irreducible cases
+
+For irreducible polynomials, OpenGalois distinguishes the usual transitive possibilities:
+
+* degree 1: trivial group;
+* degree 2: (C_2);
+* degree 3: (C_3) or (S_3);
+* degree 4: (C_4), (V_4), (D_4), (A_4), or (S_4);
+* degree 5: (C_5), (D_5), (F_{20}), (A_5), or (S_5).
+
+The degree-4 classification uses the pair-sums cubic resolvent
+
+[
+(x_1+x_2)(x_3+x_4),
+]
+
+and the (C_4/D_4) branch is resolved by the corresponding Kappe--Warren discriminant tests.
+
+The degree-5 classification uses Dummit's sextic resolvent to detect the solvable branch and distinguish (S_5), (A_5), and (F_{20}). In the square-discriminant solvable branch, OpenGalois uses Dummit's auxiliary quadratic criterion to distinguish (D_5) from (C_5).
+
+### Reducible cases
+
+For reducible polynomials, OpenGalois factors the polynomial over (\mathbb{Q}), removes repeated factors and rational linear factors for the purpose of the splitting field, and then reasons from the irreducible factors.
+
+The main nontrivial reducible patterns in degree at most 5 are:
+
+* two irreducible quadratic factors, giving (C_2) or (C_2\times C_2);
+* one irreducible quadratic and one irreducible cubic factor, giving (C_6), (S_3), or (D_6).
+
+---
+
+## Installation
+
+Once published on PyPI:
+
+```bash
+pip install opengalois
+```
+
+For development from source:
+
+```bash
+git clone https://github.com/aparreno14/OpenGalois.git
+cd OpenGalois
+python -m venv .venv
+. .venv/bin/activate
+pip install -U pip
+pip install -e ".[dev]"
+```
+
+On Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install -U pip
+pip install -e ".[dev]"
+```
+
+---
+
+## Quickstart: Python API
+
+```python
+from opengalois import analyze, verify, render_explanation
+
+# f(x) = x^5 - x - 1
+result = analyze([1, 0, 0, 0, -1, -1])
+
+print(result.galois_group)
+print(result.solvable_by_radicals)
+
+certificate = result.certificate
+verification = verify(certificate)
+
+print(verification.verified)
+
+explanation = render_explanation(result, format="md")
+print(explanation)
+```
+
+The coefficient list is given in descending degree order:
+
+[
+[a_n,\ldots,a_0]
+]
+
+for
+
+[
+a_nx^n+\cdots+a_0.
+]
+
+Exact rational coefficients may be given as strings:
+
+```python
+result = analyze(["1", "0", "-13/5", "38/25", "667/125", "11672/3125"])
+```
+
+---
+
+## Quickstart: CLI
+
+Analyze a polynomial and write the certificate to disk:
+
+```bash
+opengalois analyze 1 0 0 0 -1 -1 --output cert.json
+```
+
+Verify a certificate:
+
+```bash
+opengalois verify cert.json
+```
+
+Render a human-readable explanation:
+
+```bash
+opengalois explain cert.json --format markdown
+```
+
+Write a LaTeX explanation:
+
+```bash
+opengalois explain cert.json --format latex --out proof.tex
+```
+
+Write a PDF explanation:
+
+```bash
+opengalois explain cert.json --format pdf --out proof.pdf
+```
+
+---
+
+## Certificates
+
+The central artifact produced by OpenGalois is a JSON certificate.
+
+A certificate contains:
+
+* the normalized input polynomial;
+* a store of mathematical objects;
+* a topologically ordered list of proved facts;
+* the rule used for each fact;
+* the premises required by each rule;
+* optional rule-defined evidence;
+* non-normative summary data for user interfaces.
+
+The verifier accepts a certificate only if the normative proof payload is valid.
+
+In particular, summaries, prose explanations, renderer output, and UI metadata do not affect correctness.
+
+---
+
+## The Objects / Facts / Rules model
+
+OpenGalois certificates are based on three concepts.
 
 ### Objects
 
-Mathematical objects live in an `objects` store and are referenced by stable ids.
-Typical object kinds include:
+Objects are mathematical values appearing in the proof, such as:
 
-* `PolyQQ`
-* `MPolyQQ`
-* `RatQQ`
-* `PolyQQList`
-* `GroupId`
-* `IntZ`
+* polynomials over (\mathbb{Q});
+* rational numbers;
+* group identifiers;
+* lists of factors;
+* radical expressions.
 
-The top-level polynomial is referenced via the reserved identifier `$input`.
+Objects are stored canonically and referenced by stable identifiers.
 
 ### Facts
 
-The proof is stored as a list `proof.facts[]` of fact nodes.
-Each fact node contains:
+Facts are mathematical claims about objects, for example:
 
-* `claim`: a typed predicate application `pred(args...)` (**normative**),
-* `rule`: the rule id used to justify the claim (**normative**),
-* `premises`: references to earlier facts (**normative**),
-* `evidence`: optional rule-defined computational evidence (**normative** when required).
+```text
+IrreducibleQQ(f)
+Discriminant(f, D)
+IsSquareQQ(D)
+GaloisGroup(f, G)
+RadicalRoots(f, R)
+```
 
-Non-normative fields such as `summary`, `statement`, or auxiliary display data must never affect acceptance.
+A fact is a statement. It becomes accepted only when justified by a rule.
 
-### Rulesets
+### Rules
 
-A verifier checks facts relative to an active `ruleset_id`.
-This allows OpenGalois to make the trusted surface explicit:
+Rules are verifier-known inference steps. A rule specifies:
 
-* which predicates exist,
-* which rules are allowed,
-* which rule ids are implemented,
-* and how each fact type is verified.
+* what kind of fact it can prove;
+* which premises are required;
+* which object bindings must agree;
+* what evidence, if any, is required;
+* what deterministic checks the verifier must perform.
 
-> v2 uses a lemma-tree representation.
-> v3 generalizes this into an explicit fact graph with a smaller and clearer trusted core.
-
----
-
-## Determinism and mathematical identity
-
-Mathematical identity is pinned by the normalized polynomial input, not by runtime metadata.
-
-The input identity is:
-
-* `input.hash = sha256( JCS(input_v1_scope) )`
-
-where `input_v1_scope` is the canonical JSON object containing only:
-
-* `domain`
-* `variable`
-* `ordering`
-* `degree`
-* `coeffs_qq`
-
-Timestamps, UI options, backend metadata, and similar runtime details are non-normative and must not affect identity.
+The engine proposes facts. The verifier distrusts the engine and checks every rule application independently.
 
 ---
 
-## Normative vs non-normative content
+## Radical expressions
 
-This distinction is fundamental.
+Radical expressions in OpenGalois are represented as symbolic abstract syntax trees.
 
-### Normative
+They are not floating-point approximations and they are not globally simplified algebraic numbers. Equality of radical expressions is structural, not equality modulo arbitrary algebraic identities.
 
-A verifier may use only:
+This design is intentional. It keeps the verifier small and avoids hiding difficult symbolic simplification inside the trusted core.
 
-* the applicable schema,
-* the active ruleset,
-* the object payloads,
-* the fact graph,
-* and any rule-defined evidence required by the ruleset.
+For example, OpenGalois treats a symbol such as
 
-### Non-normative
+[
+\sqrt{2}
+]
 
-The following must never affect acceptance:
-
-* summaries,
-* prose statements,
-* renderer-specific output,
-* backend notes,
-* convenience metadata,
-* UI-facing explanation fields.
-
-This separation is essential to the OpenGalois design.
+as an algebraic radical object satisfying (u^2=2), not as a numerical branch of the complex square root function.
 
 ---
 
-## Current mathematical scope
+## Explanation layer
 
-OpenGalois is intended for polynomials over (\mathbb{Q}) of degree at most 5.
+The explanation layer turns certificates into readable mathematical text.
 
-At the proof level, the project is being developed incrementally by adding:
+It is designed to be:
 
-* canonical object kinds,
-* fact predicates,
-* rulesets,
-* verifier support,
-* and degree-specific classification pipelines.
+* deterministic;
+* derived from the proof graph;
+* useful for auditing;
+* independent from verification.
 
-The intended direction is:
-
-* factor/reducibility analysis,
-* explicit derived facts such as degree, discriminant, square/non-square status,
-* resolvent-based classification where appropriate,
-* and final `GaloisGroup(...)` claims justified by explicit rule applications.
-
-The exact set of implemented rules depends on the active branch and ruleset version.
-For the normative source of truth, always consult the ruleset files and verifier implementation.
+The explanation layer is not trusted by the verifier. If an explanation and a verified certificate ever disagree, the certificate and ruleset are authoritative.
 
 ---
 
-## Documentation (read in this order)
+## Documentation map
 
-### Normative (source of truth)
+Start here:
 
-* `docs/spec/v3/overview.md`
-* `docs/spec/v3/certificate-format.md`
-* `docs/spec/v3/objects.md`
-* `docs/spec/v3/facts.md`
-* `docs/spec/v3/rules.md`
-* `docs/spec/v3/ruleset.md`
-
-Machine-readable fact catalog:
-
-* `spec/facts.yaml`
-
-Rulesets:
-
-* `rulesets/<ruleset_id>/`
-
-### Verification and explainability
-
-* `docs/verification.md`
-* `docs/explain.md`
-
-### Developer documentation
-
-* `docs/dev/adding-a-fact.md`
-* `docs/dev/adding-a-rule.md`
-
-### Legacy (v2)
-
-For v2 certificates, the following remain authoritative:
-
-* `schemas/certificate/2.0.0.json`
-* `docs/certificates/schema-v2.0.0.md`
-* `examples/certificates/v2.0.0/`
-* `docs/lemmas/`
-* `docs/objects/`
-
-### Conflict rule
-
-If a derived or explanatory document disagrees with the applicable normative schema or ruleset,
-the schema/ruleset is authoritative.
+* `docs/overview.md` — conceptual overview of the certificate model;
+* `docs/certificate-format.md` — JSON certificate format;
+* `docs/objects.md` — canonical object encodings;
+* `docs/rulesets/le5-core@1/facts.md` — fact catalog for the active ruleset;
+* `docs/rulesets/le5-core@1/` — rule documentation;
+* `docs/verification.md` — verifier model;
+* `docs/explain.md` — explanation model;
+* `docs/resolvents.md` — mathematical background on resolvents;
+* `docs/adding-a-fact.md` — developer guide for adding predicates;
+* `docs/adding-a-rule.md` — developer guide for adding rules.
 
 ---
 
-## Quickstart (developer)
+## Development
 
-1. Create a virtual environment and install dependencies
+Install development dependencies:
 
-   python -m venv .venv
-   . .venv/bin/activate    # Linux/macOS
+```bash
+pip install -e ".[dev]"
+```
 
-   # .venv\Scripts\activate  # Windows PowerShell
+Run tests:
 
-   pip install -U pip
-   pip install -e ".[dev]"
+```bash
+pytest -q
+```
 
-2. Run tests
+Run Ruff:
 
-   pytest -q
+```bash
+ruff check .
+```
 
-3. Minimal smoke check
+Run mypy:
 
-   python -c "from opengalois import analyze, verify; print(verify(analyze([1,0,0,0,-1,-1], explain=False).certificate).verified)"
-
----
-
-## Intended API (stable surface)
-
-* `analyze(polynomial, explain=False, **opts) -> Result`
-* `verify(certificate, **opts) -> VerifiedResult`
-* `render_explanation(result|certificate, format="md"|"tex"|"json")`
-
-Planned CLI:
-
-* `opengalois analyze`
-* `opengalois verify`
-* `opengalois explain`
+```bash
+mypy src
+```
 
 ---
 
-## Design principles
+## Status
 
-OpenGalois is guided by a small number of design principles:
+OpenGalois is currently pre-alpha research software.
 
-* **exact arithmetic over trust in heuristics**
-* **explicit proof obligations over implicit backend behaviour**
-* **normative certificates over renderer-dependent summaries**
-* **glass-box verification over black-box classification**
-* **mathematical auditability over convenience shortcuts**
+The main public surface is:
+
+```python
+analyze(polynomial, explain=False)
+verify(certificate)
+render_explanation(result_or_certificate, format="md")
+```
+
+The certificate schema, ruleset, and explanation templates may still evolve.
 
 ---
 
 ## License
 
-MIT (see `LICENSE`).
+OpenGalois is distributed under the MIT License.
 
-Si quieres, te preparo ahora una **versión aún más afinada** para pegarla directamente en `README.md`, ajustada al estado exacto en que has dejado ya grado 4.
+---
+
+## Academic context
+
+OpenGalois was developed as part of the project *The Solvability Problem for Polynomials of Degree at Most 5*. The project studies the classification of Galois groups and solvability by radicals for low-degree polynomials, with an emphasis on exact computation, proof-carrying certificates, and transparent mathematical explanations.
