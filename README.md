@@ -3,7 +3,6 @@
 OpenGalois is a Python library for **glass-box Galois analysis** of polynomials over `Q[x]` of degree at most 5.
 
 It computes Galois groups, determines solvability by radicals, and, when supported, produces radical expressions for the roots. Unlike a black-box computer algebra system, OpenGalois also emits a **proof-carrying JSON certificate**: a structured derivation that can be checked by an independent verifier using exact arithmetic and an explicit ruleset.
-It computes Galois groups, determines solvability by radicals, and, when supported, produces radical expressions for the roots. Unlike a black-box computer algebra system, OpenGalois also emits a **proof-carrying JSON certificate**: a structured derivation that can be checked by an independent verifier using exact arithmetic and an explicit ruleset.
 
 The guiding principle is simple:
 
@@ -218,9 +217,7 @@ In particular, summaries, prose explanations, renderer output and UI metadata do
 ---
 
 ## The Objects / Facts / Rules model
-## The Objects / Facts / Rules model
 
-OpenGalois certificates are based on three concepts.
 OpenGalois certificates are based on three concepts.
 
 ### Objects
@@ -289,7 +286,6 @@ It is designed to be:
 - independent from verification.
 
 The explanation layer is not trusted by the verifier. If an explanation and a verified certificate ever disagree, the certificate and ruleset are authoritative.
-The explanation layer is not trusted by the verifier. If an explanation and a verified certificate ever disagree, the certificate and ruleset are authoritative.
 
 ---
 
@@ -318,15 +314,7 @@ Install development dependencies:
 ```bash
 pip install -e ".[dev]"
 ```
-## Development
 
-Install development dependencies:
-
-```bash
-pip install -e ".[dev]"
-```
-
-Run tests:
 Run tests:
 
 ```bash
