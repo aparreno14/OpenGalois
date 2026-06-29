@@ -1,0 +1,39 @@
+id: radical_roots.QQ.deg2.quadratic_formula@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: RadicalRoots
+  args: [PolyQQ, RadicalExprList]
+
+premise_patterns:
+  - pred: Degree
+    bind:
+      claim_arg_0: premise_arg_0
+    constants:
+      premise_arg_1:
+        kind: IntZ
+        value: "2"
+  - pred: IrreducibleQQ
+    bind:
+      claim_arg_0: premise_arg_0
+
+evidence_schema: null
+
+check_mode: recompute
+
+checker:
+  steps:
+    - "Require a verified premise Degree(f,2) bound to the same polynomial f as in the claim."
+    - "Require a verified premise IrreducibleQQ(f)."
+    - "Decode f canonically as a PolyQQ and defensively require deg(f)=2."
+    - "If f(x)=ax^2+bx+c with a != 0, recompute the canonical discriminant Δ=b^2-4ac and denominator 2a."
+    - "Recompute the canonical ordered root list as [((-b)+root(2,Δ))/(2a), ((-b)-root(2,Δ))/(2a)] using the exact RadicalExpr AST scheme fixed by this rule."
+    - "Decode the claimed RadicalExprList and compare it to the recomputed list by exact structural equality of RadicalExpr payloads."
+    - "Accept."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_TYPE
+  - E_SIDE_CONDITION
+  - E_MISMATCH

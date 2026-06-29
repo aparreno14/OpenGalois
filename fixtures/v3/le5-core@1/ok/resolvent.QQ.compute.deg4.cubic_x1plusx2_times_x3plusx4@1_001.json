@@ -1,0 +1,131 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.0.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 4,
+    "coeffs_qq": [
+      "1",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "fae4db481433948cddaa1e4c16ab5e5e64caca82f586098324883745d90a57f3"
+  },
+  "objects": {
+    "int.4": {
+      "kind": "IntZ",
+      "value": "4"
+    },
+    "mpoly.alt": {
+      "kind": "MPolyQQ",
+      "nvars": 4,
+      "terms": [
+        {
+          "exp": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        }
+      ]
+    },
+    "poly.R": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "-4",
+        "-9",
+        "7"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.4"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 4."
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly.R"
+            },
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "mpoly.alt"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg4.cubic_x1plusx2_times_x3plusx4@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Canonical cubic resolvent for the quartic family (x1+x2)(x3+x4)."
+      }
+    ]
+  },
+  "summary": {
+    "status": "ok"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.2.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 2,
+    "coeffs_qq": [
+      "1",
+      "1",
+      "1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "2de54bed33d45b70e95898a435e1b460779c7fa8130b4ae688a869532836b95c"
+  },
+  "objects": {
+    "int.2": {
+      "kind": "IntZ",
+      "value": "2"
+    },
+    "rexpr.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "qq",
+            "value_qq": "-1"
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "qq",
+              "value_qq": "-3"
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rexpr.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "sub",
+          "left": {
+            "kind": "qq",
+            "value_qq": "-1"
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "qq",
+              "value_qq": "-3"
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rlist.1": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.1",
+        "rexpr.2"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.2"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 2."
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Irreducible over Q."
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rlist.1"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg2.quadratic_formula@1",
+        "premises": [
+          "F1",
+          "F2"
+        ],
+        "statement": "Canonical degree-2 radical roots over QQ."
+      }
+    ]
+  }
+}

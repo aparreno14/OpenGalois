@@ -1,0 +1,293 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.2.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 3,
+    "coeffs_qq": [
+      "1",
+      "-1",
+      "-1",
+      "-2"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "acae955b47d8e2a77d6958972b357da24dcb2ef89dfba082fc638bcd5327fb75"
+  },
+  "objects": {
+    "poly.q": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "1",
+        "1"
+      ]
+    },
+    "poly.l": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "-2"
+      ]
+    },
+    "list.factors": {
+      "kind": "PolyQQList",
+      "items": [
+        "poly.q",
+        "poly.l"
+      ]
+    },
+    "rat.unit": {
+      "kind": "RatQQ",
+      "value": "1"
+    },
+    "int.2": {
+      "kind": "IntZ",
+      "value": "2"
+    },
+    "int.1": {
+      "kind": "IntZ",
+      "value": "1"
+    },
+    "rexpr.q1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "qq",
+            "value_qq": "-1"
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "qq",
+              "value_qq": "-3"
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rexpr.q2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "sub",
+          "left": {
+            "kind": "qq",
+            "value_qq": "-1"
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "qq",
+              "value_qq": "-3"
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rlist.q": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.q1",
+        "rexpr.q2"
+      ]
+    },
+    "rexpr.l": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "qq",
+        "value_qq": "2"
+      }
+    },
+    "rlist.l": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.l"
+      ]
+    },
+    "rlist.compose": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.l",
+        "rexpr.q1",
+        "rexpr.q2"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "FactorizationMonicQQ",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "list.factors"
+            },
+            {
+              "ref": "rat.unit"
+            }
+          ]
+        },
+        "rule": "factorization.QQ.monic@1",
+        "premises": [],
+        "statement": "Factorization in Q[x] with monic factors."
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.q"
+            },
+            {
+              "ref": "int.2"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of quadratic factor."
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.q"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F2"
+        ],
+        "statement": "Quadratic factor irreducible over Q."
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.q"
+            },
+            {
+              "ref": "rlist.q"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg2.quadratic_formula@1",
+        "premises": [
+          "F2",
+          "F3"
+        ],
+        "statement": "Canonical degree-2 radical roots over QQ."
+      },
+      {
+        "id": "F5",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.l"
+            },
+            {
+              "ref": "int.1"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of linear factor."
+      },
+      {
+        "id": "F6",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.l"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg1_trivial@1",
+        "premises": [
+          "F5"
+        ],
+        "statement": "Linear factor irreducible over Q."
+      },
+      {
+        "id": "F7",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.l"
+            },
+            {
+              "ref": "rlist.l"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg1.trivial@1",
+        "premises": [
+          "F5"
+        ],
+        "statement": "Canonical degree-1 radical root over QQ."
+      },
+      {
+        "id": "F8",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rlist.compose"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.reducible.compose@1",
+        "premises": [
+          "F1",
+          "F3",
+          "F4",
+          "F6",
+          "F7"
+        ],
+        "statement": "Canonical reducible radical roots composed from certified factor-level lists."
+      }
+    ]
+  }
+}

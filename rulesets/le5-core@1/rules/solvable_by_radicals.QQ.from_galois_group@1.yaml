@@ -1,0 +1,30 @@
+id: solvable_by_radicals.QQ.from_galois_group@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: SolvableByRadicals
+  args: [PolyQQ]
+
+premise_patterns:
+  - pred: GaloisGroup
+    bind:
+      claim_arg_0: premise_arg_0
+
+evidence_schema: null
+
+check_mode: theorem
+
+checker:
+  steps:
+    - "Require the claim to be SolvableByRadicals(f)."
+    - "Require a verified premise GaloisGroup(f,G) bound to the same polynomial f."
+    - "Decode G canonically as GroupId(system='smallgroup')."
+    - "Accept exactly for the resoluble groups supported by le5-core@1: Trivial, C2, C3, S3, V4, C4, D4, A4, S4, C5, D5, F20, C6, D6."
+    - "Reject otherwise."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_TYPE
+  - E_GROUP_NOT_RESOLUBLE
+  - E_GROUP_UNSUPPORTED

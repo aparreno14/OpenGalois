@@ -1,0 +1,32 @@
+id: galois_group.QQ.reducible.all_linear.trivial@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: GaloisGroup
+  args: [PolyQQ, GroupId]
+
+premise_patterns:
+  - pred: FactorizationMonicQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: Degree
+
+evidence_schema: null
+
+check_mode: theorem
+
+checker:
+  steps:
+    - "Require a verified premise FactorizationMonicQQ(f, factors, unit) bound to the same f as in the claim."
+    - "Decode factors as PolyQQList and require len(factors.items) >= 2."
+    - "Form the order-preserving list of distinct factor refs occurring in factors.items."
+    - "For each such factor ref l, require a verified premise Degree(l,1)."
+    - "Require the claim group G to be the trivial smallgroup(1,1)."
+    - "Accept."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_TYPE
+  - E_SIDE_CONDITION
+  - E_GROUP_MISMATCH

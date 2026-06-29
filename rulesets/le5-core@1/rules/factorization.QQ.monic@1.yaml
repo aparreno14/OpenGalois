@@ -1,0 +1,30 @@
+id: factorization.QQ.monic@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: FactorizationMonicQQ
+  args: [PolyQQ, PolyQQList, RatQQ]
+
+premise_patterns: []
+
+evidence_schema: null
+
+check_mode: recompute
+
+checker:
+  steps:
+    - "Decode f: PolyQQ, factors: PolyQQList, unit: RatQQ canonically."
+    - "Require factors.items is non-empty. Duplicates encode multiplicity."
+    - "For each factor id in factors.items: resolve to PolyQQ; require deg>=1 and leading coefficient == 1 (monic)."
+    - "Compute P = Π factor_i in QQ[x] exactly."
+    - "Compute unit * P and compare for exact equality with f in QQ[x]."
+    - "Accept iff equality holds."
+errors:
+  - E_TYPE
+  - E_EMPTY_FACTORS
+  - E_OBJECT_REF
+  - E_UNIT_ZERO
+  - E_DEG0_FACTOR
+  - E_NOT_MONIC
+  - E_EXCEPTION
+  - E_PRODUCT_MISMATCH

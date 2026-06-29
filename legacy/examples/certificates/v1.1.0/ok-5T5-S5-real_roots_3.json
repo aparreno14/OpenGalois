@@ -1,0 +1,71 @@
+{
+  "$schema": "../../../schemas/certificate/1.1.0.json",
+  "meta": {
+    "schema_version": "1.1.0",
+    "generator": "opengalois",
+    "generator_version": "0.1.0",
+    "backend": "sympy",
+    "created_at": "2026-02-14T20:00:00Z",
+    "options": {
+      "note": "example fixture"
+    }
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "-1",
+      "0",
+      "0",
+      "1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "7d35058a3c5816f1155f5b95743664417d8dc6e7df9126ab330f84aaeaed99de"
+  },
+  "normalization": {
+    "basis": "depressed_monic_QQ",
+    "tschirnhaus_shift": "0",
+    "monic_scale": "1",
+    "poly_coeffs": [
+      "1",
+      "0",
+      "-1",
+      "0",
+      "0",
+      "1"
+    ]
+  },
+  "checks": {
+    "factorization_QQ": {
+      "is_irreducible": true
+    }
+  },
+  "invariants": {
+    "discriminant": {
+      "value": "-11",
+      "is_square": false
+    }
+  },
+  "real_roots": {
+    "method": "sturm_count",
+    "count": 3
+  },
+  "trace": {
+    "decision_path": [
+      "ok",
+      "real_roots=3 => S5"
+    ]
+  },
+  "result": {
+    "status": "ok",
+    "solvable_by_radicals": false,
+    "galois_group": "S5",
+    "transitive_group_id": "5T5"
+  }
+}

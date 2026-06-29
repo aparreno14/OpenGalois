@@ -1,0 +1,57 @@
+id: galois_group.QQ.deg4.D4.w1@2
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: GaloisGroup
+  args: [PolyQQ, GroupId]
+
+premise_patterns:
+  - pred: Degree
+    bind:
+      claim_arg_0: premise_arg_0
+    constants:
+      premise_arg_1:
+        kind: IntZ
+        value: "4"
+  - pred: IrreducibleQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: Discriminant
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: DiscNonSquareQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: ResolventQQ
+    bind:
+      claim_arg_0: premise_arg_1
+  - pred: FactorizationMonicQQ
+  - pred: NonSquareQQ
+
+evidence_schema: null
+
+check_mode: theorem
+
+checker:
+  steps:
+    - "Require verified premises Degree(f,4), IrreducibleQQ(f), Discriminant(f,Δ), DiscNonSquareQQ(f) bound to the same f as in the claim."
+    - "Require a verified premise ResolventQQ(R,f,p) bound to the same f as in the claim."
+    - "Require that p is exactly the canonical MPolyQQ object for (x1+x2)(x3+x4)."
+    - "Require a verified premise FactorizationMonicQQ(R,factors,unit) for the same resolvent polynomial R."
+    - "Require unit = 1 and exactly one monic linear factor x-s0 in the resolvent factorization."
+    - "Monicize f = X^4+aX^3+bX^2+cX+d and recompute w1=(a^2-4s0)Δ."
+    - "Require a verified NonSquareQQ premise whose argument is exactly the RatQQ object encoding w1."
+    - "Decode G as GroupId(system='smallgroup') and require (order,index)=(8,3) (D4)."
+    - "Accept."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_BAD_RESOLVENT_FAMILY
+  - E_BAD_FACTORIZATION
+  - E_BAD_AUXILIARY_NONSQUARE
+  - E_TYPE
+  - E_GROUP_MISMATCH
+
+
+

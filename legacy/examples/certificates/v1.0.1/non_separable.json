@@ -1,0 +1,31 @@
+{
+  "$schema": "../../../schemas/certificate/1.0.1.json",
+  "meta": {
+    "schema_version": "1.0.1",
+    "generator": "opengalois",
+    "generator_version": "0.1.0",
+    "backend": "sympy"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": ["1", "0", "0", "0", "0", "0"],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "a55dfc8f4d395515acf56b70afbdd011a31455f6db39e2f109569b79a983b16b"
+  },
+  "checks": {
+    "separability": {
+      "is_separable": false,
+      "gcd_coeffs": ["1", "0", "0", "0", "0"]
+    }
+  },
+  "result": {
+    "status": "non_separable",
+    "galois_group": "UNKNOWN",
+    "transitive_group_id": null
+  }
+}

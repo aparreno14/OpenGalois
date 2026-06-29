@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "schema_version": "2.0.0",
+    "generator": "opengalois",
+    "backend": "sympy"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": ["1", "0", "0", "0", "-1", "-1"],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "71f8fe8d34ac4cbf906f15065f9c901dff7c0cb56dfcf0fc735ee8a9f23fbd4d"
+  },
+  "proof": {
+    "version": "0.1",
+    "root": {
+      "kind": "opengalois.analyze",
+      "inputs": [{ "ref": "$input" }],
+      "children": [
+        {
+          "kind": "irreducible.QQ",
+          "inputs": [{ "ref": "$input" }],
+          "witness": { "method": "glassbox_le5" },
+          "statement": "Irreducible over Q by the glass-box le5 procedure."
+        }
+      ]
+    }
+  },
+  "summary": {
+    "status": "unclassified",
+    "solvable_by_radicals": null,
+    "galois_group": "UNKNOWN",
+    "transitive_group_id": null
+  }
+}

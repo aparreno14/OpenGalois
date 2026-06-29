@@ -1,0 +1,266 @@
+{
+  "$id": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OpenGalois Proof-Carrying Certificate (Facts/Rules Model)",
+  "description": "Proof-carrying, glass-box certificate for polynomials over Q of degree 1..5. Proof obligations are expressed as a fact graph: each node asserts a typed fact (claim) and references a rule (verification procedure) plus premises and optional evidence.",
+  "type": "object",
+  "additionalProperties": false,
+
+  "$defs": {
+    "sha256_hex": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+
+    "rational_canonical": {
+      "type": "string",
+      "description": "Canonical Q element: 0 | nonzero integer | reduced fraction p/q with q>=2, gcd(|p|,q)=1, q>0. Disallows '-0' and any denominator 1.",
+      "pattern": "^(?:0|-?[1-9][0-9]*|-?[1-9][0-9]*/(?:[2-9][0-9]*|1[0-9]+))$"
+    },
+    "rational_nonzero_canonical": {
+      "type": "string",
+      "description": "Canonical nonzero Q element: nonzero integer | reduced fraction p/q with q>=2, gcd(|p|,q)=1, q>0. Disallows '-0' and any denominator 1.",
+      "pattern": "^(?:-?[1-9][0-9]*|-?[1-9][0-9]*/(?:[2-9][0-9]*|1[0-9]+))$"
+    },
+
+    "id_token": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^[A-Za-z0-9_.:-]+$"
+    },
+
+    "object_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ref"],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Reference to '$input' or a key in the top-level 'objects' map.",
+          "pattern": "^(?:\\$input|[A-Za-z0-9_.:-]+)$"
+        }
+      }
+    },
+
+    "fact_ref": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Reference to a fact node id in proof.facts[].id",
+      "pattern": "^[A-Za-z0-9_.:-]+$"
+    },
+
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pred", "args"],
+      "properties": {
+        "pred": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Predicate symbol (from the ruleset's fact catalog)."
+        },
+        "args": {
+          "type": "array",
+          "description": "Ordered predicate arguments as references to '$input' or objects in the object store. Arity and expected kinds are defined by the ruleset's fact catalog.",
+          "items": { "$ref": "#/$defs/object_ref" }
+        }
+      }
+    },
+
+    "fact_node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "claim", "rule"],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id_token",
+          "description": "Stable identifier for this proved fact node (used by premises/goal)."
+        },
+        "claim": {
+          "$ref": "#/$defs/fact",
+          "description": "The asserted mathematical fact (normative)."
+        },
+        "rule": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Rule identifier (stable, versioned) from the referenced ruleset."
+        },
+        "premises": {
+          "type": "array",
+          "description": "List of fact node ids that this node depends on (normative). Interpreted by the rule checker.",
+          "items": { "$ref": "#/$defs/fact_ref" },
+          "default": []
+        },
+        "evidence": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Optional rule-defined evidence payload (normative if required by the rule)."
+        },
+        "statement": {
+          "type": "string",
+          "description": "Optional human-readable statement for pedagogy/audit; non-normative."
+        },
+        "data": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Optional computed data for pedagogy/audit; non-normative."
+        }
+      }
+    }
+  },
+
+  "properties": {
+    "$schema": { "type": "string" },
+
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Namespaced extension point."
+    },
+
+    "meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schema_version", "generator", "ruleset_id"],
+      "properties": {
+        "schema_version": { "const": "3.0.0" },
+        "generator": { "type": "string", "minLength": 1 },
+        "generator_version": { "type": "string" },
+        "backend": { "type": "string", "minLength": 1 },
+        "created_at": { "type": "string" },
+        "options": { "type": "object", "additionalProperties": true },
+
+        "ruleset_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Ruleset/profile identifier that defines the allowed predicates, rules, and lookups."
+        }
+      }
+    },
+
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain",
+        "variable",
+        "ordering",
+        "degree",
+        "coeffs_qq",
+        "canonicalization",
+        "hash_alg",
+        "hash_scope",
+        "hash"
+      ],
+      "properties": {
+        "domain": { "const": "Q" },
+        "variable": { "const": "x" },
+        "ordering": { "const": "descending_degree" },
+        "degree": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "coeffs_qq": {
+          "type": "array",
+          "description": "Coefficients [a_n,...,a_0] in canonical Q encoding (descending degree).",
+          "minItems": 2,
+          "maxItems": 6,
+          "items": { "$ref": "#/$defs/rational_canonical" }
+        },
+        "canonicalization": { "const": "jcs-rfc8785" },
+        "hash_alg": { "const": "sha256" },
+        "hash_scope": {
+          "const": "input_v1",
+          "description": "Hash computed over JCS({domain,variable,ordering,degree,coeffs_qq})."
+        },
+        "hash": { "$ref": "#/$defs/sha256_hex" }
+      }
+    },
+
+    "objects": {
+      "type": "object",
+      "description": "Optional object store for sharing computed mathematical objects across proof steps. Keys are stable IDs.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["kind"],
+        "properties": {
+          "kind": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+
+    "proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "facts"],
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Fact-graph format version.",
+          "default": "1.0"
+        },
+        "facts": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/fact_node" },
+          "description": "A list of proved fact nodes. Nodes reference each other via premises (by id)."
+        },
+        "goals": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/fact_ref" },
+          "description": "Optional list of fact node ids that represent the claimed final conclusions (normative if present)."
+        }
+      }
+    },
+
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional non-normative summary for UX. Verifiers MUST rely on proof + recomputation, not on this section.",
+      "properties": {
+        "galois_group": { "type": ["string", "null"] },
+        "solvable_by_radicals": { "type": ["boolean", "null"] },
+        "status": {
+          "type": "string",
+          "enum": ["ok", "irreducible", "reducible", "unclassified", "error"]
+        },
+        "transitive_group_id": { "type": ["string", "null"] }
+      }
+    }
+  },
+
+  "required": ["meta", "input", "proof"],
+
+  "allOf": [
+    {
+      "if": { "properties": { "input": { "properties": { "degree": { "const": 1 } } } } },
+      "then": { "properties": { "input": { "properties": { "coeffs_qq": { "minItems": 2, "maxItems": 2 } } } } }
+    },
+    {
+      "if": { "properties": { "input": { "properties": { "degree": { "const": 2 } } } } },
+      "then": { "properties": { "input": { "properties": { "coeffs_qq": { "minItems": 3, "maxItems": 3 } } } } }
+    },
+    {
+      "if": { "properties": { "input": { "properties": { "degree": { "const": 3 } } } } },
+      "then": { "properties": { "input": { "properties": { "coeffs_qq": { "minItems": 4, "maxItems": 4 } } } } }
+    },
+    {
+      "if": { "properties": { "input": { "properties": { "degree": { "const": 4 } } } } },
+      "then": { "properties": { "input": { "properties": { "coeffs_qq": { "minItems": 5, "maxItems": 5 } } } } }
+    },
+    {
+      "if": { "properties": { "input": { "properties": { "degree": { "const": 5 } } } } },
+      "then": { "properties": { "input": { "properties": { "coeffs_qq": { "minItems": 6, "maxItems": 6 } } } } }
+    },
+    {
+      "properties": {
+        "input": {
+          "properties": {
+            "coeffs_qq": {
+              "prefixItems": [{ "$ref": "#/$defs/rational_nonzero_canonical" }]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

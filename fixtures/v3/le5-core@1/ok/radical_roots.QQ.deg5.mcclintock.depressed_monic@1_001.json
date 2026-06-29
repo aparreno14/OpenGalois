@@ -1,0 +1,4092 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.2.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "0",
+      "0",
+      "15",
+      "12"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "2db5e9bee534b7ee5599ac8d708be312d85ddeea9228340ebf012a80e092512b"
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.5"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ]
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "DepressedMonicEq",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "normalize.depressed_monic_QQ@1",
+        "premises": [
+          "F1"
+        ],
+        "evidence": {
+          "tschirnhaus_shift": "0",
+          "monic_scale": "1"
+        }
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            },
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "mpoly.resolvent.deg5.sextic_dummit_F20"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg5.sextic_dummit_F20@1",
+        "premises": [
+          "F1"
+        ]
+      },
+      {
+        "id": "F5",
+        "claim": {
+          "pred": "FactorizationMonicQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            },
+            {
+              "ref": "list.dummit.factors.1"
+            },
+            {
+              "ref": "rat.dummit.unit.1"
+            }
+          ]
+        },
+        "rule": "factorization.QQ.monic@1",
+        "premises": []
+      },
+      {
+        "id": "F6",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "radlist.1"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg5.mcclintock.depressed_monic@1",
+        "premises": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5"
+        ]
+      }
+    ],
+    "goals": [
+      "F6"
+    ]
+  },
+  "objects": {
+    "int.5": {
+      "kind": "IntZ",
+      "value": "5"
+    },
+    "mpoly.resolvent.deg5.sextic_dummit_F20": {
+      "kind": "MPolyQQ",
+      "nvars": 5,
+      "terms": [
+        {
+          "exp": [
+            2,
+            1,
+            0,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            2,
+            0,
+            1,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            2,
+            1,
+            0,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            1,
+            0,
+            2,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            0,
+            2,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            2,
+            0,
+            1,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            2,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            1,
+            0,
+            2
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            0,
+            1,
+            2,
+            1
+          ],
+          "coeff_qq": "1"
+        }
+      ]
+    },
+    "poly.resolvent.1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "120",
+        "9000",
+        "540000",
+        "20250000",
+        "324000000",
+        "0"
+      ]
+    },
+    "poly.dummit.linear.1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0"
+      ]
+    },
+    "poly.dummit.cofactor.1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "120",
+        "9000",
+        "540000",
+        "20250000",
+        "324000000"
+      ]
+    },
+    "list.dummit.factors.1": {
+      "kind": "PolyQQList",
+      "items": [
+        "poly.dummit.linear.1",
+        "poly.dummit.cofactor.1"
+      ]
+    },
+    "rat.dummit.unit.1": {
+      "kind": "RatQQ",
+      "value": "1"
+    },
+    "radexpr.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "add",
+            "left": {
+              "kind": "root",
+              "n": 5,
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "3/5"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-11/8"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "41/24"
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": {
+              "kind": "mul",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "25/9"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "qq",
+                      "value_qq": "9/25"
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-25/18"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "pow_int",
+                "base": {
+                  "kind": "root",
+                  "n": 5,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "3/5"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-11/8"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "mul",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "root",
+                                "n": 2,
+                                "arg": {
+                                  "kind": "qq",
+                                  "value_qq": "9/25"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "41/24"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "mul",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "root",
+                                "n": 2,
+                                "arg": {
+                                  "kind": "qq",
+                                  "value_qq": "9/25"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "exp": 2
+              }
+            }
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "add",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "25/9"
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-100/27"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "625/216"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "mul",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-4375/648"
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "qq",
+                      "value_qq": "9/25"
+                    }
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": {
+              "kind": "pow_int",
+              "base": {
+                "kind": "root",
+                "n": 5,
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "3/5"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-11/8"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "41/24"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "exp": 3
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "add",
+            "left": {
+              "kind": "add",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "125/27"
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-1250/81"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "qq",
+                      "value_qq": "9/25"
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "mul",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "6875/648"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "36/25"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": {
+              "kind": "mul",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-25625/1944"
+              },
+              "right": {
+                "kind": "mul",
+                "left": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "qq",
+                    "value_qq": "9/25"
+                  }
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "36/25"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "pow_int",
+            "base": {
+              "kind": "root",
+              "n": 5,
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "3/5"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-11/8"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "41/24"
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "exp": 4
+          }
+        }
+      }
+    },
+    "radexpr.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "add",
+            "left": {
+              "kind": "mul",
+              "left": {
+                "kind": "zeta",
+                "n": 5,
+                "k": 1
+              },
+              "right": {
+                "kind": "root",
+                "n": 5,
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "3/5"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-11/8"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "41/24"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": {
+              "kind": "mul",
+              "left": {
+                "kind": "zeta",
+                "n": 5,
+                "k": 2
+              },
+              "right": {
+                "kind": "mul",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "25/9"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-25/18"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "pow_int",
+                  "base": {
+                    "kind": "root",
+                    "n": 5,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "3/5"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-11/8"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "add",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "mul",
+                                "left": {
+                                  "kind": "qq",
+                                  "value_qq": "36/25"
+                                },
+                                "right": {
+                                  "kind": "root",
+                                  "n": 2,
+                                  "arg": {
+                                    "kind": "qq",
+                                    "value_qq": "9/25"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "41/24"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "add",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "mul",
+                                "left": {
+                                  "kind": "qq",
+                                  "value_qq": "36/25"
+                                },
+                                "right": {
+                                  "kind": "root",
+                                  "n": 2,
+                                  "arg": {
+                                    "kind": "qq",
+                                    "value_qq": "9/25"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "exp": 2
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "zeta",
+              "n": 5,
+              "k": 3
+            },
+            "right": {
+              "kind": "mul",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "25/9"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-100/27"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "625/216"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4375/648"
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "pow_int",
+                "base": {
+                  "kind": "root",
+                  "n": 5,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "3/5"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-11/8"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "mul",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "root",
+                                "n": 2,
+                                "arg": {
+                                  "kind": "qq",
+                                  "value_qq": "9/25"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "41/24"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "mul",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "root",
+                                "n": 2,
+                                "arg": {
+                                  "kind": "qq",
+                                  "value_qq": "9/25"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "exp": 3
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 5,
+            "k": 4
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "add",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "125/27"
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1250/81"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "6875/648"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "mul",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-25625/1944"
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "qq",
+                      "value_qq": "9/25"
+                    }
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": {
+              "kind": "pow_int",
+              "base": {
+                "kind": "root",
+                "n": 5,
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "3/5"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-11/8"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "41/24"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "exp": 4
+            }
+          }
+        }
+      }
+    },
+    "radexpr.3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "add",
+            "left": {
+              "kind": "mul",
+              "left": {
+                "kind": "zeta",
+                "n": 5,
+                "k": 2
+              },
+              "right": {
+                "kind": "root",
+                "n": 5,
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "3/5"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-11/8"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "41/24"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": {
+              "kind": "mul",
+              "left": {
+                "kind": "zeta",
+                "n": 5,
+                "k": 4
+              },
+              "right": {
+                "kind": "mul",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "25/9"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-25/18"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "pow_int",
+                  "base": {
+                    "kind": "root",
+                    "n": 5,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "3/5"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-11/8"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "add",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "mul",
+                                "left": {
+                                  "kind": "qq",
+                                  "value_qq": "36/25"
+                                },
+                                "right": {
+                                  "kind": "root",
+                                  "n": 2,
+                                  "arg": {
+                                    "kind": "qq",
+                                    "value_qq": "9/25"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "41/24"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "add",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "mul",
+                                "left": {
+                                  "kind": "qq",
+                                  "value_qq": "36/25"
+                                },
+                                "right": {
+                                  "kind": "root",
+                                  "n": 2,
+                                  "arg": {
+                                    "kind": "qq",
+                                    "value_qq": "9/25"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "exp": 2
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "zeta",
+              "n": 5,
+              "k": 1
+            },
+            "right": {
+              "kind": "mul",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "25/9"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-100/27"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "625/216"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4375/648"
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "pow_int",
+                "base": {
+                  "kind": "root",
+                  "n": 5,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "3/5"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-11/8"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "mul",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "root",
+                                "n": 2,
+                                "arg": {
+                                  "kind": "qq",
+                                  "value_qq": "9/25"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "41/24"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "mul",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "root",
+                                "n": 2,
+                                "arg": {
+                                  "kind": "qq",
+                                  "value_qq": "9/25"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "exp": 3
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 5,
+            "k": 3
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "add",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "125/27"
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1250/81"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "6875/648"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "mul",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-25625/1944"
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "qq",
+                      "value_qq": "9/25"
+                    }
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": {
+              "kind": "pow_int",
+              "base": {
+                "kind": "root",
+                "n": 5,
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "3/5"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-11/8"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "41/24"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "exp": 4
+            }
+          }
+        }
+      }
+    },
+    "radexpr.4": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "add",
+            "left": {
+              "kind": "mul",
+              "left": {
+                "kind": "zeta",
+                "n": 5,
+                "k": 3
+              },
+              "right": {
+                "kind": "root",
+                "n": 5,
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "3/5"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-11/8"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "41/24"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": {
+              "kind": "mul",
+              "left": {
+                "kind": "zeta",
+                "n": 5,
+                "k": 1
+              },
+              "right": {
+                "kind": "mul",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "25/9"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-25/18"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "pow_int",
+                  "base": {
+                    "kind": "root",
+                    "n": 5,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "3/5"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-11/8"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "add",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "mul",
+                                "left": {
+                                  "kind": "qq",
+                                  "value_qq": "36/25"
+                                },
+                                "right": {
+                                  "kind": "root",
+                                  "n": 2,
+                                  "arg": {
+                                    "kind": "qq",
+                                    "value_qq": "9/25"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "41/24"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "add",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "mul",
+                                "left": {
+                                  "kind": "qq",
+                                  "value_qq": "36/25"
+                                },
+                                "right": {
+                                  "kind": "root",
+                                  "n": 2,
+                                  "arg": {
+                                    "kind": "qq",
+                                    "value_qq": "9/25"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "exp": 2
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "zeta",
+              "n": 5,
+              "k": 4
+            },
+            "right": {
+              "kind": "mul",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "25/9"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-100/27"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "625/216"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4375/648"
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "pow_int",
+                "base": {
+                  "kind": "root",
+                  "n": 5,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "3/5"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-11/8"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "mul",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "root",
+                                "n": 2,
+                                "arg": {
+                                  "kind": "qq",
+                                  "value_qq": "9/25"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "41/24"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "mul",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "root",
+                                "n": 2,
+                                "arg": {
+                                  "kind": "qq",
+                                  "value_qq": "9/25"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "exp": 3
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 5,
+            "k": 2
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "add",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "125/27"
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1250/81"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "6875/648"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "mul",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-25625/1944"
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "qq",
+                      "value_qq": "9/25"
+                    }
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": {
+              "kind": "pow_int",
+              "base": {
+                "kind": "root",
+                "n": 5,
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "3/5"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-11/8"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "41/24"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "exp": 4
+            }
+          }
+        }
+      }
+    },
+    "radexpr.5": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "add",
+            "left": {
+              "kind": "mul",
+              "left": {
+                "kind": "zeta",
+                "n": 5,
+                "k": 4
+              },
+              "right": {
+                "kind": "root",
+                "n": 5,
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "3/5"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-11/8"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "41/24"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": {
+              "kind": "mul",
+              "left": {
+                "kind": "zeta",
+                "n": 5,
+                "k": 3
+              },
+              "right": {
+                "kind": "mul",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "25/9"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-25/18"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "pow_int",
+                  "base": {
+                    "kind": "root",
+                    "n": 5,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "3/5"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-11/8"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "add",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "mul",
+                                "left": {
+                                  "kind": "qq",
+                                  "value_qq": "36/25"
+                                },
+                                "right": {
+                                  "kind": "root",
+                                  "n": 2,
+                                  "arg": {
+                                    "kind": "qq",
+                                    "value_qq": "9/25"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "41/24"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "add",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "mul",
+                                "left": {
+                                  "kind": "qq",
+                                  "value_qq": "36/25"
+                                },
+                                "right": {
+                                  "kind": "root",
+                                  "n": 2,
+                                  "arg": {
+                                    "kind": "qq",
+                                    "value_qq": "9/25"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "exp": 2
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "zeta",
+              "n": 5,
+              "k": 2
+            },
+            "right": {
+              "kind": "mul",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "25/9"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-100/27"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "625/216"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4375/648"
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "pow_int",
+                "base": {
+                  "kind": "root",
+                  "n": 5,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "3/5"
+                        },
+                        "right": {
+                          "kind": "mul",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "9/25"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-11/8"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "mul",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "root",
+                                "n": 2,
+                                "arg": {
+                                  "kind": "qq",
+                                  "value_qq": "9/25"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "41/24"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "mul",
+                              "left": {
+                                "kind": "qq",
+                                "value_qq": "36/25"
+                              },
+                              "right": {
+                                "kind": "root",
+                                "n": 2,
+                                "arg": {
+                                  "kind": "qq",
+                                  "value_qq": "9/25"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "exp": 3
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 5,
+            "k": 1
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "add",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "125/27"
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1250/81"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "9/25"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "6875/648"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "mul",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-25625/1944"
+                },
+                "right": {
+                  "kind": "mul",
+                  "left": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "qq",
+                      "value_qq": "9/25"
+                    }
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 2,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "36/25"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "36/25"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "right": {
+              "kind": "pow_int",
+              "base": {
+                "kind": "root",
+                "n": 5,
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "3/5"
+                      },
+                      "right": {
+                        "kind": "mul",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "9/25"
+                          }
+                        }
+                      }
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-11/8"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "mul",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "41/24"
+                    },
+                    "right": {
+                      "kind": "mul",
+                      "left": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "9/25"
+                        }
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "36/25"
+                          },
+                          "right": {
+                            "kind": "mul",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "36/25"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "9/25"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "exp": 4
+            }
+          }
+        }
+      }
+    },
+    "radlist.1": {
+      "kind": "RadicalExprList",
+      "items": [
+        "radexpr.1",
+        "radexpr.2",
+        "radexpr.3",
+        "radexpr.4",
+        "radexpr.5"
+      ]
+    }
+  }
+}

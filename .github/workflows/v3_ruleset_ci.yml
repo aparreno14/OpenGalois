@@ -1,0 +1,35 @@
+name: v3 ruleset checks
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  v3-ruleset:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install package (editable) + CI deps
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          python -m pip install pytest pyyaml
+
+      - name: YAML ↔ compiled ruleset consistency + fixture coverage
+        run: |
+          python tools/check_ruleset_consistency.py --ruleset le5-core@1 --repo-root .
+
+      - name: Verify all v3 fixtures (ok must pass, bad must fail)
+        run: |
+          python tools/verify_v3_fixtures.py --repo-root . --ruleset le5-core@1
+
+      - name: Run unit tests
+        run: |
+          pytest -q

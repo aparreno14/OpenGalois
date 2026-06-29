@@ -1,0 +1,85 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opengalois"
+version = "0.2.0"
+description = "Glass-box Galois analysis for polynomials over Q up to degree 5 with proof-carrying output."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Alejandro P." }]
+keywords = ["galois", "quintic", "number-theory", "computer-algebra", "proof-carrying"]
+classifiers = [
+  "Development Status :: 2 - Pre-Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Topic :: Scientific/Engineering :: Mathematics",
+]
+dependencies = [
+  "jsonschema>=4",
+]
+
+[project.scripts]
+opengalois = "opengalois.cli:main"
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6",
+  "mypy>=1.8",
+  "types-setuptools",
+  "types-jsonschema",
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+opengalois = ["py.typed", "schemas/**/*.json"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+src = ["src", "tests"]
+extend-exclude = ["legacy/", "tests/sympy", "tools"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "D"]
+ignore = ["D100", "D104"]  # típico (módulo / __init__)
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+[tool.ruff.lint.per-file-ignores]
+"tests/**.py" = ["S101", "E501", "D103"]
+"src/opengalois/algorithms/dummit_quintic_tables.py" = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_return_any = true
+no_implicit_optional = true
+check_untyped_defs = true
+disallow_incomplete_defs = false
+disallow_untyped_defs = false
+strict_equality = true
+disallow_any_generics = true
+warn_unreachable = true
+disallow_untyped_calls = true
+
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+disallow_untyped_defs = false
+check_untyped_defs = false
+
+[tool.pytest.ini_options]
+norecursedirs = ["legacy", ".*", "build", "dist", "venv"]
+

@@ -1,0 +1,64 @@
+{
+  "$schema": "../../../schemas/certificate/1.0.1.json",
+  "meta": {
+    "schema_version": "1.0.1",
+    "generator": "opengalois",
+    "generator_version": "0.1.0",
+    "backend": "sympy"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": ["3", "0", "-3", "0", "1", "1"],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "b51881dbf271381f5ab36666cb07871ef06026a9cb18163586ce30a7330fe198"
+  },
+  "normalization": {
+    "basis": "depressed_monic_QQ",
+    "tschirnhaus_shift": "0",
+    "monic_scale": "3",
+    "poly_coeffs": ["1", "0", "-1", "0", "1/3", "1/3"]
+  },
+  "checks": {
+    "separability": { "is_separable": true },
+    "factorization_QQ": { "is_irreducible": true }
+  },
+  "invariants": {
+    "discriminant": {
+      "value": "1",
+      "is_square": true,
+      "sqrt_witness": "1"
+    }
+  },
+  "resolvents": {
+    "f20": {
+      "construction_method": "dummit_f20_v1",
+      "poly_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "has_rational_root": true,
+      "root_witness": "1"
+    }
+  },
+  "dummit_quadratics": {
+    "quad1": {
+      "coeffs_qq": ["1", "0", "1"],
+      "is_reducible_QQ": false
+    },
+    "quad2": {
+      "coeffs_qq": ["1", "1", "1"],
+      "is_reducible_QQ": false
+    }
+  },
+  "trace": {
+    "decision_path": ["ok", "disc square", "f20 root", "both quadratics irreducible => D5"]
+  },
+  "result": {
+    "status": "ok",
+    "solvable_by_radicals": true,
+    "galois_group": "D5",
+    "transitive_group_id": "5T2"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.2.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": [
+      "1",
+      "2",
+      "0",
+      "0",
+      "0",
+      "1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "2a90ee0f808803424e0fbd66a6f41d155e717ad0275abe4e4f70b74426cc4263"
+  },
+  "objects": {
+    "int.5": {
+      "kind": "IntZ",
+      "value": "5"
+    },
+    "poly.depressed_monic": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "-8/5",
+        "32/25",
+        "-48/125",
+        "3253/3125"
+      ]
+    },
+    "poly.wrong": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.5"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 5."
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Irreducible over Q."
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "DepressedMonicEq",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "poly.depressed_monic"
+            }
+          ]
+        },
+        "rule": "normalize.depressed_monic_QQ@1",
+        "premises": [
+          "F1"
+        ],
+        "evidence": {
+          "tschirnhaus_shift": "2/5",
+          "monic_scale": "1"
+        },
+        "statement": "Depressed-monic normalization over Q."
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.wrong"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.to.depressed_monic@1",
+        "premises": [
+          "F3",
+          "F2"
+        ],
+        "statement": "Bad binding fixture."
+      }
+    ]
+  }
+}

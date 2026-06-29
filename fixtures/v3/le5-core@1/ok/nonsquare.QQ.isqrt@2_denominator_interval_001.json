@@ -1,0 +1,60 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "manual-fixture",
+    "backend": "none",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 1,
+    "coeffs_qq": [
+      "1",
+      "0"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "b338d38649f1f084fb67ce839ef019e04fb673262acc82e8669be604ecb1f846"
+  },
+  "objects": {
+    "rat:q": {
+      "kind": "RatQQ",
+      "value": "25/18"
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "goals": [
+      "F1"
+    ],
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "NonSquareQQ",
+          "args": [
+            {
+              "ref": "rat:q"
+            }
+          ]
+        },
+        "rule": "nonsquare.QQ.isqrt@2",
+        "premises": [],
+        "evidence": {
+          "obstruction": {
+            "kind": "integer_isqrt_interval",
+            "side": "denominator",
+            "lower_root": "4",
+            "lower_square": "16",
+            "upper_root": "5",
+            "upper_square": "25"
+          }
+        }
+      }
+    ]
+  }
+}

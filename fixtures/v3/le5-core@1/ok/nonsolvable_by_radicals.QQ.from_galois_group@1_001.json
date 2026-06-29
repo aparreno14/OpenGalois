@@ -1,0 +1,362 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.0.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "0",
+      "0",
+      "-1",
+      "-1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "71f8fe8d34ac4cbf906f15065f9c901dff7c0cb56dfcf0fc735ee8a9f23fbd4d"
+  },
+  "objects": {
+    "int.5": {
+      "kind": "IntZ",
+      "value": "5"
+    },
+    "group.S5": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 120,
+      "index": 34,
+      "alias": "S5"
+    },
+    "group.A5": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 60,
+      "index": 5,
+      "alias": "A5"
+    },
+    "group.F20": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 20,
+      "index": 3,
+      "alias": "F20"
+    },
+    "group.D5": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 10,
+      "index": 2,
+      "alias": "D5"
+    },
+    "group.C5": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 5,
+      "index": 1,
+      "alias": "C5"
+    },
+    "rat.disc.1": {
+      "kind": "RatQQ",
+      "value": "2869"
+    },
+    "mpoly.resolvent.deg5.sextic_dummit_F20": {
+      "kind": "MPolyQQ",
+      "nvars": 5,
+      "terms": [
+        {
+          "exp": [
+            2,
+            1,
+            0,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            2,
+            0,
+            1,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            2,
+            1,
+            0,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            1,
+            0,
+            2,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            0,
+            2,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            2,
+            0,
+            1,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            2,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            1,
+            0,
+            2
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            0,
+            1,
+            2,
+            1
+          ],
+          "coeff_qq": "1"
+        }
+      ]
+    },
+    "poly.resolvent.1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "-8",
+        "40",
+        "-160",
+        "400",
+        "-3637",
+        "9631"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.5"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 5."
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Irreducible over Q."
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rat.disc.1"
+            }
+          ]
+        },
+        "rule": "disc.QQ.compute@1",
+        "premises": [],
+        "statement": "Discriminant over QQ computed via resultant with the derivative."
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "NonSquareQQ",
+          "args": [
+            {
+              "ref": "rat.disc.1"
+            }
+          ]
+        },
+        "rule": "nonsquare.QQ.isqrt@1",
+        "premises": [],
+        "statement": "Rational value is not a square in QQ."
+      },
+      {
+        "id": "F5",
+        "claim": {
+          "pred": "DiscNonSquareQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "disc.nonsquare.QQ.lift@1",
+        "premises": [
+          "F3",
+          "F4"
+        ],
+        "statement": "Lift discriminant non-squarehood from D to the polynomial."
+      },
+      {
+        "id": "F6",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            },
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "mpoly.resolvent.deg5.sextic_dummit_F20"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg5.sextic_dummit_F20@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Degree-5 sextic Dummit resolvent over QQ for the canonical F20 family."
+      },
+      {
+        "id": "F7",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.dummit_resolvent@1",
+        "premises": [
+          "F6",
+          "F1",
+          "F2"
+        ],
+        "statement": "Dummit sextic resolvent is irreducible over Q by the rational-root test."
+      },
+      {
+        "id": "F8",
+        "claim": {
+          "pred": "GaloisGroup",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "group.S5"
+            }
+          ]
+        },
+        "rule": "galois_group.QQ.deg5.S5@1",
+        "premises": [
+          "F1",
+          "F2",
+          "F5",
+          "F6",
+          "F7"
+        ],
+        "statement": "Irreducible quintic classified via Dummit's sextic resolvent."
+      },
+      {
+        "id": "F9",
+        "claim": {
+          "pred": "NonSolvableByRadicals",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "nonsolvable_by_radicals.QQ.from_galois_group@1",
+        "premises": [
+          "F8"
+        ],
+        "statement": "Lift non-solvability by radicals from the certified non-resoluble Galois group."
+      }
+    ]
+  },
+  "summary": {
+    "status": "ok",
+    "solvable_by_radicals": false,
+    "galois_group": "S5",
+    "transitive_group_id": null
+  }
+}

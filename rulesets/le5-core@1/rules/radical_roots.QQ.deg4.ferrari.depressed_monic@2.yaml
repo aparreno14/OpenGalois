@@ -1,0 +1,47 @@
+id: radical_roots.QQ.deg4.ferrari.depressed_monic@2
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: RadicalRoots
+  args: [PolyQQ, RadicalExprList]
+
+premise_patterns:
+  - pred: Degree
+    bind:
+      claim_arg_0: premise_arg_0
+    constants:
+      premise_arg_1:
+        kind: IntZ
+        value: "4"
+  - pred: IrreducibleQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: DepressedMonicEq
+    bind:
+      claim_arg_0: premise_arg_1
+  - pred: ResolventQQ
+    bind:
+      claim_arg_0: premise_arg_1
+  - pred: RadicalRoots
+
+evidence_schema: null
+
+check_mode: recompute
+
+checker:
+  steps:
+    - "Require verified premises Degree(g,4), IrreducibleQQ(g), and DepressedMonicEq(f,g) for some f."
+    - "Require a verified premise ResolventQQ(R,g,p) for the same g, with p equal to the canonical MPolyQQ for (x1+x2)(x3+x4)."
+    - "Require a verified premise RadicalRoots(R, roots_R) for the same cubic resolvent R."
+    - "Decode g canonically as a monic depressed quartic g(t) = t^4 + c t^2 + d t + e."
+    - "If d = 0, solve the quartic as a biquadratic via y = t^2, with y_± = (-c ± sqrt(c^2 - 4e))/2, and emit [sqrt(y_+), -sqrt(y_+), sqrt(y_-), -sqrt(y_-)]."
+    - "If d != 0, select s as the first root in roots_R, set u = sqrt(-s), Δ1 = s - 2c + 2d/u, Δ2 = s - 2c - 2d/u, and emit [(u + sqrt(Δ1))/2, (u - sqrt(Δ1))/2, (-u + sqrt(Δ2))/2, (-u - sqrt(Δ2))/2]."
+    - "Accept iff the claimed RadicalExprList equals the recomputed ordered list by exact structural equality of RadicalExpr payloads."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_TYPE
+  - E_SIDE_CONDITION
+  - E_BAD_RESOLVENT_FAMILY
+  - E_MISMATCH

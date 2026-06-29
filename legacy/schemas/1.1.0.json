@@ -1,0 +1,1890 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opengalois.org/schemas/certificate/1.1.0.json",
+  "title": "OpenGalois Proof-Carrying Certificate",
+  "description": "Normative proof-carrying certificate for degree-5 polynomials over Q.",
+  "type": "object",
+  "required": [
+    "meta",
+    "input",
+    "result"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "meta": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "generator",
+        "backend"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.1.0"
+        },
+        "generator": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generator_version": {
+          "type": "string"
+        },
+        "backend": {
+          "type": "string",
+          "minLength": 1
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "options": {
+          "type": "object",
+          "description": "Non-normative runtime options. MUST be excluded from input.hash.",
+          "additionalProperties": true
+        }
+      }
+    },
+    "input": {
+      "type": "object",
+      "required": [
+        "domain",
+        "variable",
+        "ordering",
+        "degree",
+        "coeffs_qq",
+        "canonicalization",
+        "hash_alg",
+        "hash_scope",
+        "hash"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "domain": {
+          "const": "Q"
+        },
+        "variable": {
+          "const": "x"
+        },
+        "ordering": {
+          "const": "descending_degree"
+        },
+        "degree": {
+          "const": 5
+        },
+        "coeffs_qq": {
+          "type": "array",
+          "description": "Canonical coefficients [a5,a4,a3,a2,a1,a0] in Q. a5 != 0.",
+          "minItems": 6,
+          "maxItems": 6,
+          "prefixItems": [
+            {
+              "$ref": "#/$defs/rational_nonzero_canonical"
+            },
+            {
+              "$ref": "#/$defs/rational_canonical"
+            },
+            {
+              "$ref": "#/$defs/rational_canonical"
+            },
+            {
+              "$ref": "#/$defs/rational_canonical"
+            },
+            {
+              "$ref": "#/$defs/rational_canonical"
+            },
+            {
+              "$ref": "#/$defs/rational_canonical"
+            }
+          ],
+          "items": false
+        },
+        "canonicalization": {
+          "const": "jcs-rfc8785"
+        },
+        "hash_alg": {
+          "const": "sha256"
+        },
+        "hash_scope": {
+          "const": "input_v1",
+          "description": "Hash computed over JCS({domain,variable,ordering,degree,coeffs_qq})."
+        },
+        "hash": {
+          "$ref": "#/$defs/sha256_hex"
+        }
+      }
+    },
+    "normalization": {
+      "type": "object",
+      "description": "Canonical polynomial basis for invariants/evidence in v1.",
+      "additionalProperties": false,
+      "required": [
+        "basis",
+        "poly_coeffs",
+        "tschirnhaus_shift",
+        "monic_scale"
+      ],
+      "properties": {
+        "basis": {
+          "type": "string",
+          "enum": [
+            "depressed_monic_QQ"
+          ],
+          "description": "In v1, invariants/evidence are computed on the depressed monic polynomial over Q."
+        },
+        "tschirnhaus_shift": {
+          "$ref": "#/$defs/rational_canonical"
+        },
+        "monic_scale": {
+          "$ref": "#/$defs/rational_nonzero_canonical"
+        },
+        "poly_coeffs": {
+          "type": "array",
+          "description": "Coefficients of the depressed monic polynomial in Q: [1,0,*,*,*,*].",
+          "minItems": 6,
+          "maxItems": 6,
+          "prefixItems": [
+            {
+              "const": "1"
+            },
+            {
+              "const": "0"
+            },
+            {
+              "$ref": "#/$defs/rational_canonical"
+            },
+            {
+              "$ref": "#/$defs/rational_canonical"
+            },
+            {
+              "$ref": "#/$defs/rational_canonical"
+            },
+            {
+              "$ref": "#/$defs/rational_canonical"
+            }
+          ],
+          "items": false
+        }
+      }
+    },
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "factorization_QQ": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "is_irreducible"
+          ],
+          "properties": {
+            "is_irreducible": {
+              "type": "boolean"
+            },
+            "factors_digest": {
+              "$ref": "#/$defs/sha256_hex",
+              "description": "Optional portable digest of the factor list under a normative canonicalization (specified in the spec). Not a substitute for explicit factors in v1."
+            },
+            "factors": {
+              "type": "array",
+              "description": "If reducible, explicit factors in Q[x] (descending degree).",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "coeffs_qq"
+                ],
+                "properties": {
+                  "coeffs_qq": {
+                    "type": "array",
+                    "minItems": 2,
+                    "prefixItems": [
+                      {
+                        "$ref": "#/$defs/rational_nonzero_canonical"
+                      }
+                    ],
+                    "items": {
+                      "$ref": "#/$defs/rational_canonical"
+                    }
+                  },
+                  "multiplicity": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "is_irreducible": {
+                    "const": false
+                  }
+                },
+                "required": [
+                  "is_irreducible"
+                ]
+              },
+              "then": {
+                "required": [
+                  "factors"
+                ]
+              }
+            },
+            {
+              "if": {
+                "properties": {
+                  "is_irreducible": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "is_irreducible"
+                ]
+              },
+              "then": {
+                "not": {
+                  "anyOf": [
+                    {
+                      "required": [
+                        "factors"
+                      ]
+                    },
+                    {
+                      "required": [
+                        "factors_digest"
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "invariants": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "discriminant": {
+          "type": "object",
+          "required": [
+            "value",
+            "is_square"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "value": {
+              "$ref": "#/$defs/rational_canonical"
+            },
+            "is_square": {
+              "type": "boolean"
+            },
+            "sqrt_witness": {
+              "$ref": "#/$defs/rational_canonical"
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "is_square": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "is_square"
+                ]
+              },
+              "then": {
+                "required": [
+                  "sqrt_witness"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "sqrt_witness"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "real_roots": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "method",
+        "count"
+      ],
+      "properties": {
+        "method": {
+          "const": "sturm_count"
+        },
+        "count": {
+          "type": "integer",
+          "enum": [
+            1,
+            3,
+            5
+          ]
+        }
+      }
+    },
+    "modp_evidence": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Frobenius cycle-type witnesses via factorization degrees mod p (canonical partitions of 5).",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "p",
+          "is_good_prime",
+          "factor_degrees"
+        ],
+        "properties": {
+          "p": {
+            "type": "integer",
+            "minimum": 2
+          },
+          "is_good_prime": {
+            "type": "boolean"
+          },
+          "factor_degrees": {
+            "$ref": "#/$defs/deg5_factor_degrees"
+          }
+        }
+      }
+    },
+    "resolvents": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "f20": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "construction_method",
+            "poly_hash",
+            "has_rational_root"
+          ],
+          "properties": {
+            "construction_method": {
+              "const": "dummit_f20_v1"
+            },
+            "poly_hash": {
+              "$ref": "#/$defs/sha256_hex"
+            },
+            "has_rational_root": {
+              "type": "boolean"
+            },
+            "root_witness": {
+              "$ref": "#/$defs/rational_canonical"
+            }
+          },
+          "allOf": [
+            {
+              "if": {
+                "properties": {
+                  "has_rational_root": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "has_rational_root"
+                ]
+              },
+              "then": {
+                "required": [
+                  "root_witness"
+                ]
+              },
+              "else": {
+                "not": {
+                  "required": [
+                    "root_witness"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "dummit_quadratics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quad1",
+        "quad2"
+      ],
+      "properties": {
+        "quad1": {
+          "$ref": "#/$defs/dummit_quad"
+        },
+        "quad2": {
+          "$ref": "#/$defs/dummit_quad"
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_path"
+      ],
+      "properties": {
+        "decision_path": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "reject_log": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": [
+              "node",
+              "reason"
+            ],
+            "additionalProperties": true,
+            "properties": {
+              "node": {
+                "type": "string",
+                "minLength": 1
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "ok",
+            "reducible",
+            "unclassified",
+            "error"
+          ]
+        },
+        "solvable_by_radicals": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "galois_group": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "C5",
+            "D5",
+            "F20",
+            "A5",
+            "S5",
+            "UNKNOWN",
+            null
+          ]
+        },
+        "transitive_group_id": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "5T1",
+            "5T2",
+            "5T3",
+            "5T4",
+            "5T5",
+            null
+          ],
+          "description": "Transitive group database label (degree 5): 5T1=C5, 5T2=D5, 5T3=F20, 5T4=A5, 5T5=S5."
+        },
+        "factor_results": {
+          "type": "array",
+          "description": "Reducible case: per-factor certificates or references (distinct from checks.factorization_QQ.factors).",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "factor_index",
+              "status"
+            ],
+            "properties": {
+              "factor_index": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Index of the factor in checks.factorization_QQ.factors."
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "ok",
+                  "unclassified",
+                  "error",
+                  "skipped"
+                ]
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Required when status=skipped."
+              },
+              "certificate_ref": {
+                "type": "string",
+                "minLength": 1,
+                "description": "Reference to an external certificate for this factor."
+              },
+              "certificate_inline": {
+                "type": "object",
+                "description": "Inline subcertificate. SHOULD conform to the certificate schema."
+              }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "status": {
+                      "const": "skipped"
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                },
+                "then": {
+                  "required": [
+                    "reason"
+                  ],
+                  "not": {
+                    "anyOf": [
+                      {
+                        "required": [
+                          "certificate_ref"
+                        ]
+                      },
+                      {
+                        "required": [
+                          "certificate_inline"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "status": {
+                      "enum": [
+                        "ok",
+                        "unclassified",
+                        "error"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "status"
+                  ]
+                },
+                "then": {
+                  "oneOf": [
+                    {
+                      "required": [
+                        "certificate_ref"
+                      ],
+                      "not": {
+                        "required": [
+                          "certificate_inline"
+                        ]
+                      }
+                    },
+                    {
+                      "required": [
+                        "certificate_inline"
+                      ],
+                      "not": {
+                        "required": [
+                          "certificate_ref"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "error": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "code",
+            "message"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "minLength": 1
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Explicit extension point. Experimental data MUST live here.",
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_.-]*$"
+      },
+      "additionalProperties": true
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "properties": {
+              "status": {
+                "const": "ok"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "normalization",
+          "checks",
+          "invariants",
+          "trace",
+          "result"
+        ],
+        "properties": {
+          "checks": {
+            "required": [
+              "factorization_QQ"
+            ],
+            "properties": {
+              "factorization_QQ": {
+                "required": [
+                  "is_irreducible"
+                ],
+                "properties": {
+                  "is_irreducible": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          },
+          "invariants": {
+            "required": [
+              "discriminant"
+            ],
+            "properties": {
+              "discriminant": {
+                "required": [
+                  "value",
+                  "is_square"
+                ],
+                "properties": {
+                  "value": {
+                    "$ref": "#/$defs/rational_nonzero_canonical"
+                  }
+                }
+              }
+            }
+          },
+          "trace": {
+            "required": [
+              "decision_path"
+            ]
+          },
+          "result": {
+            "required": [
+              "solvable_by_radicals",
+              "galois_group",
+              "transitive_group_id"
+            ],
+            "properties": {
+              "solvable_by_radicals": {
+                "type": "boolean"
+              },
+              "galois_group": {
+                "enum": [
+                  "C5",
+                  "D5",
+                  "F20",
+                  "A5",
+                  "S5"
+                ]
+              },
+              "transitive_group_id": {
+                "enum": [
+                  "5T1",
+                  "5T2",
+                  "5T3",
+                  "5T4",
+                  "5T5"
+                ]
+              }
+            }
+          }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "real_roots"
+            ]
+          },
+          {
+            "required": [
+              "modp_evidence"
+            ],
+            "properties": {
+              "modp_evidence": {
+                "minItems": 1
+              }
+            }
+          },
+          {
+            "required": [
+              "resolvents"
+            ],
+            "properties": {
+              "resolvents": {
+                "required": [
+                  "f20"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "reducible",
+                  "error"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "required": [
+              "galois_group",
+              "transitive_group_id"
+            ],
+            "properties": {
+              "galois_group": {
+                "const": "UNKNOWN"
+              },
+              "transitive_group_id": {
+                "const": null
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "properties": {
+              "status": {
+                "const": "unclassified"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "required": [
+              "solvable_by_radicals",
+              "galois_group",
+              "transitive_group_id"
+            ],
+            "properties": {
+              "galois_group": {
+                "const": "UNKNOWN"
+              },
+              "transitive_group_id": {
+                "const": null
+              },
+              "solvable_by_radicals": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "properties": {
+              "status": {
+                "const": "reducible"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "checks",
+          "result"
+        ],
+        "properties": {
+          "checks": {
+            "required": [
+              "factorization_QQ"
+            ],
+            "properties": {
+              "factorization_QQ": {
+                "required": [
+                  "is_irreducible",
+                  "factors"
+                ],
+                "properties": {
+                  "is_irreducible": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          },
+          "result": {
+            "required": [
+              "factor_results",
+              "solvable_by_radicals"
+            ],
+            "properties": {
+              "solvable_by_radicals": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "properties": {
+              "status": {
+                "const": "error"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "required": [
+              "error"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "result",
+          "real_roots"
+        ],
+        "properties": {
+          "result": {
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "const": "ok"
+              }
+            }
+          },
+          "real_roots": {
+            "required": [
+              "count"
+            ],
+            "properties": {
+              "count": {
+                "const": 3
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "invariants": {
+            "properties": {
+              "discriminant": {
+                "properties": {
+                  "is_square": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          },
+          "result": {
+            "required": [
+              "solvable_by_radicals",
+              "galois_group",
+              "transitive_group_id"
+            ],
+            "properties": {
+              "solvable_by_radicals": {
+                "const": false
+              },
+              "galois_group": {
+                "const": "S5"
+              },
+              "transitive_group_id": {
+                "const": "5T5"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "result",
+          "invariants",
+          "real_roots"
+        ],
+        "properties": {
+          "result": {
+            "required": [
+              "status"
+            ],
+            "properties": {
+              "status": {
+                "const": "ok"
+              }
+            }
+          },
+          "invariants": {
+            "required": [
+              "discriminant"
+            ],
+            "properties": {
+              "discriminant": {
+                "required": [
+                  "is_square"
+                ],
+                "properties": {
+                  "is_square": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "real_roots": {
+            "properties": {
+              "count": {
+                "enum": [
+                  1,
+                  5
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "enum": [
+                  "5T1",
+                  "5T2",
+                  "5T3"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "solvable_by_radicals": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "enum": [
+                  "5T4",
+                  "5T5"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "solvable_by_radicals": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "galois_group"
+            ],
+            "properties": {
+              "galois_group": {
+                "const": "C5"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T1"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "galois_group"
+            ],
+            "properties": {
+              "galois_group": {
+                "const": "D5"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T2"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "galois_group"
+            ],
+            "properties": {
+              "galois_group": {
+                "const": "F20"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T3"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "galois_group"
+            ],
+            "properties": {
+              "galois_group": {
+                "const": "A5"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T4"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "galois_group"
+            ],
+            "properties": {
+              "galois_group": {
+                "const": "S5"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T5"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T1"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "galois_group": {
+                "const": "C5"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T2"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "galois_group": {
+                "const": "D5"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T3"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "galois_group": {
+                "const": "F20"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T4"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "galois_group": {
+                "const": "A5"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T5"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "galois_group": {
+                "const": "S5"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T5"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "invariants": {
+            "properties": {
+              "discriminant": {
+                "properties": {
+                  "is_square": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          }
+        },
+        "anyOf": [
+          {
+            "required": [
+              "real_roots"
+            ],
+            "properties": {
+              "real_roots": {
+                "properties": {
+                  "count": {
+                    "const": 3
+                  }
+                }
+              }
+            }
+          },
+          {
+            "required": [
+              "modp_evidence"
+            ],
+            "properties": {
+              "modp_evidence": {
+                "contains": {
+                  "required": [
+                    "is_good_prime",
+                    "factor_degrees"
+                  ],
+                  "properties": {
+                    "is_good_prime": {
+                      "const": true
+                    },
+                    "factor_degrees": {
+                      "const": [
+                        2,
+                        3
+                      ]
+                    }
+                  }
+                },
+                "minContains": 1
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T4"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "modp_evidence"
+        ],
+        "properties": {
+          "invariants": {
+            "properties": {
+              "discriminant": {
+                "properties": {
+                  "is_square": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          },
+          "modp_evidence": {
+            "contains": {
+              "required": [
+                "is_good_prime",
+                "factor_degrees"
+              ],
+              "properties": {
+                "is_good_prime": {
+                  "const": true
+                },
+                "factor_degrees": {
+                  "const": [
+                    1,
+                    1,
+                    3
+                  ]
+                }
+              }
+            },
+            "minContains": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T3"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "resolvents"
+        ],
+        "properties": {
+          "invariants": {
+            "properties": {
+              "discriminant": {
+                "properties": {
+                  "is_square": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          },
+          "resolvents": {
+            "required": [
+              "f20"
+            ],
+            "properties": {
+              "f20": {
+                "required": [
+                  "has_rational_root",
+                  "root_witness"
+                ],
+                "properties": {
+                  "has_rational_root": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "enum": [
+                  "5T1",
+                  "5T2"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "resolvents",
+          "dummit_quadratics"
+        ],
+        "properties": {
+          "invariants": {
+            "properties": {
+              "discriminant": {
+                "properties": {
+                  "is_square": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          },
+          "resolvents": {
+            "required": [
+              "f20"
+            ],
+            "properties": {
+              "f20": {
+                "required": [
+                  "has_rational_root",
+                  "root_witness"
+                ],
+                "properties": {
+                  "has_rational_root": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T2"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "dummit_quadratics": {
+            "properties": {
+              "quad1": {
+                "properties": {
+                  "is_reducible_QQ": {
+                    "const": false
+                  }
+                }
+              },
+              "quad2": {
+                "properties": {
+                  "is_reducible_QQ": {
+                    "const": false
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "required": [
+              "transitive_group_id"
+            ],
+            "properties": {
+              "transitive_group_id": {
+                "const": "5T1"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "dummit_quadratics": {
+            "properties": {
+              "quad1": {
+                "properties": {
+                  "is_reducible_QQ": {
+                    "const": true
+                  }
+                }
+              },
+              "quad2": {
+                "properties": {
+                  "is_reducible_QQ": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "resolvents"
+        ],
+        "properties": {
+          "resolvents": {
+            "required": [
+              "f20"
+            ],
+            "properties": {
+              "f20": {
+                "required": [
+                  "has_rational_root"
+                ],
+                "properties": {
+                  "has_rational_root": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "transitive_group_id": {
+                "enum": [
+                  "5T1",
+                  "5T2",
+                  "5T3"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "dummit_quadratics"
+        ]
+      },
+      "then": {
+        "properties": {
+          "result": {
+            "properties": {
+              "transitive_group_id": {
+                "enum": [
+                  "5T1",
+                  "5T2"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "sha256_hex": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "rational_canonical": {
+      "type": "string",
+      "description": "Coarse canonical Q element: 0 | nonzero integer | nonzero fraction with denominator>=2. Full reduction SHOULD be enforced by certificate verifiers or by the accompanying specification.",
+      "pattern": "^(?:0|[1-9][0-9]*|-[1-9][0-9]*|(?:[1-9][0-9]*|-[1-9][0-9]*)\\/(?:[2-9][0-9]*|1[0-9]+))$"
+    },
+    "rational_nonzero_canonical": {
+      "type": "string",
+      "description": "Nonzero integer or nonzero fraction with denominator>=2.",
+      "pattern": "^(?:[1-9][0-9]*|-[1-9][0-9]*|(?:[1-9][0-9]*|-[1-9][0-9]*)\\/(?:[2-9][0-9]*|1[0-9]+))$"
+    },
+    "deg5_factor_degrees": {
+      "description": "Canonical (non-decreasing) degree partitions of 5.",
+      "oneOf": [
+        {
+          "const": [
+            5
+          ]
+        },
+        {
+          "const": [
+            1,
+            4
+          ]
+        },
+        {
+          "const": [
+            2,
+            3
+          ]
+        },
+        {
+          "const": [
+            1,
+            1,
+            3
+          ]
+        },
+        {
+          "const": [
+            1,
+            2,
+            2
+          ]
+        },
+        {
+          "const": [
+            1,
+            1,
+            1,
+            2
+          ]
+        },
+        {
+          "const": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "dummit_quad": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "coeffs_qq",
+        "is_reducible_QQ"
+      ],
+      "properties": {
+        "coeffs_qq": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 3,
+          "prefixItems": [
+            {
+              "$ref": "#/$defs/rational_nonzero_canonical"
+            },
+            {
+              "$ref": "#/$defs/rational_canonical"
+            },
+            {
+              "$ref": "#/$defs/rational_canonical"
+            }
+          ],
+          "items": false
+        },
+        "is_reducible_QQ": {
+          "type": "boolean"
+        },
+        "sqrt_discriminant_witness": {
+          "$ref": "#/$defs/rational_canonical"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "is_reducible_QQ": {
+                "const": true
+              }
+            },
+            "required": [
+              "is_reducible_QQ"
+            ]
+          },
+          "then": {
+            "required": [
+              "sqrt_discriminant_witness"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "sqrt_discriminant_witness"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

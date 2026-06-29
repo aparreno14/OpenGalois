@@ -1,0 +1,91 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "input": {
+    "canonicalization": "jcs-rfc8785",
+    "coeffs_qq": [
+      "1",
+      "-2",
+      "1"
+    ],
+    "degree": 2,
+    "domain": "Q",
+    "hash": "89cafa0e5d8f776354dbca150ce6310e7c958d3281b734b7e6ff841733b3ed24",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "ordering": "descending_degree",
+    "variable": "x"
+  },
+  "meta": {
+    "backend": "none",
+    "generator": "opengalois",
+    "generator_version": "0.0.0-dev",
+    "ruleset_id": "le5-core@1",
+    "schema_version": "3.0.0"
+  },
+  "objects": {
+    "rat.D": {
+      "kind": "RatQQ",
+      "value": "0"
+    },
+    "rat.two": {
+      "kind": "RatQQ",
+      "value": "2"
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rat.D"
+            }
+          ]
+        },
+        "premises": [],
+        "rule": "disc.QQ.compute@1",
+        "statement": "Discriminant of (x-1)^2 is 0."
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "NonSquareQQ",
+          "args": [
+            {
+              "ref": "rat.two"
+            }
+          ]
+        },
+        "premises": [],
+        "rule": "nonsquare.QQ.isqrt@1",
+        "statement": "2 is not a square in QQ."
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "DiscNonSquareQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "premises": [
+          "F1",
+          "F2"
+        ],
+        "rule": "disc.nonsquare.QQ.lift@1",
+        "statement": "Incorrectly claims discriminant is non-square (premise mismatched D)."
+      }
+    ]
+  },
+  "summary": {
+    "status": "ok"
+  }
+}

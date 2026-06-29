@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+
+# Virtualenvs
+.venv/
+venv/
+
+# Test/coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.vscode/
+.idea/
+
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Sympy tests
+#tests/sympy/*

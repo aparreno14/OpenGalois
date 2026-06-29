@@ -1,0 +1,70 @@
+{
+  "$schema": "../../../schemas/certificate/1.1.0.json",
+  "meta": {
+    "schema_version": "1.1.0",
+    "generator": "opengalois",
+    "generator_version": "0.1.0",
+    "backend": "sympy"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "0",
+      "0",
+      "0",
+      "-1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "7db065d3a0afb753da30a9d39082b04ca4accda681c5e1ca1128775ad55edfd4"
+  },
+  "checks": {
+    "factorization_QQ": {
+      "is_irreducible": false,
+      "factors": [
+        {
+          "coeffs_qq": [
+            "1",
+            "-1"
+          ],
+          "multiplicity": 1
+        },
+        {
+          "coeffs_qq": [
+            "1",
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "multiplicity": 1
+        }
+      ],
+      "unit": "1"
+    }
+  },
+  "result": {
+    "status": "reducible",
+    "galois_group": "UNKNOWN",
+    "transitive_group_id": null,
+    "factor_results": [
+      {
+        "factor_index": 0,
+        "status": "skipped",
+        "reason": "Factor degree != 5 (schema v1.1.0 only covers degree-5 certificates)."
+      },
+      {
+        "factor_index": 1,
+        "status": "skipped",
+        "reason": "Factor degree != 5 (schema v1.1.0 only covers degree-5 certificates)."
+      }
+    ],
+    "solvable_by_radicals": true
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "input": {
+    "canonicalization": "jcs-rfc8785",
+    "coeffs_qq": [
+      "1",
+      "0",
+      "1"
+    ],
+    "degree": 2,
+    "domain": "Q",
+    "hash": "096da3b46b34fb1c5855ece717f2afc205027bb12019b78a07770b5b78495f6a",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "ordering": "descending_degree",
+    "variable": "x"
+  },
+  "meta": {
+    "backend": "none",
+    "generator": "opengalois",
+    "generator_version": "0.0.0-dev",
+    "ruleset_id": "le5-core@1",
+    "schema_version": "3.0.0"
+  },
+  "objects": {
+    "rat.q": {
+      "kind": "RatQQ",
+      "value": "4/9"
+    },
+    "rat.k": {
+      "kind": "RatQQ",
+      "value": "2/3"
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "SqrtQQ",
+          "args": [
+            {
+              "ref": "rat.q"
+            },
+            {
+              "ref": "rat.k"
+            }
+          ]
+        },
+        "premises": [],
+        "rule": "sqrt.QQ.check@1",
+        "statement": "2/3 is a square root of 4/9 in QQ."
+      }
+    ]
+  },
+  "summary": {
+    "status": "ok"
+  }
+}

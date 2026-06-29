@@ -1,0 +1,141 @@
+{
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.2.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 3,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "0",
+      "2"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "8a71a32f997b7427cc2584aba8c1430fb5c67c8601c454bcff3854aeb9361911"
+  },
+  "objects": {
+    "int:deg3": {
+      "kind": "IntZ",
+      "value": "3"
+    },
+    "rexpr:p0:r1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "qq",
+        "value_qq": "0"
+      }
+    },
+    "rexpr:p0:r2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "qq",
+        "value_qq": "0"
+      }
+    },
+    "rexpr:p0:r3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "qq",
+        "value_qq": "0"
+      }
+    },
+    "rlist:cardano_v2_p0": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr:p0:r1",
+        "rexpr:p0:r2",
+        "rexpr:p0:r3"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int:deg3"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ]
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "DepressedMonicEq",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "normalize.depressed_monic_QQ@1",
+        "premises": [
+          "F1"
+        ],
+        "evidence": {
+          "monic_scale": "1",
+          "tschirnhaus_shift": "0"
+        }
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rlist:cardano_v2_p0"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg3.cardano.depressed_monic@2",
+        "premises": [
+          "F1",
+          "F2",
+          "F3"
+        ]
+      }
+    ],
+    "goals": [
+      "F4"
+    ]
+  }
+}

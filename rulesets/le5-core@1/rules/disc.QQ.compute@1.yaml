@@ -1,0 +1,26 @@
+id: disc.QQ.compute@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: Discriminant
+  args: [PolyQQ, RatQQ]
+
+premise_patterns: []
+
+evidence_schema: null
+
+check_mode: recompute
+
+checker:
+  steps:
+    - "Decode f canonically as a PolyQQ."
+    - "Decode D canonically as a RatQQ."
+    - "Let n = deg(f) after trimming leading zeros. Side convention: if n == 1 then Disc(f) = 1."
+    - "Compute f'(x) exactly in QQ[x]."
+    - "Compute the resultant Res(f, f') as det(Sylvester(f, f'))."
+    - "Compute Disc(f) = (-1)^(n(n-1)/2) * Res(f, f') / lc(f)."
+    - "Accept iff claimed D equals the recomputed discriminant exactly as a rational."
+errors:
+  - E_TYPE
+  - E_EXCEPTION
+  - E_MISMATCH

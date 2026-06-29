@@ -1,0 +1,307 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "fixture",
+    "generator_version": "0",
+    "backend": "none",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 4,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "0",
+      "36",
+      "63"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "0c86f95ef3df1f7d692378af023c6f84ec4df7d5af87f12ad5925a373551fec7"
+  },
+  "objects": {
+    "int.deg4": {
+      "kind": "IntZ",
+      "value": "4"
+    },
+    "int.deg3": {
+      "kind": "IntZ",
+      "value": "3"
+    },
+    "rat.disc.1": {
+      "kind": "RatQQ",
+      "value": "18662400"
+    },
+    "rat.sqrt.1": {
+      "kind": "RatQQ",
+      "value": "4320"
+    },
+    "rat.unit.1": {
+      "kind": "RatQQ",
+      "value": "1"
+    },
+    "poly.resolvent.1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "-252",
+        "-1296"
+      ]
+    },
+    "mpoly.resolvent.deg4.cubic_x1x2_plus_x3x4": {
+      "kind": "MPolyQQ",
+      "nvars": 4,
+      "terms": [
+        {
+          "exp": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "coeff_qq": "1"
+        }
+      ]
+    },
+    "grp.target": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 12,
+      "index": 3,
+      "alias": "A4"
+    },
+    "poly.factor.1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "-18"
+      ]
+    },
+    "poly.factor.2": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "6"
+      ]
+    },
+    "poly.factor.3": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "12"
+      ]
+    },
+    "polylist.factors.1": {
+      "kind": "PolyQQList",
+      "items": [
+        "poly.factor.1",
+        "poly.factor.2",
+        "poly.factor.3"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.deg4"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of the input quartic."
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Irreducible quartic over QQ."
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rat.disc.1"
+            }
+          ]
+        },
+        "rule": "disc.QQ.compute@1",
+        "premises": [],
+        "statement": "Quartic discriminant."
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "SqrtQQ",
+          "args": [
+            {
+              "ref": "rat.disc.1"
+            },
+            {
+              "ref": "rat.sqrt.1"
+            }
+          ]
+        },
+        "rule": "sqrt.QQ.check@1",
+        "premises": [],
+        "statement": "Square root witness for the discriminant."
+      },
+      {
+        "id": "F5",
+        "claim": {
+          "pred": "IsSquareQQ",
+          "args": [
+            {
+              "ref": "rat.disc.1"
+            }
+          ]
+        },
+        "rule": "is_square.QQ.lift@1",
+        "premises": [
+          "F4"
+        ],
+        "statement": "Discriminant is a square in QQ."
+      },
+      {
+        "id": "F6",
+        "claim": {
+          "pred": "DiscSquareQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "disc.square.QQ.lift@1",
+        "premises": [
+          "F3",
+          "F5"
+        ],
+        "statement": "Quartic discriminant square branch."
+      },
+      {
+        "id": "F7",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            },
+            {
+              "ref": "int.deg3"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of the quartic cubic resolvent."
+      },
+      {
+        "id": "F8",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            },
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "mpoly.resolvent.deg4.cubic_x1x2_plus_x3x4"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg4.cubic_x1x2_plus_x3x4@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Quartic cubic resolvent."
+      },
+      {
+        "id": "F9",
+        "claim": {
+          "pred": "FactorizationMonicQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            },
+            {
+              "ref": "polylist.factors.1"
+            },
+            {
+              "ref": "rat.unit.1"
+            }
+          ]
+        },
+        "rule": "factorization.QQ.monic@1",
+        "premises": [
+          "F7"
+        ],
+        "statement": "Complete splitting of the quartic cubic resolvent."
+      },
+      {
+        "id": "F10",
+        "claim": {
+          "pred": "GaloisGroup",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "grp.target"
+            }
+          ]
+        },
+        "rule": "galois_group.QQ.deg4.V4@1",
+        "premises": [
+          "F1",
+          "F2",
+          "F6",
+          "F8",
+          "F9"
+        ],
+        "statement": "Quartic Galois-group classification (V4 branch)."
+      }
+    ]
+  }
+}

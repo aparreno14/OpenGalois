@@ -1,0 +1,55 @@
+id: galois_group.QQ.deg5.F20@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: GaloisGroup
+  args: [PolyQQ, GroupId]
+
+premise_patterns:
+  - pred: Degree
+    bind:
+      claim_arg_0: premise_arg_0
+    constants:
+      premise_arg_1:
+        kind: IntZ
+        value: "5"
+  - pred: IrreducibleQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: DiscNonSquareQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: ResolventQQ
+    bind:
+      claim_arg_0: premise_arg_1
+  - pred: FactorizationMonicQQ
+    # bound indirectly: its first argument must match the R from ResolventQQ(R,f,p)
+  - pred: Degree
+    # bound indirectly: premise_arg_0 = l must occur among the factor refs listed in
+    # FactorizationMonicQQ(R,factors,unit), and premise_arg_1 must equal 1.
+    constants:
+      premise_arg_1:
+        kind: IntZ
+        value: "1"
+
+evidence_schema: null
+
+check_mode: theorem
+
+checker:
+  steps:
+    - "Require verified premises Degree(f,5), IrreducibleQQ(f), DiscNonSquareQQ(f) bound to the same f as in the claim."
+    - "Require a verified premise ResolventQQ(R,f,p) bound to the same f as in the claim."
+    - "Require that p is exactly the canonical MPolyQQ object for Dummit's F20 sextic resolvent family."
+    - "Require a verified premise FactorizationMonicQQ(R,factors,unit) for the same resolvent polynomial R."
+    - "Require a verified premise Degree(l,1)."
+    - "Decode factors as PolyQQList and require that the factor reference l occurs among factors.items."
+    - "Decode G as GroupId(system='smallgroup') and require (order,index)=(20,3) (F20)."
+    - "Accept."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_BAD_RESOLVENT_FAMILY
+  - E_TYPE
+  - E_GROUP_MISMATCH

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "input": {
+    "canonicalization": "jcs-rfc8785",
+    "coeffs_qq": [
+      "2",
+      "10",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    "degree": 5,
+    "domain": "Q",
+    "hash": "fac7d0a837aceae9895289c8450a628fba04a53dc67fc5a5b621281753f7234a",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "ordering": "descending_degree",
+    "variable": "x"
+  },
+  "meta": {
+    "backend": "none",
+    "generator": "opengalois",
+    "generator_version": "0.0.0-dev",
+    "ruleset_id": "le5-core@1",
+    "schema_version": "3.0.0"
+  },
+  "objects": {
+    "int.5": {
+      "kind": "IntZ",
+      "value": "5"
+    },
+    "poly.dm": {
+      "coeffs_qq": [
+        "1",
+        "0",
+        "-10",
+        "20",
+        "-15",
+        "4"
+      ],
+      "kind": "PolyQQ"
+    }
+  },
+  "proof": {
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            { "ref": "$input" },
+            { "ref": "int.5" }
+          ]
+        },
+        "premises": [],
+        "rule": "degree.QQ@1",
+        "statement": "Degree of the input polynomial is 5."
+      },
+      {
+        "claim": {
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "poly.dm"
+            }
+          ],
+          "pred": "DepressedMonicEq"
+        },
+        "evidence": {
+          "monic_scale": "2",
+          "tschirnhaus_shift": "1"
+        },
+        "id": "F2",
+        "premises": ["F1"],
+        "rule": "normalize.depressed_monic_QQ@1",
+        "statement": "g(x) = (f/lc)(x - t) with t = coeff(x^4)/5; here t=1."
+      }
+    ],
+    "version": "1.0"
+  },
+  "summary": {
+    "status": "unclassified"
+  }
+}

@@ -1,0 +1,20 @@
+id: sqrt.QQ.check@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: SqrtQQ
+  args: [RatQQ, RatQQ]
+
+premise_patterns: []
+
+evidence_schema: null
+
+check_mode: check_witness
+
+checker:
+  steps:
+    - "Decode q and k canonically as RatQQ."
+    - "Accept iff k^2 == q exactly in QQ."
+errors:
+  - E_TYPE
+  - E_MISMATCH

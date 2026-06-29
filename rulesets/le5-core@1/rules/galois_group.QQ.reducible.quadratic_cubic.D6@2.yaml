@@ -1,0 +1,37 @@
+id: galois_group.QQ.reducible.quadratic_cubic.D6@2
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: GaloisGroup
+  args: [PolyQQ, GroupId]
+
+premise_patterns:
+  - pred: FactorizationMonicQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: Degree
+  - pred: IrreducibleQQ
+  - pred: Discriminant
+  - pred: NonSquareQQ
+
+evidence_schema: null
+
+check_mode: theorem
+
+checker:
+  steps:
+    - "Require a verified premise FactorizationMonicQQ(f,factors,unit) bound to the same f as in the claim."
+    - "Decode factors as PolyQQList and form the list of distinct factor refs appearing in factors.items."
+    - "Require that among those distinct refs exactly one factor q has Degree(q,2), exactly one factor c has Degree(c,3), and every remaining distinct factor ref l satisfies Degree(l,1)."
+    - "Require verified premises IrreducibleQQ(q), Discriminant(q,d1), IrreducibleQQ(c), Discriminant(c,d2), and NonSquareQQ(d2)."
+    - "Require a verified premise NonSquareQQ(w) where w = d1*d2 exactly in QQ."
+    - "Decode G canonically as GroupId(system='smallgroup') and require (order,index)=(12,4)."
+    - "Accept."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_SIDE_CONDITION
+  - E_BAD_AUXILIARY_NONSQUARE
+  - E_TYPE
+  - E_GROUP_MISMATCH

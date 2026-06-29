@@ -1,0 +1,86 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "input": {
+    "canonicalization": "jcs-rfc8785",
+    "coeffs_qq": [
+      "1",
+      "0",
+      "0",
+      "1",
+      "-1",
+      "1"
+    ],
+    "degree": 5,
+    "domain": "Q",
+    "hash": "0fca3627b4953c455b61b39000f910b35c7127738d1e3ca2b611911c8007becb",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "ordering": "descending_degree",
+    "variable": "x"
+  },
+  "meta": {
+    "backend": "none",
+    "generator": "opengalois",
+    "generator_version": "0.0.0-dev",
+    "ruleset_id": "le5-core@1",
+    "schema_version": "3.0.0"
+  },
+  "objects": {
+    "list.factors": {
+      "items": [
+        "poly.g1",
+        "poly.g2"
+      ],
+      "kind": "PolyQQList"
+    },
+    "poly.g1": {
+      "coeffs_qq": [
+        "1",
+        "0",
+        "1"
+      ],
+      "kind": "PolyQQ"
+    },
+    "poly.g2": {
+      "coeffs_qq": [
+        "1",
+        "0",
+        "-1",
+        "1"
+      ],
+      "kind": "PolyQQ"
+    },
+    "rat.unit": {
+      "kind": "RatQQ",
+      "value": "1"
+    }
+  },
+  "proof": {
+    "facts": [
+      {
+        "claim": {
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "list.factors"
+            },
+            {
+              "ref": "rat.unit"
+            }
+          ],
+          "pred": "FactorizationMonicQQ"
+        },
+        "id": "F1",
+        "premises": [],
+        "rule": "factorization.QQ.monic@1",
+        "statement": "f = unit * \u03a0 factors (monic)"
+      }
+    ],
+    "version": "1.0"
+  },
+  "summary": {
+    "status": "unclassified"
+  }
+}

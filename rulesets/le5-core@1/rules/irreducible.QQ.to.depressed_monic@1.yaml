@@ -1,0 +1,28 @@
+id: irreducible.QQ.to.depressed_monic@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: IrreducibleQQ
+  args: [PolyQQ]
+
+premise_patterns:
+  - pred: DepressedMonicEq
+    # the claim polynomial is checked indirectly against the g from DepressedMonicEq(f,g)
+  - pred: IrreducibleQQ
+    # the source polynomial is checked indirectly against the f from DepressedMonicEq(f,g)
+
+evidence_schema: null
+
+check_mode: theorem
+
+checker:
+  steps:
+    - "Require a verified premise DepressedMonicEq(f,g)."
+    - "Require that the claim is exactly IrreducibleQQ(g) for the same g appearing in that premise."
+    - "Require a verified premise IrreducibleQQ(f) for the same f appearing in the normalization premise."
+    - "Accept."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_TYPE

@@ -1,0 +1,14 @@
+# Forzar siempre saltos de línea LF (estándar de la industria y Python)
+* text=auto eol=lf
+
+# Excepción: Archivos batch de Windows deben mantener CRLF
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Archivos binarios (imágenes, etc.) no deben tocarse
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary

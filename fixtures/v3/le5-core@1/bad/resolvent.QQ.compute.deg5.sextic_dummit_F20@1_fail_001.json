@@ -1,0 +1,196 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "manual-fixture",
+    "backend": "none",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "0",
+      "0",
+      "1",
+      "1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "a31ffbba08005f7fa9c1306115fa3c0c5d58962e5c63d3876a8bb6199e3173b4"
+  },
+  "objects": {
+    "int:5": {
+      "kind": "IntZ",
+      "value": "5"
+    },
+    "poly:r20": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "8",
+        "40",
+        "160",
+        "400",
+        "-2613",
+        "-9118"
+      ]
+    },
+    "mpoly.resolvent.deg5.sextic_dummit_F20": {
+      "kind": "MPolyQQ",
+      "nvars": 5,
+      "terms": [
+        {
+          "exp": [
+            2,
+            1,
+            0,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            2,
+            0,
+            1,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            2,
+            1,
+            0,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            1,
+            0,
+            2,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            0,
+            2,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            0,
+            0,
+            1,
+            2
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            2,
+            0,
+            1,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            2,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            1,
+            0,
+            2
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            0,
+            1,
+            2,
+            1
+          ],
+          "coeff_qq": "1"
+        }
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "f1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int:5"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "f2",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly:r20"
+            },
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "mpoly.resolvent.deg5.sextic_dummit_F20"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg5.sextic_dummit_F20@1",
+        "premises": [
+          "f1"
+        ]
+      }
+    ],
+    "goals": [
+      "f2"
+    ]
+  }
+}

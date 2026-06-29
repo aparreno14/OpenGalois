@@ -1,0 +1,39 @@
+id: resolvent.QQ.compute.deg4.cubic_x1plusx2_times_x3plusx4@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: ResolventQQ
+  args: [PolyQQ, PolyQQ, MPolyQQ]
+
+premise_patterns:
+  - pred: Degree
+    bind:
+      claim_arg_1: premise_arg_0
+    constants:
+      premise_arg_1:
+        kind: IntZ
+        value: "4"
+
+evidence_schema: null
+
+check_mode: recompute
+
+checker:
+  steps:
+    - "Require a verified premise Degree(f,4) bound to the same f as in the claim."
+    - "Decode R canonically as a PolyQQ."
+    - "Decode f canonically as a PolyQQ."
+    - "Decode p canonically as an MPolyQQ."
+    - "Require p to be exactly the canonical MPolyQQ for (x1+x2)(x3+x4)."
+    - "Let lc = lc(f) and form the monic quartic f_m = f / lc = X^4 + aX^3 + bX^2 + cX + d."
+    - "Recompute the cubic resolvent R3(X) = X^3 - 2bX^2 + (b^2 + ac - 4d)X + (a^2 d - abc + c^2) exactly in QQ[X]."
+    - "Accept iff the claimed R equals the recomputed R3 exactly in QQ[X]."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_TYPE
+  - E_SIDE_CONDITION
+  - E_P_MISMATCH
+  - E_EXCEPTION
+  - E_MISMATCH

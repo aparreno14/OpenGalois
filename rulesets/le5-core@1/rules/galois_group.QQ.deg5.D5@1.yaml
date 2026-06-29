@@ -1,0 +1,58 @@
+id: galois_group.QQ.deg5.D5@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: GaloisGroup
+  args: [PolyQQ, GroupId]
+
+premise_patterns:
+  - pred: Degree
+    bind:
+      claim_arg_0: premise_arg_0
+    constants:
+      premise_arg_1:
+        kind: IntZ
+        value: "5"
+  - pred: IrreducibleQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: Discriminant
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: SqrtQQ
+  - pred: ResolventQQ
+    bind:
+      claim_arg_0: premise_arg_1
+  - pred: FactorizationMonicQQ
+  - pred: Degree
+  - pred: Discriminant
+  - pred: Discriminant
+  - pred: NonSquareQQ
+
+evidence_schema: null
+check_mode: theorem
+
+checker:
+  steps:
+    - "Require verified premises Degree(f,5), IrreducibleQQ(f), and Discriminant(f,D) bound to the same f as in the claim."
+    - "Require a verified premise SqrtQQ(D,A) for that same discriminant object D."
+    - "Require a verified premise ResolventQQ(R,f,p) bound to the same f and require that p is exactly the canonical MPolyQQ object for Dummit's F20 sextic-resolvent family."
+    - "Require a verified premise FactorizationMonicQQ(R,factors,unit) for that same resolvent R."
+    - "Require a verified premise Degree(l,1), decode factors as PolyQQList, and require that l occurs in factors.items."
+    - "Decode l as a linear polynomial and extract its rational root theta."
+    - "Decode f in descending coefficients and require that it has Dummit's depressed monic quintic shape x^5 + p x^3 + q x^2 + r x + s."
+    - "Using the shared Dummit appendix module and the witness data (p,q,r,s,theta,D,A), recompute the two Dummit quadratics q+ = x^2 + (T1+T2*A)x + (T3+T4*A) and q- = x^2 + (T1-T2*A)x + (T3-T4*A)."
+    - "Require verified premises Discriminant(q+,D+) and Discriminant(q-,D-) for those two quadratics, allowing q+ and q- to appear in either order."
+    - "Require a verified premise NonSquareQQ(D+) or NonSquareQQ(D-)."
+    - "Decode G as GroupId(system='smallgroup') and require (order,index)=(10,2) (D5)."
+    - "Accept."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_BAD_RESOLVENT_FAMILY
+  - E_SIDE_CONDITION
+  - E_DUMMIT_QUADRATICS_MISMATCH
+  - E_DUMMIT_D_MISMATCH
+  - E_TYPE
+  - E_GROUP_MISMATCH

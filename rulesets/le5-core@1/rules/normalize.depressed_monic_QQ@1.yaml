@@ -1,0 +1,48 @@
+id: normalize.depressed_monic_QQ@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: DepressedMonicEq
+  args: [PolyQQ, PolyQQ]
+
+premise_patterns:
+  - pred: Degree
+    bind:
+      claim_arg_0: premise_arg_0
+
+evidence_schema:
+  type: object
+  additionalProperties: false
+  required: [tschirnhaus_shift, monic_scale]
+  properties:
+    tschirnhaus_shift:
+      type: string
+      description: "Canonical rational string t where g(x)=f_m(x - t) with f_m = f / lc(f)."
+    monic_scale:
+      type: string
+      description: "Canonical rational string equal to lc(f)."
+
+check_mode: verify_evidence
+
+checker:
+  steps:
+    - "Require a verified premise Degree(f,n) bound to the same input polynomial f."
+    - "Decode f and g as PolyQQ (from $input or objects)."
+    - "Side condition: deg(f) in {2,3,4,5}. Reject otherwise."
+    - "Parse evidence: monic_scale=a and tschirnhaus_shift=t as canonical rationals."
+    - "Let a_n = lc(f). Check a == a_n."
+    - "Let f_m = f / a_n (monic). Compute t_expected = (coeff of x^(n-1) in f_m) / n. Check t == t_expected."
+    - "Recompute g_expected(x) = f_m(x - t_expected) exactly in QQ[x] and compare with g."
+    - "Enforce invariants: lc(g)=1 and coeff of x^(n-1) in g is 0 (depressed)."
+    - "Accept iff all checks pass."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_TYPE
+  - E_SIDE_CONDITION
+  - E_EVIDENCE
+  - E_EXCEPTION
+  - E_CONSTRUCTION_MISMATCH
+  - E_NOT_MONIC
+  - E_NOT_DEPRESSED

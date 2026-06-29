@@ -1,0 +1,235 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.0.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 4,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "-5",
+      "0",
+      "6"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "746fb92b0f5c8aa83050c12527e92797c2673e9a9e847a8e56d362f6301098d7"
+  },
+  "objects": {
+    "poly:q1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "-2"
+      ]
+    },
+    "poly:q2": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "-3"
+      ]
+    },
+    "list:factors": {
+      "kind": "PolyQQList",
+      "items": [
+        "poly:q1",
+        "poly:q2"
+      ]
+    },
+    "rat:unit": {
+      "kind": "RatQQ",
+      "value": "1"
+    },
+    "int:2": {
+      "kind": "IntZ",
+      "value": "2"
+    },
+    "rat:d1": {
+      "kind": "RatQQ",
+      "value": "8"
+    },
+    "rat:d2": {
+      "kind": "RatQQ",
+      "value": "12"
+    },
+    "rat:prod": {
+      "kind": "RatQQ",
+      "value": "96"
+    },
+    "grp:V4": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 4,
+      "index": 2,
+      "alias": "V4"
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly:q1"
+            },
+            {
+              "ref": "int:2"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly:q1"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ]
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [
+            {
+              "ref": "poly:q1"
+            },
+            {
+              "ref": "rat:d1"
+            }
+          ]
+        },
+        "rule": "disc.QQ.compute@1",
+        "premises": []
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly:q2"
+            },
+            {
+              "ref": "int:2"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "F5",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly:q2"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F4"
+        ]
+      },
+      {
+        "id": "F6",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [
+            {
+              "ref": "poly:q2"
+            },
+            {
+              "ref": "rat:d2"
+            }
+          ]
+        },
+        "rule": "disc.QQ.compute@1",
+        "premises": []
+      },
+      {
+        "id": "F7",
+        "claim": {
+          "pred": "NonSquareQQ",
+          "args": [
+            {
+              "ref": "rat:prod"
+            }
+          ]
+        },
+        "rule": "nonsquare.QQ.isqrt@1",
+        "premises": []
+      },
+      {
+        "id": "F8",
+        "claim": {
+          "pred": "FactorizationMonicQQ",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "list:factors"
+            },
+            {
+              "ref": "rat:unit"
+            }
+          ]
+        },
+        "rule": "factorization.QQ.monic@1",
+        "premises": []
+      },
+      {
+        "id": "F9",
+        "claim": {
+          "pred": "GaloisGroup",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "grp:V4"
+            }
+          ]
+        },
+        "rule": "galois_group.QQ.reducible.double_quadratic.V4@1",
+        "premises": [
+          "F8",
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5",
+          "F6",
+          "F7"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "manual-fixture",
+    "backend": "none",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 2,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "-1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "281a356c8a64ad0da1e3df6fbf7d2a150e74cbe073337e384bf9eab12b014b71"
+  },
+  "objects": {
+    "int:2": {
+      "kind": "IntZ",
+      "value": "2"
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "goals": [
+      "F2"
+    ],
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int:2"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.zassenhaus_trace@1",
+        "premises": [
+          "F1"
+        ],
+        "evidence": {
+          "prime": "3",
+          "ell": 0,
+          "mod_p_factorization": {
+            "factors_desc": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "2"
+              ]
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

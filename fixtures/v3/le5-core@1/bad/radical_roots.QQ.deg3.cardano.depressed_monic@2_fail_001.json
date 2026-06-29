@@ -1,0 +1,284 @@
+{
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.2.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 3,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "1",
+      "1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "982bc654cf049b49d565dfef334ddd89e0a505db86f8bab0a887b78ac5c12ee1"
+  },
+  "objects": {
+    "int:deg3": {
+      "kind": "IntZ",
+      "value": "3"
+    },
+    "rexpr:r1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "root",
+          "n": 3,
+          "arg": {
+            "kind": "add",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-1/2"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "31/108"
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "root",
+          "n": 3,
+          "arg": {
+            "kind": "sub",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-1/2"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "31/108"
+              }
+            }
+          }
+        }
+      }
+    },
+    "rexpr:r2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 1
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "31/108"
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 2
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "sub",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "31/108"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rexpr:r3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 2
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "31/108"
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 1
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "sub",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "31/108"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rlist:cardano_v2": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr:r1",
+        "rexpr:r2",
+        "rexpr:r3"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int:deg3"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ]
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "DepressedMonicEq",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "normalize.depressed_monic_QQ@1",
+        "premises": [
+          "F1"
+        ],
+        "evidence": {
+          "monic_scale": "1",
+          "tschirnhaus_shift": "0"
+        }
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rlist:cardano_v2"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg3.cardano.depressed_monic@2",
+        "premises": [
+          "F1",
+          "F2",
+          "F3"
+        ]
+      }
+    ],
+    "goals": [
+      "F4"
+    ]
+  }
+}

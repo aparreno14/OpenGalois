@@ -1,0 +1,99 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "manual-fixture",
+    "backend": "none",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": ["1", "0", "0", "0", "15", "12"],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "2db5e9bee534b7ee5599ac8d708be312d85ddeea9228340ebf012a80e092512b"
+  },
+  "objects": {
+    "int:5": {
+      "kind": "IntZ",
+      "value": "5"
+    },
+    "poly:r20": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "120",
+        "9000",
+        "540000",
+        "20250000",
+        "324000000",
+        "0"
+      ]
+    },
+    "mpoly.resolvent.deg5.sextic_dummit_F20": {
+      "kind": "MPolyQQ",
+      "nvars": 5,
+      "terms": [
+        {"exp": [2, 1, 0, 0, 1], "coeff_qq": "1"},
+        {"exp": [2, 0, 1, 1, 0], "coeff_qq": "1"},
+        {"exp": [1, 2, 1, 0, 0], "coeff_qq": "1"},
+        {"exp": [1, 1, 0, 2, 0], "coeff_qq": "1"},
+        {"exp": [1, 0, 2, 0, 1], "coeff_qq": "1"},
+        {"exp": [1, 0, 0, 1, 2], "coeff_qq": "1"},
+        {"exp": [0, 2, 0, 1, 1], "coeff_qq": "1"},
+        {"exp": [0, 1, 2, 1, 0], "coeff_qq": "1"},
+        {"exp": [0, 1, 1, 0, 2], "coeff_qq": "1"},
+        {"exp": [0, 0, 1, 2, 1], "coeff_qq": "1"}
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "goals": ["F4"],
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [{"ref": "$input"}, {"ref": "int:5"}]
+        },
+        "rule": "degree.QQ@1"
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [{"ref": "$input"}]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": ["F1"]
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {"ref": "poly:r20"},
+            {"ref": "$input"},
+            {"ref": "mpoly.resolvent.deg5.sextic_dummit_F20"}
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg5.sextic_dummit_F20@1",
+        "premises": ["F1"]
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [{"ref": "poly:r20"}]
+        },
+        "rule": "irreducible.QQ.dummit_resolvent@1",
+        "premises": ["F1", "F2", "F3"]
+      }
+    ]
+  }
+}

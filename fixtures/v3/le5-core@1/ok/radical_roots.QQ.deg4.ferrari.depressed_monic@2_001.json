@@ -1,0 +1,581 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "fixture",
+    "generator_version": "0.0.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 4,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "2",
+      "0",
+      "2"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "b608fd132eedf9dc4a9e2eb90e1577538849003baaa44a57fd108ad7d9a0fc2b"
+  },
+  "objects": {
+    "int.4": {
+      "kind": "IntZ",
+      "value": "4"
+    },
+    "int.3": {
+      "kind": "IntZ",
+      "value": "3"
+    },
+    "int.2": {
+      "kind": "IntZ",
+      "value": "2"
+    },
+    "int.1": {
+      "kind": "IntZ",
+      "value": "1"
+    },
+    "rat.unit.1": {
+      "kind": "RatQQ",
+      "value": "1"
+    },
+    "poly.g": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "2",
+        "0",
+        "2"
+      ]
+    },
+    "poly.R": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "-4",
+        "-4",
+        "0"
+      ]
+    },
+    "poly.R.lin": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0"
+      ]
+    },
+    "poly.R.quad": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "-4",
+        "-4"
+      ]
+    },
+    "list.R.factors": {
+      "kind": "PolyQQList",
+      "items": [
+        "poly.R.lin",
+        "poly.R.quad"
+      ]
+    },
+    "mpoly.alt": {
+      "kind": "MPolyQQ",
+      "nvars": 4,
+      "terms": [
+        {
+          "exp": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        }
+      ]
+    },
+    "rexpr.Rlin.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "qq",
+        "value_qq": "0"
+      }
+    },
+    "rlist.Rlin": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.Rlin.1"
+      ]
+    },
+    "rexpr.Rquad.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "qq",
+            "value_qq": "4"
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "qq",
+              "value_qq": "32"
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rexpr.Rquad.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "sub",
+          "left": {
+            "kind": "qq",
+            "value_qq": "4"
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "qq",
+              "value_qq": "32"
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rlist.Rquad": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.Rquad.1",
+        "rexpr.Rquad.2"
+      ]
+    },
+    "rlist.R": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.Rlin.1",
+        "rexpr.Rquad.1",
+        "rexpr.Rquad.2"
+      ]
+    },
+    "rexpr.g.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "root",
+        "n": 2,
+        "arg": {
+          "kind": "div",
+          "left": {
+            "kind": "add",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-2"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "-4"
+              }
+            }
+          },
+          "right": {
+            "kind": "qq",
+            "value_qq": "2"
+          }
+        }
+      }
+    },
+    "rexpr.g.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "neg",
+        "arg": {
+          "kind": "root",
+          "n": 2,
+          "arg": {
+            "kind": "div",
+            "left": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-4"
+                }
+              }
+            },
+            "right": {
+              "kind": "qq",
+              "value_qq": "2"
+            }
+          }
+        }
+      }
+    },
+    "rexpr.g.3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "root",
+        "n": 2,
+        "arg": {
+          "kind": "div",
+          "left": {
+            "kind": "sub",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-2"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "-4"
+              }
+            }
+          },
+          "right": {
+            "kind": "qq",
+            "value_qq": "2"
+          }
+        }
+      }
+    },
+    "rexpr.g.4": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "neg",
+        "arg": {
+          "kind": "root",
+          "n": 2,
+          "arg": {
+            "kind": "div",
+            "left": {
+              "kind": "sub",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-4"
+                }
+              }
+            },
+            "right": {
+              "kind": "qq",
+              "value_qq": "2"
+            }
+          }
+        }
+      }
+    },
+    "rlist.g": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.g.1",
+        "rexpr.g.2",
+        "rexpr.g.3",
+        "rexpr.g.4"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.4"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "DepressedMonicEq",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "poly.g"
+            }
+          ]
+        },
+        "rule": "normalize.depressed_monic_QQ@1",
+        "premises": [
+          "F1"
+        ],
+        "evidence": {
+          "monic_scale": "1",
+          "tschirnhaus_shift": "0"
+        }
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.g"
+            },
+            {
+              "ref": "int.4"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.g"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F3"
+        ]
+      },
+      {
+        "id": "F5",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly.R"
+            },
+            {
+              "ref": "poly.g"
+            },
+            {
+              "ref": "mpoly.alt"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg4.cubic_x1plusx2_times_x3plusx4@1",
+        "premises": [
+          "F3"
+        ]
+      },
+      {
+        "id": "F6",
+        "claim": {
+          "pred": "FactorizationMonicQQ",
+          "args": [
+            {
+              "ref": "poly.R"
+            },
+            {
+              "ref": "list.R.factors"
+            },
+            {
+              "ref": "rat.unit.1"
+            }
+          ]
+        },
+        "rule": "factorization.QQ.monic@1",
+        "premises": []
+      },
+      {
+        "id": "F7",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.R.lin"
+            },
+            {
+              "ref": "int.1"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "F8",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.R.lin"
+            },
+            {
+              "ref": "rlist.Rlin"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg1.trivial@1",
+        "premises": [
+          "F7"
+        ]
+      },
+      {
+        "id": "F9",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.R.quad"
+            },
+            {
+              "ref": "int.2"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "F10",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.R.quad"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F9"
+        ]
+      },
+      {
+        "id": "F11",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.R.quad"
+            },
+            {
+              "ref": "rlist.Rquad"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg2.quadratic_formula@1",
+        "premises": [
+          "F9",
+          "F10"
+        ]
+      },
+      {
+        "id": "F12",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.R"
+            },
+            {
+              "ref": "rlist.R"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.reducible.compose@2",
+        "premises": [
+          "F6",
+          "F8",
+          "F11"
+        ]
+      },
+      {
+        "id": "F13",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.g"
+            },
+            {
+              "ref": "rlist.g"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg4.ferrari.depressed_monic@2",
+        "premises": [
+          "F3",
+          "F4",
+          "F2",
+          "F5",
+          "F12"
+        ]
+      }
+    ]
+  }
+}

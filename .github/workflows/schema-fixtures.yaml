@@ -1,0 +1,76 @@
+name: schema-fixtures
+
+on:
+  pull_request:
+  push:
+    branches: ["main", "master"]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install tooling
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install check-jsonschema
+
+      - name: Select schema path (repo + packaged copy)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          # Canonical repo schema (v3)
+          if [[ -f "schemas/certificate/3.0.0.json" ]]; then
+            echo "SCHEMA_PATH=schemas/certificate/3.0.0.json" >> "$GITHUB_ENV"
+          else
+            echo "ERROR: schemas/certificate/3.0.0.json not found" >&2
+            exit 1
+          fi
+
+          # Optional packaged schema copy (recommended to exist for wheel installs)
+          if [[ -f "src/opengalois/schemas/certificate/3.0.0.json" ]]; then
+            echo "PKG_SCHEMA_PATH=src/opengalois/schemas/certificate/3.0.0.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Validate schema (metaschema)
+        run: |
+          check-jsonschema --check-metaschema "$SCHEMA_PATH"
+
+      - name: Ensure packaged schema (if present) matches repo schema
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -n "${PKG_SCHEMA_PATH:-}" ]]; then
+            diff -u "$SCHEMA_PATH" "$PKG_SCHEMA_PATH"
+          else
+            echo "NOTE: src/opengalois/schemas/certificate/3.0.0.json not present; skipping diff."
+          fi
+
+      - name: Validate v3 fixtures (schema only)
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          shopt -s nullglob globstar
+          
+          # In v3, ALL fixtures (ok/ and bad/) must be valid according to the schema.
+          # The 'bad/' fixtures will fail later in Python logical tests,
+          # but they must not fail here during structural JSON validation.
+          files=(fixtures/v3/**/*.json)
+          
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No v3 fixtures found yet. Skipping validation."
+            exit 0
+          fi
+
+          echo "Validating ${#files[@]} v3 fixtures against $SCHEMA_PATH..."
+          check-jsonschema --schemafile "$SCHEMA_PATH" "${files[@]}"

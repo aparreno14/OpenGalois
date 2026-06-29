@@ -1,0 +1,42 @@
+id: radical_roots.QQ.deg3.cardano.depressed_monic@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: RadicalRoots
+  args: [PolyQQ, RadicalExprList]
+
+premise_patterns:
+  - pred: Degree
+    bind:
+      claim_arg_0: premise_arg_0
+    constants:
+      premise_arg_1:
+        kind: IntZ
+        value: "3"
+  - pred: IrreducibleQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: DepressedMonicEq
+    bind:
+      claim_arg_0: premise_arg_1
+
+evidence_schema: null
+
+check_mode: recompute
+
+checker:
+  steps:
+    - "Require a verified premise Degree(g,3) bound to the same polynomial g as in the claim."
+    - "Require a verified premise IrreducibleQQ(g)."
+    - "Require a verified premise DepressedMonicEq(f,g) for some polynomial f."
+    - "Decode g canonically as a PolyQQ and defensively require exact form x^3 + p x + q."
+    - "Recompute the canonical ordered Cardano list [u+v, ωu+ω^2v, ω^2u+ωv] with u = root(3, (-q/2)+root(2,Δ_C)) and v = root(3, (-q/2)-root(2,Δ_C)), where Δ_C = q^2/4 + p^3/27 and ω = zeta(3,1)."
+    - "Decode the claimed RadicalExprList and compare it to the recomputed list by exact structural equality of RadicalExpr payloads."
+    - "Accept."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_TYPE
+  - E_SIDE_CONDITION
+  - E_MISMATCH

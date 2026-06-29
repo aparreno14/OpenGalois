@@ -1,0 +1,22 @@
+id: nonsquare.QQ.isqrt@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: NonSquareQQ
+  args: [RatQQ]
+
+premise_patterns: []
+
+evidence_schema: null
+
+check_mode: recompute
+
+checker:
+  steps:
+    - "Decode q canonically as a RatQQ, yielding a reduced fraction a/b with b>0."
+    - "If a < 0, accept (no rational square is negative)."
+    - "Compute is_square_Z(a) and is_square_Z(b) using exact integer isqrt."
+    - "Accept iff not is_square_Z(a) or not is_square_Z(b)."
+errors:
+  - E_TYPE
+  - E_MISMATCH

@@ -1,0 +1,26 @@
+{
+  "$schema": "../../../schemas/certificate/1.0.1.json",
+  "meta": { "schema_version": "1.0.1", "generator": "opengalois", "backend": "sympy" },
+  "input": {
+    "domain": "Q", "variable": "x", "ordering": "descending_degree", "degree": 5,
+    "coeffs_qq": ["1", "0", "0", "0", "0", "1"],
+    "canonicalization": "jcs-rfc8785", "hash_alg": "sha256", "hash_scope": "input_v1",
+    "hash": "b99f0ae475fe72467834b7bde8c0e843ad5c3a76b52d0732b62438b9adcba149"
+  },
+  "normalization": {
+    "basis": "depressed_monic_QQ",
+    "tschirnhaus_shift": "0",
+    "monic_scale": "1",
+    "poly_coeffs": ["1", "0", "0", "0", "0", "1"]
+  },
+  "checks": { "separability": { "is_separable": true }, "factorization_QQ": { "is_irreducible": true } },
+  "invariants": { "discriminant": { "value": "9", "is_square": true, "sqrt_witness": "3" } },
+  "real_roots": { "method": "sturm_count", "count": 3 },
+  "trace": { "decision_path": ["bad-fixture"] },
+  "result": {
+    "status": "ok",
+    "solvable_by_radicals": false,
+    "galois_group": "A5",
+    "transitive_group_id": "5T4"
+  }
+}

@@ -1,0 +1,2583 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.0.0",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 4,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "0",
+      "-1",
+      "-1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "d274be4dbf97163e06767c7c875bdad3c4ead5a1606170fd78eb40d4227e29d1"
+  },
+  "objects": {
+    "int.4": {
+      "kind": "IntZ",
+      "value": "4"
+    },
+    "rat.disc.1": {
+      "kind": "RatQQ",
+      "value": "-283"
+    },
+    "mpoly.resolvent.deg4.cubic_x1x2_plus_x3x4": {
+      "kind": "MPolyQQ",
+      "nvars": 4,
+      "terms": [
+        {
+          "exp": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "coeff_qq": "1"
+        }
+      ]
+    },
+    "poly.resolvent.1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "4",
+        "1"
+      ]
+    },
+    "int.3": {
+      "kind": "IntZ",
+      "value": "3"
+    },
+    "group.S4": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 24,
+      "index": 12,
+      "alias": "S4"
+    },
+    "group.A4": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 12,
+      "index": 3,
+      "alias": "A4"
+    },
+    "group.V4": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 4,
+      "index": 2,
+      "alias": "V4"
+    },
+    "group.C4": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 4,
+      "index": 1,
+      "alias": "C4"
+    },
+    "group.D4": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 8,
+      "index": 3,
+      "alias": "D4"
+    },
+    "poly.depressed_monic.1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "0",
+        "-1",
+        "-1"
+      ]
+    },
+    "mpoly.resolvent.deg4.cubic_x1plusx2_times_x3plusx4": {
+      "kind": "MPolyQQ",
+      "nvars": 4,
+      "terms": [
+        {
+          "exp": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        }
+      ]
+    },
+    "poly.resolvent.2": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "4",
+        "1"
+      ]
+    },
+    "rat.disc.2": {
+      "kind": "RatQQ",
+      "value": "-283"
+    },
+    "group.C3": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 3,
+      "index": 1,
+      "alias": "C3"
+    },
+    "group.S3": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 6,
+      "index": 2,
+      "alias": "S3"
+    },
+    "poly.depressed_monic.2": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "4",
+        "1"
+      ]
+    },
+    "rexpr.cardano.v2.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "root",
+          "n": 3,
+          "arg": {
+            "kind": "add",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-1/2"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "283/108"
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "div",
+          "left": {
+            "kind": "qq",
+            "value_qq": "-4/3"
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "283/108"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rexpr.cardano.v2.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 1
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "283/108"
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 2
+          },
+          "right": {
+            "kind": "div",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-4/3"
+            },
+            "right": {
+              "kind": "root",
+              "n": 3,
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-1/2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "qq",
+                    "value_qq": "283/108"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rexpr.cardano.v2.3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 2
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "283/108"
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 1
+          },
+          "right": {
+            "kind": "div",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-4/3"
+            },
+            "right": {
+              "kind": "root",
+              "n": 3,
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-1/2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "qq",
+                    "value_qq": "283/108"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rlist.cardano.v2.1": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.cardano.v2.1",
+        "rexpr.cardano.v2.2",
+        "rexpr.cardano.v2.3"
+      ]
+    },
+    "rexpr.cardano.lift.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "root",
+          "n": 3,
+          "arg": {
+            "kind": "add",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-1/2"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "283/108"
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "div",
+          "left": {
+            "kind": "qq",
+            "value_qq": "-4/3"
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "283/108"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rexpr.cardano.lift.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 1
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "283/108"
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 2
+          },
+          "right": {
+            "kind": "div",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-4/3"
+            },
+            "right": {
+              "kind": "root",
+              "n": 3,
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-1/2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "qq",
+                    "value_qq": "283/108"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rexpr.cardano.lift.3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 2
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "283/108"
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 1
+          },
+          "right": {
+            "kind": "div",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-4/3"
+            },
+            "right": {
+              "kind": "root",
+              "n": 3,
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-1/2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "qq",
+                    "value_qq": "283/108"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rlist.cardano.lift.1": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.cardano.lift.1",
+        "rexpr.cardano.lift.2",
+        "rexpr.cardano.lift.3"
+      ]
+    },
+    "rexpr.ferrari.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "neg",
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "sub",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "div",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "neg",
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "root",
+                        "n": 3,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-1/2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "283/108"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "div",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-4/3"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 3,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-1/2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "283/108"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rexpr.ferrari.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "sub",
+          "left": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "neg",
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "sub",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "div",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "neg",
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "root",
+                        "n": 3,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-1/2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "283/108"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "div",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-4/3"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 3,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-1/2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "283/108"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rexpr.ferrari.3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "neg",
+            "arg": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "neg",
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "div",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-4/3"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 3,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-1/2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "283/108"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "div",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "neg",
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "root",
+                        "n": 3,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-1/2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "283/108"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "div",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-4/3"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 3,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-1/2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "283/108"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rexpr.ferrari.4": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "sub",
+          "left": {
+            "kind": "neg",
+            "arg": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "neg",
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "div",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-4/3"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 3,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-1/2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "283/108"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "div",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "neg",
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "root",
+                        "n": 3,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-1/2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "283/108"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "div",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-4/3"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 3,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-1/2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "283/108"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rlist.ferrari.1": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.ferrari.1",
+        "rexpr.ferrari.2",
+        "rexpr.ferrari.3",
+        "rexpr.ferrari.4"
+      ]
+    },
+    "rexpr.ferrari.lift.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "neg",
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "sub",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "div",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "neg",
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "root",
+                        "n": 3,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-1/2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "283/108"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "div",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-4/3"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 3,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-1/2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "283/108"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rexpr.ferrari.lift.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "sub",
+          "left": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "neg",
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "sub",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "div",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "neg",
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "root",
+                        "n": 3,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-1/2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "283/108"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "div",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-4/3"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 3,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-1/2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "283/108"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rexpr.ferrari.lift.3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "neg",
+            "arg": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "neg",
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "div",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-4/3"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 3,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-1/2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "283/108"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "div",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "neg",
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "root",
+                        "n": 3,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-1/2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "283/108"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "div",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-4/3"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 3,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-1/2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "283/108"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rexpr.ferrari.lift.4": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "sub",
+          "left": {
+            "kind": "neg",
+            "arg": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "neg",
+                "arg": {
+                  "kind": "add",
+                  "left": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  },
+                  "right": {
+                    "kind": "div",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-4/3"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 3,
+                      "arg": {
+                        "kind": "add",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-1/2"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 2,
+                          "arg": {
+                            "kind": "qq",
+                            "value_qq": "283/108"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "add",
+                "left": {
+                  "kind": "root",
+                  "n": 3,
+                  "arg": {
+                    "kind": "add",
+                    "left": {
+                      "kind": "qq",
+                      "value_qq": "-1/2"
+                    },
+                    "right": {
+                      "kind": "root",
+                      "n": 2,
+                      "arg": {
+                        "kind": "qq",
+                        "value_qq": "283/108"
+                      }
+                    }
+                  }
+                },
+                "right": {
+                  "kind": "div",
+                  "left": {
+                    "kind": "qq",
+                    "value_qq": "-4/3"
+                  },
+                  "right": {
+                    "kind": "root",
+                    "n": 3,
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "qq",
+                        "value_qq": "-1/2"
+                      },
+                      "right": {
+                        "kind": "root",
+                        "n": 2,
+                        "arg": {
+                          "kind": "qq",
+                          "value_qq": "283/108"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "right": {
+                "kind": "div",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "neg",
+                    "arg": {
+                      "kind": "add",
+                      "left": {
+                        "kind": "root",
+                        "n": 3,
+                        "arg": {
+                          "kind": "add",
+                          "left": {
+                            "kind": "qq",
+                            "value_qq": "-1/2"
+                          },
+                          "right": {
+                            "kind": "root",
+                            "n": 2,
+                            "arg": {
+                              "kind": "qq",
+                              "value_qq": "283/108"
+                            }
+                          }
+                        }
+                      },
+                      "right": {
+                        "kind": "div",
+                        "left": {
+                          "kind": "qq",
+                          "value_qq": "-4/3"
+                        },
+                        "right": {
+                          "kind": "root",
+                          "n": 3,
+                          "arg": {
+                            "kind": "add",
+                            "left": {
+                              "kind": "qq",
+                              "value_qq": "-1/2"
+                            },
+                            "right": {
+                              "kind": "root",
+                              "n": 2,
+                              "arg": {
+                                "kind": "qq",
+                                "value_qq": "283/108"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rlist.ferrari.lift.1": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.ferrari.lift.1",
+        "rexpr.ferrari.lift.2",
+        "rexpr.ferrari.lift.3",
+        "rexpr.ferrari.lift.4"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.4"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 4."
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Irreducible over Q."
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rat.disc.1"
+            }
+          ]
+        },
+        "rule": "disc.QQ.compute@1",
+        "premises": [],
+        "statement": "Discriminant over QQ computed via resultant with the derivative."
+      },
+      {
+        "id": "F5",
+        "claim": {
+          "pred": "NonSquareQQ",
+          "args": [
+            {
+              "ref": "rat.disc.1"
+            }
+          ]
+        },
+        "rule": "nonsquare.QQ.isqrt@1",
+        "premises": [],
+        "statement": "Rational value is not a square in QQ."
+      },
+      {
+        "id": "F6",
+        "claim": {
+          "pred": "DiscNonSquareQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "disc.nonsquare.QQ.lift@1",
+        "premises": [
+          "F3",
+          "F5"
+        ],
+        "statement": "Discriminant of f is not a square in QQ."
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            },
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "mpoly.resolvent.deg4.cubic_x1plusx2_times_x3plusx4"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg4.cubic_x1plusx2_times_x3plusx4@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Degree-4 cubic resolvent over QQ for the family x1*x2 + x3*x4."
+      },
+      {
+        "id": "F7",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            },
+            {
+              "ref": "int.3"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 3."
+      },
+      {
+        "id": "F8",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F7"
+        ],
+        "statement": "Irreducible over Q."
+      },
+      {
+        "id": "F9",
+        "claim": {
+          "pred": "GaloisGroup",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "group.S4"
+            }
+          ]
+        },
+        "rule": "galois_group.QQ.deg4.S4@2",
+        "premises": [
+          "F1",
+          "F2",
+          "F6",
+          "F4",
+          "F8"
+        ],
+        "statement": "Degree-4 irreducible Galois group classification via discriminant and cubic resolvent."
+      },
+      {
+        "id": "F10",
+        "claim": {
+          "pred": "DepressedMonicEq",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "poly.depressed_monic.1"
+            }
+          ]
+        },
+        "rule": "normalize.depressed_monic_QQ@1",
+        "premises": [
+          "F1"
+        ],
+        "evidence": {
+          "tschirnhaus_shift": "0",
+          "monic_scale": "1"
+        },
+        "statement": "Depressed-monic normalization over Q: monicize then apply x -> x - t to kill x^(n-1)."
+      },
+      {
+        "id": "F11",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.depressed_monic.1"
+            },
+            {
+              "ref": "int.4"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 4."
+      },
+      {
+        "id": "F12",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.depressed_monic.1"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.to.depressed_monic@1",
+        "premises": [
+          "F10",
+          "F2"
+        ],
+        "statement": "Irreducibility transported to the depressed monic normalization over Q."
+      },
+      {
+        "id": "F13",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "poly.depressed_monic.1"
+            },
+            {
+              "ref": "mpoly.resolvent.deg4.cubic_x1plusx2_times_x3plusx4"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg4.cubic_x1plusx2_times_x3plusx4@1",
+        "premises": [
+          "F11"
+        ],
+        "statement": "Degree-4 cubic resolvent over QQ for the family (x1+x2)(x3+x4)."
+      },
+      {
+        "id": "F14",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "int.3"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 3."
+      },
+      {
+        "id": "F15",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F14"
+        ],
+        "statement": "Irreducible over Q."
+      },
+      {
+        "id": "F16",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "rat.disc.2"
+            }
+          ]
+        },
+        "rule": "disc.QQ.compute@1",
+        "premises": [],
+        "statement": "Discriminant over QQ computed via resultant with the derivative."
+      },
+      {
+        "id": "F17",
+        "claim": {
+          "pred": "NonSquareQQ",
+          "args": [
+            {
+              "ref": "rat.disc.2"
+            }
+          ]
+        },
+        "rule": "nonsquare.QQ.isqrt@1",
+        "premises": [],
+        "statement": "Rational value is not a square in QQ."
+      },
+      {
+        "id": "F18",
+        "claim": {
+          "pred": "DiscNonSquareQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            }
+          ]
+        },
+        "rule": "disc.nonsquare.QQ.lift@1",
+        "premises": [
+          "F16",
+          "F17"
+        ],
+        "statement": "Discriminant of f is not a square in QQ."
+      },
+      {
+        "id": "F19",
+        "claim": {
+          "pred": "GaloisGroup",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "group.S3"
+            }
+          ]
+        },
+        "rule": "galois_group.QQ.deg3.S3@1",
+        "premises": [
+          "F14",
+          "F15",
+          "F18"
+        ],
+        "statement": "Degree-3 irreducible Galois group classification via discriminant."
+      },
+      {
+        "id": "F20",
+        "claim": {
+          "pred": "DepressedMonicEq",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "poly.depressed_monic.2"
+            }
+          ]
+        },
+        "rule": "normalize.depressed_monic_QQ@1",
+        "premises": [
+          "F14"
+        ],
+        "evidence": {
+          "tschirnhaus_shift": "0",
+          "monic_scale": "1"
+        },
+        "statement": "Depressed-monic normalization over Q: monicize then apply x -> x - t to kill x^(n-1)."
+      },
+      {
+        "id": "F21",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.depressed_monic.2"
+            },
+            {
+              "ref": "int.3"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 3."
+      },
+      {
+        "id": "F22",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.depressed_monic.2"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F21"
+        ],
+        "statement": "Irreducible over Q (recomputed on the normalized cubic)."
+      },
+      {
+        "id": "F23",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.depressed_monic.2"
+            },
+            {
+              "ref": "rlist.cardano.v2.1"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg3.cardano.depressed_monic@2",
+        "premises": [
+          "F21",
+          "F22",
+          "F20"
+        ],
+        "statement": "Canonical Cardano-v2 radical roots for the depressed monic cubic."
+      },
+      {
+        "id": "F24",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "rlist.cardano.lift.1"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.lift.depressed_monic@1",
+        "premises": [
+          "F20",
+          "F23"
+        ],
+        "statement": "Lift depressed-monic Cardano radical roots back to the original cubic."
+      },
+      {
+        "id": "F25",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.depressed_monic.1"
+            },
+            {
+              "ref": "rlist.ferrari.1"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg4.ferrari.depressed_monic@2",
+        "premises": [
+          "F11",
+          "F12",
+          "F10",
+          "F13",
+          "F24"
+        ],
+        "statement": "Canonical Ferrari radical roots for the depressed monic quartic."
+      },
+      {
+        "id": "F26",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rlist.ferrari.lift.1"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.lift.depressed_monic@1",
+        "premises": [
+          "F10",
+          "F25"
+        ],
+        "statement": "Lift depressed-monic Ferrari radical roots back to the original quartic."
+      }
+    ]
+  },
+  "summary": {
+    "status": "irreducible",
+    "solvable_by_radicals": true,
+    "galois_group": "S4",
+    "transitive_group_id": null
+  }
+}

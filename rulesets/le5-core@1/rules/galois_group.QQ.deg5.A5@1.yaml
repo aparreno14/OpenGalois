@@ -1,0 +1,46 @@
+id: galois_group.QQ.deg5.A5@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: GaloisGroup
+  args: [PolyQQ, GroupId]
+
+premise_patterns:
+  - pred: Degree
+    bind:
+      claim_arg_0: premise_arg_0
+    constants:
+      premise_arg_1:
+        kind: IntZ
+        value: "5"
+  - pred: IrreducibleQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: DiscSquareQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: ResolventQQ
+    bind:
+      claim_arg_0: premise_arg_1
+  - pred: IrreducibleQQ
+    # bound indirectly: its argument must match the R from ResolventQQ(R,f,p)
+
+evidence_schema: null
+
+check_mode: theorem
+
+checker:
+  steps:
+    - "Require verified premises Degree(f,5), IrreducibleQQ(f), DiscSquareQQ(f) bound to the same f as in the claim."
+    - "Require a verified premise ResolventQQ(R,f,p) bound to the same f as in the claim."
+    - "Require that p is exactly the canonical MPolyQQ object for Dummit's F20 sextic resolvent family."
+    - "Require a verified premise IrreducibleQQ(R) for the same resolvent polynomial R."
+    - "Decode G as GroupId(system='smallgroup') and require (order,index)=(60,5) (A5)."
+    - "Accept."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_BAD_RESOLVENT_FAMILY
+  - E_TYPE
+  - E_GROUP_MISMATCH

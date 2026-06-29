@@ -1,0 +1,415 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "manual-fixture",
+    "backend": "none",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "-110",
+      "-55",
+      "2310",
+      "979"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "ca5574128fb96047c25449aa083e5161081e59bf8f36f675106fc8dad0c5dfcb"
+  },
+  "objects": {
+    "int:5": {
+      "kind": "IntZ",
+      "value": "5"
+    },
+    "int:1": {
+      "kind": "IntZ",
+      "value": "1"
+    },
+    "rat:D": {
+      "kind": "RatQQ",
+      "value": "1396274566650390625"
+    },
+    "rat:A": {
+      "kind": "RatQQ",
+      "value": "1181640625"
+    },
+    "poly:r20": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "18480",
+        "47764750",
+        "-580262760000",
+        "-1796651418959375",
+        "2980357148316659375",
+        "-360260685644469671875"
+      ]
+    },
+    "poly:lin": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "9955"
+      ]
+    },
+    "poly:q5": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "8525",
+        "-37101625",
+        "-210916083125",
+        "303018188550000",
+        "-36188918698590625"
+      ]
+    },
+    "polylist:factors": {
+      "kind": "PolyQQList",
+      "items": [
+        "poly:lin",
+        "poly:q5"
+      ]
+    },
+    "rat:1": {
+      "kind": "RatQQ",
+      "value": "1"
+    },
+    "poly:q1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "-735625",
+        "-49345312500"
+      ]
+    },
+    "rat:D1": {
+      "kind": "RatQQ",
+      "value": "738525390625"
+    },
+    "group.good": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 5,
+      "index": 1,
+      "alias": "C5"
+    },
+    "group.bad": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 10,
+      "index": 2,
+      "alias": "D5"
+    },
+    "mpoly.resolvent.deg5.sextic_dummit_F20": {
+      "kind": "MPolyQQ",
+      "nvars": 5,
+      "terms": [
+        {
+          "coeff_qq": "1",
+          "exp": [
+            2,
+            1,
+            0,
+            0,
+            1
+          ]
+        },
+        {
+          "coeff_qq": "1",
+          "exp": [
+            2,
+            0,
+            1,
+            1,
+            0
+          ]
+        },
+        {
+          "coeff_qq": "1",
+          "exp": [
+            1,
+            2,
+            1,
+            0,
+            0
+          ]
+        },
+        {
+          "coeff_qq": "1",
+          "exp": [
+            1,
+            1,
+            0,
+            2,
+            0
+          ]
+        },
+        {
+          "coeff_qq": "1",
+          "exp": [
+            1,
+            0,
+            2,
+            0,
+            1
+          ]
+        },
+        {
+          "coeff_qq": "1",
+          "exp": [
+            1,
+            0,
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "coeff_qq": "1",
+          "exp": [
+            0,
+            2,
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "coeff_qq": "1",
+          "exp": [
+            0,
+            1,
+            2,
+            1,
+            0
+          ]
+        },
+        {
+          "coeff_qq": "1",
+          "exp": [
+            0,
+            1,
+            1,
+            0,
+            2
+          ]
+        },
+        {
+          "coeff_qq": "1",
+          "exp": [
+            0,
+            0,
+            1,
+            2,
+            1
+          ]
+        }
+      ]
+    },
+    "rat:sqrtD1": {
+      "kind": "RatQQ",
+      "value": "859375"
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "goals": [
+      "F11"
+    ],
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int:5"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1"
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ]
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rat:D"
+            }
+          ]
+        },
+        "rule": "disc.QQ.compute@1"
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "SqrtQQ",
+          "args": [
+            {
+              "ref": "rat:D"
+            },
+            {
+              "ref": "rat:A"
+            }
+          ]
+        },
+        "rule": "sqrt.QQ.check@1"
+      },
+      {
+        "id": "F5",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly:r20"
+            },
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "mpoly.resolvent.deg5.sextic_dummit_F20"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg5.sextic_dummit_F20@1",
+        "premises": [
+          "F1"
+        ]
+      },
+      {
+        "id": "F6",
+        "claim": {
+          "pred": "FactorizationMonicQQ",
+          "args": [
+            {
+              "ref": "poly:r20"
+            },
+            {
+              "ref": "polylist:factors"
+            },
+            {
+              "ref": "rat:1"
+            }
+          ]
+        },
+        "rule": "factorization.QQ.monic@1"
+      },
+      {
+        "id": "F7",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly:lin"
+            },
+            {
+              "ref": "int:1"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1"
+      },
+      {
+        "id": "F8",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [
+            {
+              "ref": "poly:q1"
+            },
+            {
+              "ref": "rat:D1"
+            }
+          ]
+        },
+        "rule": "disc.QQ.compute@1"
+      },
+      {
+        "id": "F9",
+        "claim": {
+          "pred": "SqrtQQ",
+          "args": [
+            {
+              "ref": "rat:D1"
+            },
+            {
+              "ref": "rat:sqrtD1"
+            }
+          ]
+        },
+        "rule": "sqrt.QQ.check@1"
+      },
+      {
+        "id": "F10",
+        "claim": {
+          "pred": "IsSquareQQ",
+          "args": [
+            {
+              "ref": "rat:D1"
+            }
+          ]
+        },
+        "rule": "is_square.QQ.lift@1",
+        "premises": [
+          "F9"
+        ]
+      },
+      {
+        "id": "F11",
+        "claim": {
+          "pred": "GaloisGroup",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "group.bad"
+            }
+          ]
+        },
+        "rule": "galois_group.QQ.deg5.C5@1",
+        "premises": [
+          "F1",
+          "F2",
+          "F3",
+          "F4",
+          "F5",
+          "F6",
+          "F7",
+          "F8",
+          "F10"
+        ]
+      }
+    ]
+  }
+}

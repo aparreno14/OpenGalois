@@ -1,0 +1,292 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.0.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 3,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "-3",
+      "1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "2ba49c231c8de2cdbaf755de858abd9233002496bcc4003503e7c4243bef02a9"
+  },
+  "objects": {
+    "int.3": {
+      "kind": "IntZ",
+      "value": "3"
+    },
+    "rexpr.cardano.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "root",
+          "n": 3,
+          "arg": {
+            "kind": "add",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-1/2"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "-3/4"
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "root",
+          "n": 3,
+          "arg": {
+            "kind": "sub",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-1/2"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "-3/4"
+              }
+            }
+          }
+        }
+      }
+    },
+    "rexpr.cardano.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 1
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-3/4"
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 2
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "sub",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-3/4"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rexpr.cardano.3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 2
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-3/4"
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 1
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "sub",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-3/4"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rlist.cardano": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.cardano.1",
+        "rexpr.cardano.3",
+        "rexpr.cardano.2"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.3"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 3."
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Irreducible over Q."
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "DepressedMonicEq",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "normalize.depressed_monic_QQ@1",
+        "premises": [
+          "F1"
+        ],
+        "evidence": {
+          "tschirnhaus_shift": "0",
+          "monic_scale": "1"
+        },
+        "statement": "Input is already monic and depressed."
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rlist.cardano"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg3.cardano.depressed_monic@1",
+        "premises": [
+          "F1",
+          "F2",
+          "F3"
+        ],
+        "statement": "Incorrectly permuted Cardano roots."
+      }
+    ]
+  },
+  "summary": {
+    "status": "ok",
+    "solvable_by_radicals": true,
+    "galois_group": "UNKNOWN",
+    "transitive_group_id": null
+  }
+}

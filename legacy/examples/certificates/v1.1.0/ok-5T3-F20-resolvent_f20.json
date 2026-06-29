@@ -1,0 +1,72 @@
+{
+  "$schema": "../../../schemas/certificate/1.1.0.json",
+  "meta": {
+    "schema_version": "1.1.0",
+    "generator": "opengalois",
+    "generator_version": "0.1.0",
+    "backend": "sympy"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "0",
+      "-2",
+      "0",
+      "1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "1d36b24fa344df1d8fda6641152834c2a8e6c2c69f7438dee1ea3f54bddc1458"
+  },
+  "normalization": {
+    "basis": "depressed_monic_QQ",
+    "tschirnhaus_shift": "0",
+    "monic_scale": "1",
+    "poly_coeffs": [
+      "1",
+      "0",
+      "0",
+      "-2",
+      "0",
+      "1"
+    ]
+  },
+  "checks": {
+    "factorization_QQ": {
+      "is_irreducible": true
+    }
+  },
+  "invariants": {
+    "discriminant": {
+      "value": "-7",
+      "is_square": false
+    }
+  },
+  "resolvents": {
+    "f20": {
+      "construction_method": "dummit_f20_v1",
+      "poly_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "has_rational_root": true,
+      "root_witness": "0"
+    }
+  },
+  "trace": {
+    "decision_path": [
+      "ok",
+      "disc nonsquare",
+      "f20 has rational root => F20"
+    ]
+  },
+  "result": {
+    "status": "ok",
+    "solvable_by_radicals": true,
+    "galois_group": "F20",
+    "transitive_group_id": "5T3"
+  }
+}

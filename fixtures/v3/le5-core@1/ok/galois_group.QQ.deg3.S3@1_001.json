@@ -1,0 +1,147 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "input": {
+    "canonicalization": "jcs-rfc8785",
+    "coeffs_qq": [
+      "1",
+      "0",
+      "0",
+      "-2"
+    ],
+    "degree": 3,
+    "domain": "Q",
+    "hash": "22cf6de74c77e3b1f5b1c41585c528c580ae44027823c6cd43fb73be4a8cc402",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "ordering": "descending_degree",
+    "variable": "x"
+  },
+  "meta": {
+    "backend": "none",
+    "generator": "opengalois",
+    "generator_version": "0.0.0-dev",
+    "ruleset_id": "le5-core@1",
+    "schema_version": "3.0.0"
+  },
+  "objects": {
+    "int.3": {
+      "kind": "IntZ",
+      "value": "3"
+    },
+    "rat.D": {
+      "kind": "RatQQ",
+      "value": "-108"
+    },
+    "group.S3": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 6,
+      "index": 2,
+      "alias": "S3"
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.3"
+            }
+          ]
+        },
+        "premises": [],
+        "rule": "degree.QQ@1"
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "premises": [
+          "F1"
+        ],
+        "rule": "irreducible.QQ.deg5_recompute@1"
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rat.D"
+            }
+          ]
+        },
+        "premises": [],
+        "rule": "disc.QQ.compute@1"
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "NonSquareQQ",
+          "args": [
+            {
+              "ref": "rat.D"
+            }
+          ]
+        },
+        "premises": [],
+        "rule": "nonsquare.QQ.isqrt@1"
+      },
+      {
+        "id": "F5",
+        "claim": {
+          "pred": "DiscNonSquareQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "premises": [
+          "F3",
+          "F4"
+        ],
+        "rule": "disc.nonsquare.QQ.lift@1"
+      },
+      {
+        "id": "F6",
+        "claim": {
+          "pred": "GaloisGroup",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "group.S3"
+            }
+          ]
+        },
+        "premises": [
+          "F1",
+          "F2",
+          "F5"
+        ],
+        "rule": "galois_group.QQ.deg3.S3@1"
+      }
+    ]
+  },
+  "summary": {
+    "status": "ok"
+  }
+}

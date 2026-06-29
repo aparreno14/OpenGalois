@@ -1,0 +1,56 @@
+id: irreducible.QQ.zassenhaus_trace@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: IrreducibleQQ
+  args: [PolyQQ]
+
+premise_patterns:
+  - pred: Degree
+    args: [PolyQQ, IntZ]
+
+evidence_schema:
+  type: object
+  additionalProperties: false
+  required: [prime, ell, mod_p_factorization]
+  properties:
+    prime:
+      type: string
+      pattern: "^(?:0|[1-9][0-9]*)$"
+    ell:
+      type: integer
+      minimum: 0
+    mod_p_factorization:
+      type: object
+      additionalProperties: false
+      required: [factors_desc]
+      properties:
+        factors_desc:
+          type: array
+          minItems: 1
+          items:
+            type: array
+            minItems: 2
+            items:
+              type: string
+              pattern: "^(?:0|[1-9][0-9]*)$"
+
+check_mode: recompute
+
+checker:
+  steps:
+    - "Decode f canonically as a PolyQQ and require a matching Degree(f,n) premise with n in {2,3,4,5}."
+    - "Construct the primitive integer model F in Z[x]."
+    - "Decode prime p and require that it is the deterministic good Zassenhaus prime selected for F."
+    - "Factor F mod p in F_p[x] and require the serialized irreducible factorization to match."
+    - "Decode ell and require it to match the deterministic Hensel precision exponent used by the implementation; ell=0 when F mod p is already irreducible."
+    - "Replay the deterministic degree-bounded Zassenhaus recombination procedure and accept iff no non-trivial factor is found."
+
+errors:
+  - E_TYPE
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_SIDE_CONDITION
+  - E_EVIDENCE
+  - E_EXCEPTION
+  - E_NOT_IRREDUCIBLE

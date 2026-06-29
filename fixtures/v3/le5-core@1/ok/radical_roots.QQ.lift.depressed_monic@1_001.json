@@ -1,0 +1,531 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.0.0",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 3,
+    "coeffs_qq": [
+      "1",
+      "3",
+      "0",
+      "-1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "67fbebbd715d91d0eb3b07ab3e98d7badbd5b8a4a955448cd31eba8a0bdf5a7e"
+  },
+  "objects": {
+    "poly.g": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "-3",
+        "1"
+      ]
+    },
+    "int.3": {
+      "kind": "IntZ",
+      "value": "3"
+    },
+    "rexpr.g.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "root",
+          "n": 3,
+          "arg": {
+            "kind": "add",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-1/2"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "-3/4"
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "root",
+          "n": 3,
+          "arg": {
+            "kind": "sub",
+            "left": {
+              "kind": "qq",
+              "value_qq": "-1/2"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "-3/4"
+              }
+            }
+          }
+        }
+      }
+    },
+    "rexpr.g.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 1
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-3/4"
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 2
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "sub",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-3/4"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rexpr.g.3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "add",
+        "left": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 2
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-3/4"
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "mul",
+          "left": {
+            "kind": "zeta",
+            "n": 3,
+            "k": 1
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "sub",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-3/4"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "rlist.g": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.g.1",
+        "rexpr.g.2",
+        "rexpr.g.3"
+      ]
+    },
+    "rexpr.f.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "sub",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-3/4"
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "root",
+            "n": 3,
+            "arg": {
+              "kind": "sub",
+              "left": {
+                "kind": "qq",
+                "value_qq": "-1/2"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "-3/4"
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "1"
+        }
+      }
+    },
+    "rexpr.f.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "sub",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "mul",
+            "left": {
+              "kind": "zeta",
+              "n": 3,
+              "k": 1
+            },
+            "right": {
+              "kind": "root",
+              "n": 3,
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-1/2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "qq",
+                    "value_qq": "-3/4"
+                  }
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "zeta",
+              "n": 3,
+              "k": 2
+            },
+            "right": {
+              "kind": "root",
+              "n": 3,
+              "arg": {
+                "kind": "sub",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-1/2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "qq",
+                    "value_qq": "-3/4"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "1"
+        }
+      }
+    },
+    "rexpr.f.3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "sub",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "mul",
+            "left": {
+              "kind": "zeta",
+              "n": 3,
+              "k": 2
+            },
+            "right": {
+              "kind": "root",
+              "n": 3,
+              "arg": {
+                "kind": "add",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-1/2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "qq",
+                    "value_qq": "-3/4"
+                  }
+                }
+              }
+            }
+          },
+          "right": {
+            "kind": "mul",
+            "left": {
+              "kind": "zeta",
+              "n": 3,
+              "k": 1
+            },
+            "right": {
+              "kind": "root",
+              "n": 3,
+              "arg": {
+                "kind": "sub",
+                "left": {
+                  "kind": "qq",
+                  "value_qq": "-1/2"
+                },
+                "right": {
+                  "kind": "root",
+                  "n": 2,
+                  "arg": {
+                    "kind": "qq",
+                    "value_qq": "-3/4"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "1"
+        }
+      }
+    },
+    "rlist.f": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.f.1",
+        "rexpr.f.2",
+        "rexpr.f.3"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.3"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 3."
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "DepressedMonicEq",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "poly.g"
+            }
+          ]
+        },
+        "rule": "normalize.depressed_monic_QQ@1",
+        "premises": [
+          "F1"
+        ],
+        "evidence": {
+          "tschirnhaus_shift": "1",
+          "monic_scale": "1"
+        },
+        "statement": "Normalize to the depressed monic cubic x^3 - 3x + 1."
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.g"
+            },
+            {
+              "ref": "int.3"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of normalized polynomial is 3."
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.g"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F3"
+        ],
+        "statement": "Normalized polynomial is irreducible over Q."
+      },
+      {
+        "id": "F5",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.g"
+            },
+            {
+              "ref": "rlist.g"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg3.cardano.depressed_monic@1",
+        "premises": [
+          "F3",
+          "F4",
+          "F2"
+        ],
+        "statement": "Canonical Cardano radical roots for the depressed monic cubic."
+      },
+      {
+        "id": "F6",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rlist.f"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.lift.depressed_monic@1",
+        "premises": [
+          "F2",
+          "F5"
+        ],
+        "statement": "Transport radical roots back to the original cubic by subtracting the Tschirnhaus shift."
+      }
+    ]
+  },
+  "summary": {
+    "status": "ok",
+    "solvable_by_radicals": true,
+    "galois_group": "UNKNOWN",
+    "transitive_group_id": null
+  }
+}

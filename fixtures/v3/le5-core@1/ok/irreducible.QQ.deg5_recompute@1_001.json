@@ -1,0 +1,69 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "input": {
+    "canonicalization": "jcs-rfc8785",
+    "coeffs_qq": [
+      "1",
+      "0",
+      "0",
+      "0",
+      "-1",
+      "-1"
+    ],
+    "degree": 5,
+    "domain": "Q",
+    "hash": "71f8fe8d34ac4cbf906f15065f9c901dff7c0cb56dfcf0fc735ee8a9f23fbd4d",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "ordering": "descending_degree",
+    "variable": "x"
+  },
+  "meta": {
+    "backend": "none",
+    "generator": "opengalois",
+    "generator_version": "0.0.0-dev",
+    "ruleset_id": "le5-core@1",
+    "schema_version": "3.0.0"
+  },
+  "objects": {
+    "int.5": {
+      "kind": "IntZ",
+      "value": "5"
+    }
+  },
+  "proof": {
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            { "ref": "$input" },
+            { "ref": "int.5" }
+          ]
+        },
+        "premises": [],
+        "rule": "degree.QQ@1",
+        "statement": "Degree of the input polynomial is 5."
+      },
+      {
+        "claim": {
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ],
+          "pred": "IrreducibleQQ"
+        },
+        "id": "F2",
+        "premises": ["F1"],
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "statement": "Irreducible over Q by deterministic glass-box le5 procedure (recomputed)."
+      }
+    ],
+    "version": "1.0"
+  },
+  "summary": {
+    "status": "unclassified"
+  }
+}

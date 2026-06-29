@@ -1,0 +1,52 @@
+id: nonsquare.QQ.isqrt@2
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: NonSquareQQ
+  args: [RatQQ]
+
+premise_patterns: []
+
+evidence_schema:
+  type: object
+  additionalProperties: false
+  required: [obstruction]
+  properties:
+    obstruction:
+      oneOf:
+        - type: object
+          additionalProperties: false
+          required: [kind]
+          properties:
+            kind:
+              const: negative
+        - type: object
+          additionalProperties: false
+          required: [kind, side, previous_square, next_square]
+          properties:
+            kind:
+              const: integer_isqrt_interval
+            side:
+              enum: [numerator, denominator]
+            previous_square:
+              type: string
+              pattern: "^(?:0|-?[1-9][0-9]*)$"
+            next_square:
+              type: string
+              pattern: "^(?:0|-?[1-9][0-9]*)$"
+
+check_mode: recompute
+
+checker:
+  steps:
+    - "Decode q canonically as a RatQQ, yielding a reduced fraction a/b with b>0."
+    - "If a < 0, require evidence.obstruction = {kind: negative} and accept."
+    - "Otherwise require an integer_isqrt_interval obstruction for either the numerator or denominator."
+    - "Let n be the selected numerator or denominator."
+    - "Compute r = isqrt(n) exactly."
+    - "Require previous_square = r^2 and next_square = (r+1)^2."
+    - "Accept iff previous_square < n < next_square."
+errors:
+  - E_TYPE
+  - E_MISMATCH
+  - E_EVIDENCE

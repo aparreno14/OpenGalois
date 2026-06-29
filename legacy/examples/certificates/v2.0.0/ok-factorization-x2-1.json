@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "schema_version": "2.0.0",
+    "generator": "opengalois",
+    "backend": "sympy"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 2,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "-1"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "281a356c8a64ad0da1e3df6fbf7d2a150e74cbe073337e384bf9eab12b014b71"
+  },
+  "objects": {
+    "poly.f1": {
+      "kind": "poly_qq_desc",
+      "degree": 1,
+      "coeffs_qq": [
+        "1",
+        "-1"
+      ]
+    },
+    "poly.f2": {
+      "kind": "poly_qq_desc",
+      "degree": 1,
+      "coeffs_qq": [
+        "1",
+        "1"
+      ]
+    }
+  },
+  "proof": {
+    "version": "0.1",
+    "root": {
+      "kind": "opengalois.analyze",
+      "inputs": [
+        {
+          "ref": "$input"
+        }
+      ],
+      "children": [
+        {
+          "kind": "factorization.QQ.monic",
+          "inputs": [
+            {
+              "ref": "$input"
+            }
+          ],
+          "witness": {
+            "unit": "1",
+            "factors": [
+              {
+                "ref": "poly.f1",
+                "multiplicity": 1
+              },
+              {
+                "ref": "poly.f2",
+                "multiplicity": 1
+              }
+            ]
+          },
+          "statement": "Factorization in Q[x] with monic factors."
+        }
+      ]
+    }
+  },
+  "summary": {
+    "status": "unclassified",
+    "solvable_by_radicals": null,
+    "galois_group": "UNKNOWN",
+    "transitive_group_id": null
+  }
+}

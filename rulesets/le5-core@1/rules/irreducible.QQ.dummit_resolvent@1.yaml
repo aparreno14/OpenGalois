@@ -1,0 +1,39 @@
+id: irreducible.QQ.dummit_resolvent@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: IrreducibleQQ
+  args: [PolyQQ]
+
+premise_patterns:
+  - pred: ResolventQQ
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: Degree
+    # bound indirectly: premise_arg_0 must match the f from ResolventQQ(R,f,p)
+    constants:
+      premise_arg_1:
+        kind: IntZ
+        value: "5"
+  - pred: IrreducibleQQ
+    # bound indirectly: its argument must match the f from ResolventQQ(R,f,p)
+
+evidence_schema: null
+
+check_mode: computation
+
+checker:
+  steps:
+    - "Require a verified premise ResolventQQ(R,f,p) bound to the same R as in the claim."
+    - "Require that p is exactly the canonical MPolyQQ object for Dummit's F20 sextic-resolvent family."
+    - "Require verified premises Degree(f,5) and IrreducibleQQ(f) for that same quintic f."
+    - "Decode R as PolyQQ in descending coefficients."
+    - "Run an exact rational-root test over Q on R."
+    - "If a rational root exists, reject; otherwise accept IrreducibleQQ(R)."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_BAD_RESOLVENT_FAMILY
+  - E_TYPE
+  - E_SIDE_CONDITION

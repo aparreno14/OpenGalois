@@ -1,0 +1,32 @@
+id: radical_roots.QQ.lift.depressed_monic@1
+ruleset: le5-core@1
+
+claim_pattern:
+  pred: RadicalRoots
+  args: [PolyQQ, RadicalExprList]
+
+premise_patterns:
+  - pred: DepressedMonicEq
+    bind:
+      claim_arg_0: premise_arg_0
+  - pred: RadicalRoots
+    # the polynomial argument is checked indirectly against the g from DepressedMonicEq(f,g)
+
+evidence_schema: null
+
+check_mode: theorem
+
+checker:
+  steps:
+    - "Require a verified premise DepressedMonicEq(f,g) bound to the same polynomial f as in the claim."
+    - "Require a verified premise RadicalRoots(g, roots_g) bound to the same g as in the normalization premise."
+    - "Recompute the canonical rational Tschirnhaus shift t from the source polynomial f according to the depressed-monic normalization convention."
+    - "Recompute the transported ordered list by replacing each radical expression y_i in roots_g with y_i - t."
+    - "Decode the claimed RadicalExprList and compare it to the recomputed list by exact structural equality of RadicalExpr payloads."
+    - "Accept."
+
+errors:
+  - E_PREMISE_MISSING
+  - E_PREMISE_BINDING
+  - E_TYPE
+  - E_MISMATCH

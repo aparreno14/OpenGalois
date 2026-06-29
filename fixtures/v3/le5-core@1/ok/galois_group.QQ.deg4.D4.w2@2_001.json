@@ -1,0 +1,1275 @@
+{
+  "$schema": "https://opengalois.org/schemas/certificate/3.0.0.json",
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "generator_version": "0.0.0",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 4,
+    "coeffs_qq": [
+      "1",
+      "0",
+      "-5",
+      "0",
+      "-8"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "9b1db383a34d647481e48a02a74b8808c11735253cd980d274a86c769db9820d"
+  },
+  "objects": {
+    "int.4": {
+      "kind": "IntZ",
+      "value": "4"
+    },
+    "rat.disc.1": {
+      "kind": "RatQQ",
+      "value": "-415872"
+    },
+    "mpoly.resolvent.deg4.cubic_x1x2_plus_x3x4": {
+      "kind": "MPolyQQ",
+      "nvars": 4,
+      "terms": [
+        {
+          "exp": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "coeff_qq": "1"
+        }
+      ]
+    },
+    "poly.resolvent.1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "10",
+        "57",
+        "0"
+      ]
+    },
+    "int.3": {
+      "kind": "IntZ",
+      "value": "3"
+    },
+    "poly.f1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0"
+      ]
+    },
+    "int.1": {
+      "kind": "IntZ",
+      "value": "1"
+    },
+    "poly.f2": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "10",
+        "57"
+      ]
+    },
+    "int.2": {
+      "kind": "IntZ",
+      "value": "2"
+    },
+    "rat.unit.1": {
+      "kind": "RatQQ",
+      "value": "1"
+    },
+    "list.factors.1": {
+      "kind": "PolyQQList",
+      "items": [
+        "poly.f1",
+        "poly.f2"
+      ]
+    },
+    "group.S4": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 24,
+      "index": 12,
+      "alias": "S4"
+    },
+    "group.A4": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 12,
+      "index": 3,
+      "alias": "A4"
+    },
+    "group.V4": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 4,
+      "index": 2,
+      "alias": "V4"
+    },
+    "group.C4": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 4,
+      "index": 1,
+      "alias": "C4"
+    },
+    "group.D4": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 8,
+      "index": 3,
+      "alias": "D4"
+    },
+    "rat.kw.1": {
+      "kind": "RatQQ",
+      "value": "0"
+    },
+    "rat.kw.2": {
+      "kind": "RatQQ",
+      "value": "-23704704"
+    },
+    "rat.kw.1.sqrt": {
+      "kind": "RatQQ",
+      "value": "0"
+    },
+    "poly.depressed_monic.1": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0",
+        "-5",
+        "0",
+        "-8"
+      ]
+    },
+    "mpoly.resolvent.deg4.cubic_x1plusx2_times_x3plusx4": {
+      "kind": "MPolyQQ",
+      "nvars": 4,
+      "terms": [
+        {
+          "exp": [
+            1,
+            0,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            1,
+            0,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            1,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            1,
+            0,
+            1
+          ],
+          "coeff_qq": "1"
+        }
+      ]
+    },
+    "poly.resolvent.2": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "10",
+        "57",
+        "0"
+      ]
+    },
+    "poly.f3": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "0"
+      ]
+    },
+    "poly.f4": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "10",
+        "57"
+      ]
+    },
+    "rat.unit.2": {
+      "kind": "RatQQ",
+      "value": "1"
+    },
+    "list.factors.2": {
+      "kind": "PolyQQList",
+      "items": [
+        "poly.f3",
+        "poly.f4"
+      ]
+    },
+    "group.trivial": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 1,
+      "index": 1,
+      "alias": "Trivial"
+    },
+    "rexpr.deg1.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "qq",
+        "value_qq": "0"
+      }
+    },
+    "rlist.deg1.1": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.deg1.1"
+      ]
+    },
+    "group.C2": {
+      "kind": "GroupId",
+      "system": "smallgroup",
+      "order": 2,
+      "index": 1,
+      "alias": "C2"
+    },
+    "rexpr.deg2.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "add",
+          "left": {
+            "kind": "qq",
+            "value_qq": "-10"
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "qq",
+              "value_qq": "-128"
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rexpr.deg2.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "div",
+        "left": {
+          "kind": "sub",
+          "left": {
+            "kind": "qq",
+            "value_qq": "-10"
+          },
+          "right": {
+            "kind": "root",
+            "n": 2,
+            "arg": {
+              "kind": "qq",
+              "value_qq": "-128"
+            }
+          }
+        },
+        "right": {
+          "kind": "qq",
+          "value_qq": "2"
+        }
+      }
+    },
+    "rlist.deg2.1": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.deg2.1",
+        "rexpr.deg2.2"
+      ]
+    },
+    "rlist.reducible.1": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.deg1.1",
+        "rexpr.deg2.1",
+        "rexpr.deg2.2"
+      ]
+    },
+    "rexpr.ferrari.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "root",
+        "n": 2,
+        "arg": {
+          "kind": "div",
+          "left": {
+            "kind": "add",
+            "left": {
+              "kind": "qq",
+              "value_qq": "5"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "57"
+              }
+            }
+          },
+          "right": {
+            "kind": "qq",
+            "value_qq": "2"
+          }
+        }
+      }
+    },
+    "rexpr.ferrari.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "neg",
+        "arg": {
+          "kind": "root",
+          "n": 2,
+          "arg": {
+            "kind": "div",
+            "left": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "5"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "57"
+                }
+              }
+            },
+            "right": {
+              "kind": "qq",
+              "value_qq": "2"
+            }
+          }
+        }
+      }
+    },
+    "rexpr.ferrari.3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "root",
+        "n": 2,
+        "arg": {
+          "kind": "div",
+          "left": {
+            "kind": "sub",
+            "left": {
+              "kind": "qq",
+              "value_qq": "5"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "57"
+              }
+            }
+          },
+          "right": {
+            "kind": "qq",
+            "value_qq": "2"
+          }
+        }
+      }
+    },
+    "rexpr.ferrari.4": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "neg",
+        "arg": {
+          "kind": "root",
+          "n": 2,
+          "arg": {
+            "kind": "div",
+            "left": {
+              "kind": "sub",
+              "left": {
+                "kind": "qq",
+                "value_qq": "5"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "57"
+                }
+              }
+            },
+            "right": {
+              "kind": "qq",
+              "value_qq": "2"
+            }
+          }
+        }
+      }
+    },
+    "rlist.ferrari.1": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.ferrari.1",
+        "rexpr.ferrari.2",
+        "rexpr.ferrari.3",
+        "rexpr.ferrari.4"
+      ]
+    },
+    "rexpr.ferrari.lift.1": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "root",
+        "n": 2,
+        "arg": {
+          "kind": "div",
+          "left": {
+            "kind": "add",
+            "left": {
+              "kind": "qq",
+              "value_qq": "5"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "57"
+              }
+            }
+          },
+          "right": {
+            "kind": "qq",
+            "value_qq": "2"
+          }
+        }
+      }
+    },
+    "rexpr.ferrari.lift.2": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "neg",
+        "arg": {
+          "kind": "root",
+          "n": 2,
+          "arg": {
+            "kind": "div",
+            "left": {
+              "kind": "add",
+              "left": {
+                "kind": "qq",
+                "value_qq": "5"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "57"
+                }
+              }
+            },
+            "right": {
+              "kind": "qq",
+              "value_qq": "2"
+            }
+          }
+        }
+      }
+    },
+    "rexpr.ferrari.lift.3": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "root",
+        "n": 2,
+        "arg": {
+          "kind": "div",
+          "left": {
+            "kind": "sub",
+            "left": {
+              "kind": "qq",
+              "value_qq": "5"
+            },
+            "right": {
+              "kind": "root",
+              "n": 2,
+              "arg": {
+                "kind": "qq",
+                "value_qq": "57"
+              }
+            }
+          },
+          "right": {
+            "kind": "qq",
+            "value_qq": "2"
+          }
+        }
+      }
+    },
+    "rexpr.ferrari.lift.4": {
+      "kind": "RadicalExpr",
+      "expr": {
+        "kind": "neg",
+        "arg": {
+          "kind": "root",
+          "n": 2,
+          "arg": {
+            "kind": "div",
+            "left": {
+              "kind": "sub",
+              "left": {
+                "kind": "qq",
+                "value_qq": "5"
+              },
+              "right": {
+                "kind": "root",
+                "n": 2,
+                "arg": {
+                  "kind": "qq",
+                  "value_qq": "57"
+                }
+              }
+            },
+            "right": {
+              "kind": "qq",
+              "value_qq": "2"
+            }
+          }
+        }
+      }
+    },
+    "rlist.ferrari.lift.1": {
+      "kind": "RadicalExprList",
+      "items": [
+        "rexpr.ferrari.lift.1",
+        "rexpr.ferrari.lift.2",
+        "rexpr.ferrari.lift.3",
+        "rexpr.ferrari.lift.4"
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int.4"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 4."
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Irreducible over Q."
+      },
+      {
+        "id": "F3",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rat.disc.1"
+            }
+          ]
+        },
+        "rule": "disc.QQ.compute@1",
+        "premises": [],
+        "statement": "Discriminant over QQ computed via resultant with the derivative."
+      },
+      {
+        "id": "F5",
+        "claim": {
+          "pred": "NonSquareQQ",
+          "args": [
+            {
+              "ref": "rat.disc.1"
+            }
+          ]
+        },
+        "rule": "nonsquare.QQ.isqrt@1",
+        "premises": [],
+        "statement": "Rational value is not a square in QQ."
+      },
+      {
+        "id": "F6",
+        "claim": {
+          "pred": "DiscNonSquareQQ",
+          "args": [
+            {
+              "ref": "$input"
+            }
+          ]
+        },
+        "rule": "disc.nonsquare.QQ.lift@1",
+        "premises": [
+          "F3",
+          "F5"
+        ],
+        "statement": "Discriminant of f is not a square in QQ."
+      },
+      {
+        "id": "F4",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            },
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "mpoly.resolvent.deg4.cubic_x1plusx2_times_x3plusx4"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg4.cubic_x1plusx2_times_x3plusx4@1",
+        "premises": [
+          "F1"
+        ],
+        "statement": "Degree-4 cubic resolvent over QQ for the family x1*x2 + x3*x4."
+      },
+      {
+        "id": "F12",
+        "claim": {
+          "pred": "FactorizationMonicQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            },
+            {
+              "ref": "list.factors.1"
+            },
+            {
+              "ref": "rat.unit.1"
+            }
+          ]
+        },
+        "rule": "factorization.QQ.monic@1",
+        "premises": [],
+        "statement": "Factorization in Q[x] with monic factors.",
+        "data": {
+          "factors_compact": [
+            {
+              "ref": "poly.f1",
+              "multiplicity": 1
+            },
+            {
+              "ref": "poly.f2",
+              "multiplicity": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "F7",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.resolvent.1"
+            },
+            {
+              "ref": "int.3"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 3."
+      },
+      {
+        "id": "F8",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.f1"
+            },
+            {
+              "ref": "int.1"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 1."
+      },
+      {
+        "id": "F9",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.f1"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg1_trivial@1",
+        "premises": [
+          "F8"
+        ],
+        "statement": "Irreducible over Q (per-factor)."
+      },
+      {
+        "id": "F10",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.f2"
+            },
+            {
+              "ref": "int.2"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 2."
+      },
+      {
+        "id": "F11",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.f2"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F10"
+        ],
+        "statement": "Irreducible over Q (per-factor)."
+      },
+      {
+        "id": "F13",
+        "claim": {
+          "pred": "SqrtQQ",
+          "args": [
+            {
+              "ref": "rat.kw.1"
+            },
+            {
+              "ref": "rat.kw.1.sqrt"
+            }
+          ]
+        },
+        "rule": "sqrt.QQ.check@1",
+        "premises": [],
+        "statement": "Explicit square root witness in QQ."
+      },
+      {
+        "id": "F14",
+        "claim": {
+          "pred": "IsSquareQQ",
+          "args": [
+            {
+              "ref": "rat.kw.1"
+            }
+          ]
+        },
+        "rule": "is_square.QQ.lift@1",
+        "premises": [
+          "F13"
+        ],
+        "statement": "Rational value is a square in QQ."
+      },
+      {
+        "id": "F15",
+        "claim": {
+          "pred": "NonSquareQQ",
+          "args": [
+            {
+              "ref": "rat.kw.2"
+            }
+          ]
+        },
+        "rule": "nonsquare.QQ.isqrt@1",
+        "premises": [],
+        "statement": "Rational value is not a square in QQ."
+      },
+      {
+        "id": "F16",
+        "claim": {
+          "pred": "GaloisGroup",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "group.D4"
+            }
+          ]
+        },
+        "rule": "galois_group.QQ.deg4.D4.w2@2",
+        "premises": [
+          "F1",
+          "F2",
+          "F3",
+          "F6",
+          "F4",
+          "F12",
+          "F15"
+        ],
+        "statement": "Degree-4 irreducible Galois group classification via quartic resolvent and Kappe-Warren criteria."
+      },
+      {
+        "id": "F17",
+        "claim": {
+          "pred": "DepressedMonicEq",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "poly.depressed_monic.1"
+            }
+          ]
+        },
+        "rule": "normalize.depressed_monic_QQ@1",
+        "premises": [
+          "F1"
+        ],
+        "evidence": {
+          "tschirnhaus_shift": "0",
+          "monic_scale": "1"
+        },
+        "statement": "Depressed-monic normalization over Q: monicize then apply x -> x - t to kill x^(n-1)."
+      },
+      {
+        "id": "F18",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.depressed_monic.1"
+            },
+            {
+              "ref": "int.4"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 4."
+      },
+      {
+        "id": "F19",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.depressed_monic.1"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.to.depressed_monic@1",
+        "premises": [
+          "F17",
+          "F2"
+        ],
+        "statement": "Irreducibility transported to the depressed monic normalization over Q."
+      },
+      {
+        "id": "F20",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "poly.depressed_monic.1"
+            },
+            {
+              "ref": "mpoly.resolvent.deg4.cubic_x1plusx2_times_x3plusx4"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg4.cubic_x1plusx2_times_x3plusx4@1",
+        "premises": [
+          "F18"
+        ],
+        "statement": "Degree-4 cubic resolvent over QQ for the family (x1+x2)(x3+x4)."
+      },
+      {
+        "id": "F26",
+        "claim": {
+          "pred": "FactorizationMonicQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "list.factors.2"
+            },
+            {
+              "ref": "rat.unit.2"
+            }
+          ]
+        },
+        "rule": "factorization.QQ.monic@1",
+        "premises": [],
+        "statement": "Factorization in Q[x] with monic factors.",
+        "data": {
+          "factors_compact": [
+            {
+              "ref": "poly.f3",
+              "multiplicity": 1
+            },
+            {
+              "ref": "poly.f4",
+              "multiplicity": 1
+            }
+          ]
+        }
+      },
+      {
+        "id": "F21",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "int.3"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 3."
+      },
+      {
+        "id": "F22",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.f3"
+            },
+            {
+              "ref": "int.1"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 1."
+      },
+      {
+        "id": "F23",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.f3"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg1_trivial@1",
+        "premises": [
+          "F22"
+        ],
+        "statement": "Irreducible over Q (per-factor)."
+      },
+      {
+        "id": "F24",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "poly.f4"
+            },
+            {
+              "ref": "int.2"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": [],
+        "statement": "Degree of polynomial is 2."
+      },
+      {
+        "id": "F25",
+        "claim": {
+          "pred": "IrreducibleQQ",
+          "args": [
+            {
+              "ref": "poly.f4"
+            }
+          ]
+        },
+        "rule": "irreducible.QQ.deg5_recompute@1",
+        "premises": [
+          "F24"
+        ],
+        "statement": "Irreducible over Q (per-factor)."
+      },
+      {
+        "id": "F27",
+        "claim": {
+          "pred": "FactorizationMonicQQ",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "list.factors.2"
+            },
+            {
+              "ref": "rat.unit.2"
+            }
+          ]
+        },
+        "rule": "factorization.QQ.monic@1",
+        "premises": [],
+        "statement": "Certified factorization in Q[x] with monic factors (reused locally)."
+      },
+      {
+        "id": "F28",
+        "claim": {
+          "pred": "GaloisGroup",
+          "args": [
+            {
+              "ref": "poly.f3"
+            },
+            {
+              "ref": "group.trivial"
+            }
+          ]
+        },
+        "rule": "galois_group.QQ.deg1.trivial@1",
+        "premises": [
+          "F22"
+        ],
+        "statement": "Degree-1 polynomial has trivial Galois group."
+      },
+      {
+        "id": "F29",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.f3"
+            },
+            {
+              "ref": "rlist.deg1.1"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg1.trivial@1",
+        "premises": [
+          "F22"
+        ],
+        "statement": "Canonical degree-1 radical root over QQ."
+      },
+      {
+        "id": "F30",
+        "claim": {
+          "pred": "GaloisGroup",
+          "args": [
+            {
+              "ref": "poly.f4"
+            },
+            {
+              "ref": "group.C2"
+            }
+          ]
+        },
+        "rule": "galois_group.QQ.deg2.C2@1",
+        "premises": [
+          "F24",
+          "F25"
+        ],
+        "statement": "Irreducible quadratic over Q has Galois group C2."
+      },
+      {
+        "id": "F31",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.f4"
+            },
+            {
+              "ref": "rlist.deg2.1"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg2.quadratic_formula@1",
+        "premises": [
+          "F24",
+          "F25"
+        ],
+        "statement": "Canonical quadratic-formula radical roots over QQ."
+      },
+      {
+        "id": "F32",
+        "claim": {
+          "pred": "GaloisGroup",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "group.C2"
+            }
+          ]
+        },
+        "rule": "galois_group.QQ.reducible.single_nonlinear.inherit@1",
+        "premises": [
+          "F27",
+          "F22",
+          "F24",
+          "F25",
+          "F30"
+        ],
+        "statement": "The splitting field is already generated by the unique distinct non-linear irreducible factor."
+      },
+      {
+        "id": "F33",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.resolvent.2"
+            },
+            {
+              "ref": "rlist.reducible.1"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.reducible.compose@2",
+        "premises": [
+          "F27",
+          "F29",
+          "F31"
+        ],
+        "statement": "Canonical reducible radical roots composed from certified factor-level lists."
+      },
+      {
+        "id": "F34",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "poly.depressed_monic.1"
+            },
+            {
+              "ref": "rlist.ferrari.1"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.deg4.ferrari.depressed_monic@2",
+        "premises": [
+          "F18",
+          "F19",
+          "F17",
+          "F20",
+          "F33"
+        ],
+        "statement": "Canonical Ferrari radical roots for the depressed monic quartic."
+      },
+      {
+        "id": "F35",
+        "claim": {
+          "pred": "RadicalRoots",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "rlist.ferrari.lift.1"
+            }
+          ]
+        },
+        "rule": "radical_roots.QQ.lift.depressed_monic@1",
+        "premises": [
+          "F17",
+          "F34"
+        ],
+        "statement": "Lift depressed-monic Ferrari radical roots back to the original quartic."
+      }
+    ]
+  },
+  "summary": {
+    "status": "irreducible",
+    "solvable_by_radicals": true,
+    "galois_group": "D4",
+    "transitive_group_id": null
+  }
+}

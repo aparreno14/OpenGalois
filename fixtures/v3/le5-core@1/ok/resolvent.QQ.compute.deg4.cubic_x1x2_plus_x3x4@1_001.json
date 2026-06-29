@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois-fixture",
+    "backend": "sympy",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 4,
+    "coeffs_qq": [
+      "2",
+      "6",
+      "10",
+      "14",
+      "18"
+    ],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "8d1b8430e7955ed75ece0d3f2efd09f0b114aac3dfcf07e9f627264a01fbc88e"
+  },
+  "objects": {
+    "int:n4": {
+      "kind": "IntZ",
+      "value": "4"
+    },
+    "poly:R": {
+      "kind": "PolyQQ",
+      "coeffs_qq": [
+        "1",
+        "-5",
+        "-15",
+        "50"
+      ]
+    },
+    "mpoly:p_fixed": {
+      "kind": "MPolyQQ",
+      "nvars": 4,
+      "terms": [
+        {
+          "exp": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "coeff_qq": "1"
+        },
+        {
+          "exp": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "coeff_qq": "1"
+        }
+      ]
+    }
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Degree",
+          "args": [
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "int:n4"
+            }
+          ]
+        },
+        "rule": "degree.QQ@1",
+        "premises": []
+      },
+      {
+        "id": "F2",
+        "claim": {
+          "pred": "ResolventQQ",
+          "args": [
+            {
+              "ref": "poly:R"
+            },
+            {
+              "ref": "$input"
+            },
+            {
+              "ref": "mpoly:p_fixed"
+            }
+          ]
+        },
+        "rule": "resolvent.QQ.compute.deg4.cubic_x1x2_plus_x3x4@1",
+        "premises": [
+          "F1"
+        ]
+      }
+    ],
+    "goals": [
+      "F2"
+    ]
+  }
+}
