@@ -1,55 +1,60 @@
-# Adding a Fact (Predicate) — Developer Guide (v3)
+# Adding a Fact Predicate
 
-This guide explains how to add a new **Fact predicate** to an OpenGalois v3 ruleset.
-It is prescriptive and intended to be followed step-by-step.
+This guide explains how to add a new fact predicate to an OpenGalois v3 ruleset.
 
-A "fact" means a predicate symbol used in `FactNode.claim`:
-- `claim = { pred: "MyPredicate", args: [...] }`
+A fact predicate is the symbol used in a claim:
 
-Facts are part of the **ruleset contract**. Adding or changing a fact can change semantics and may
-require a ruleset version bump.
+```json
+{
+  "pred": "MyPredicate",
+  "args": [{"ref": "$input"}]
+}
+```
 
----
-
-## 0) Preconditions (STOP if not true)
-
-Before adding a new predicate, confirm:
-
-1. You know which ruleset you are editing (e.g. `quintic@1`).
-2. You can express the intended statement as `pred(args...)` where each arg is an `ObjectRef`.
-3. There is (or will be) at least one **rule** that can prove this fact.
-4. You understand whether this is a **backwards compatible** addition:
-   - Adding a *new* predicate is usually compatible **only if** existing certificates do not depend
-     on it and existing rules are unchanged.
-   - If you are changing an existing predicate’s meaning/typing/arity, you MUST bump the ruleset version.
+Facts are part of the ruleset contract. Adding or changing a predicate may require a ruleset version bump.
 
 ---
 
-## 1) Design the predicate (paper step)
+## 0. Preconditions
 
-Write the predicate in this template:
+Before adding a predicate, confirm:
 
-- **Name**: `MyPredicate`
-- **Meaning** (math): one sentence, unambiguous
+1. You know which ruleset you are editing, for example `le5-core@1`.
+2. You can express the intended statement as `pred(args...)`.
+3. Every argument is an `ObjectRef`.
+4. There is, or will be, at least one rule that can prove this predicate.
+5. You know whether the change is backwards compatible.
+
+Changing the meaning, arity, or argument kinds of an existing predicate requires a new ruleset version.
+
+---
+
+## 1. Design the predicate
+
+Write down:
+
+- **Name**: `MyPredicate`.
+- **Meaning**: one unambiguous mathematical sentence.
 - **Arguments**:
-  - `arg0`: kind `PolyQQ` / `IntZ` / `RatQQ` / `PolyQQList` / ...
-  - `arg1`: kind ...
-- **Arity**: N
-- **Canonicality expectations**:
-  - which object kinds must be canonical (usually all)
+  - `arg0`: kind `PolyQQ`, `RatQQ`, `IntZ`, `GroupId`, etc.
+  - `arg1`: kind if present.
+- **Arity**: number of arguments.
+- **Canonicality expectations**.
 - **Examples**:
-  - 1 valid instance
-  - 1 invalid instance (wrong kind or arity)
+  - one valid instance;
+  - one invalid instance.
 
-STOP if any argument cannot be a reference to `$input` or `objects[...]`.
+Stop if an argument cannot be expressed as `$input` or a reference to `objects`.
 
 ---
 
-## 2) Update the machine-readable catalog (`spec/facts.yaml` or ruleset facts.yaml)
+## 2. Update the machine-readable catalog
 
-Open `spec/facts.yaml` (or `rulesets/<ruleset_id>/facts.yaml` if you keep it ruleset-local).
+For the current ruleset, update:
 
-Add an entry under `predicates:`.
+```text
+rulesets/le5-core@1/facts.yaml
+```
 
 Example:
 
@@ -57,72 +62,72 @@ Example:
 predicates:
   MyPredicate:
     args: [PolyQQ, IntZ]
-    doc: "Unambiguous one-line meaning here."
+    doc: "Unambiguous one-line meaning."
 ```
 
 Rules:
 
-* `args` MUST list kinds defined in `docs/spec/v3/objects.md` (or the ruleset’s extended kinds).
-* Do not reuse an existing predicate name with a new meaning.
+- `args` must use object kinds documented in `docs/objects.md` or in the ruleset documentation.
+- Do not reuse an existing predicate name with a new meaning.
 
 ---
 
-## 3) Update the human-readable catalog (`docs/spec/v3/facts.md`)
+## 3. Update the human-readable catalog
 
-Add a new subsection documenting:
+For the current ruleset, update:
 
-* Signature: `MyPredicate(f: PolyQQ, n: IntZ)`
-* Meaning: exact statement
-* Intended proving rules (list rule ids you will implement)
-* Any special notes (degree constraints, invariants, etc.)
+```text
+docs/rulesets/le5-core@1/facts.md
+```
 
-This doc is normative: write it like a spec, not like a tutorial.
+Add a subsection containing:
 
----
+- signature;
+- meaning;
+- typical proving rule or rules;
+- special notes or constraints.
 
-## 4) Add or confirm object kinds (if needed)
-
-If your predicate references a new object kind (not already in `objects.md`), STOP and:
-
-1. Add the new kind to `docs/spec/v3/objects.md` with canonical encoding rules.
-2. Update any schemas or parsers needed by the verifier for that kind.
-
-Do not introduce "ad hoc payloads" without specifying canonical form.
+This document is part of the ruleset contract.
 
 ---
 
-## 5) Add fixtures for typing (recommended)
+## 4. Add object kinds if needed
 
-Even before implementing a rule, add at least one fixture that includes a node with the new predicate
-and fails verification (because the rule is missing), but passes schema + type-check.
+If the predicate uses a new object kind:
 
-This ensures:
+1. document the kind in `docs/objects.md` or in a ruleset-local object document;
+2. define its canonical encoding;
+3. update decoders and schema checks if required;
+4. add tests.
 
-* schema accepts the new predicate usage,
-* fact typing works as expected.
-
-Suggested fixture:
-
-* `fixtures/v3/<ruleset_id>/bad/missing_rule_for_new_fact_001.json`
+Do not introduce ad hoc payloads without a canonical specification.
 
 ---
 
-## 6) Versioning rule (IMPORTANT)
+## 5. Add fixtures
 
-* Adding a new predicate MAY require bumping `ruleset_id` if it changes the behavior of existing rules
-  or the meaning of previously valid certificates.
-* If in doubt: bump the ruleset version.
+Add at least one fixture that uses the new predicate. Before a proving rule exists, the fixture may be a negative fixture that fails because the rule is missing but passes structural checks.
+
+Suggested location:
+
+```text
+fixtures/v3/le5-core@1/bad/
+```
+
+---
+
+## 6. Versioning rule
+
+- Adding a predicate may be compatible if no existing certificates or rules change behavior.
+- Changing an existing predicate's semantics, arity, or argument kinds requires a ruleset version bump.
+- If in doubt, bump the ruleset version.
 
 ---
 
-## 7) Final checklist
+## 7. Checklist
 
-You are done when:
-
-* [ ] `spec/facts.yaml` contains the new predicate with correct arg kinds.
-* [ ] `docs/spec/v3/facts.md` documents the predicate meaning and signature.
-* [ ] Any new object kinds are documented canonically in `objects.md`.
-* [ ] At least one fixture exists exercising the new predicate structure.
-* [ ] You have a plan to implement at least one proving rule (next guide).
-
----
+- [ ] `rulesets/le5-core@1/facts.yaml` contains the predicate.
+- [ ] `docs/rulesets/le5-core@1/facts.md` documents it.
+- [ ] Any new object kind is documented canonically.
+- [ ] Fixtures exercise the predicate.
+- [ ] At least one rule can prove the predicate, or there is a clear implementation plan.

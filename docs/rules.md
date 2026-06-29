@@ -1,157 +1,157 @@
 # OpenGalois v3 Rules
 
-This document specifies what a rule is, how rules interact with facts, and what a verifier MUST do
-to check rule applications in a v3 certificate.
+This document describes what rules are and how they interact with facts in v3 certificates.
+
 It is normative unless explicitly marked as non-normative.
 
-## 1. Background: facts vs proved facts
-
-A **Fact** is a statement `pred(args...)` (see `facts.md`).
-
-A **FactNode** is a proved fact:
-- `claim`: the Fact being asserted (normative)
-- `rule`: the rule identifier used to justify the claim (normative)
-- `premises`: ids of earlier fact nodes required by the rule (normative)
-- `evidence`: rule-defined computational fuel (normative if required by the rule)
-- `statement` / `data`: non-normative explanatory fields
-
-The verifier accepts a fact node only if its referenced rule verifies successfully.
-
 ---
 
-## 2. Definition of a rule
+## 1. Facts vs proved facts
 
-A **rule** is a *verifier-known*, versioned checker procedure.
+A fact is a statement:
 
-Each rule `R` defines a deterministic function:
-
-```
-check_R(claim, premises_claims, evidence, objects, input) -> OK | ERROR
+```text
+pred(args...)
 ```
 
-A certificate does not transmit rule implementations; it only references rule ids.
-The verifier MUST reject any rule id not present in the active ruleset.
+A fact node is a fact plus a justification:
 
-### 2.1 Rule id and versioning
+- `claim`: the fact being asserted;
+- `rule`: the rule id used to justify the claim;
+- `premises`: ids of earlier fact nodes;
+- `evidence`: optional rule-defined computational data;
+- `statement` and `data`: non-normative explanation fields.
 
-A rule id MUST be stable and versioned, e.g.:
-
-- `disc.compute@1`
-- `zz.nonsquare.isqrt@1`
-- `factorization.QQ.monic@1`
-- `galois.quintic.is_S5@1`
-
-If the verifier’s acceptance behavior for a rule changes in any way that could change accept/reject
-outcomes for some certificates, the rule version MUST be bumped (e.g. `@1 -> @2`).
+The verifier accepts a fact node only if its rule application verifies successfully.
 
 ---
 
-## 3. Rule interfaces (normative)
+## 2. Rule definition
 
-Rules MUST specify, as part of the active ruleset:
+A rule is a verifier-known, versioned checker procedure.
 
-1. **Claim pattern**: the predicate symbol and argument kinds the rule can justify.
-2. **Premise patterns**: required premises and any binding constraints (e.g., “same `f`”).
-3. **Evidence schema**: whether evidence is required and, if so, its JSON shape.
-4. **Verifier obligations**: deterministic steps the verifier executes.
+Conceptually:
 
-These specifications must be sufficiently precise for independent verifier implementations.
+```text
+check_R(claim, premises, evidence, objects, input) -> OK | ERROR
+```
 
----
+A certificate does not transmit rule implementations. It only references rule ids.
 
-## 4. Evidence semantics (normative)
-
-Evidence is computational fuel for the verifier.
-
-- The mathematical identity of the proved fact depends strictly on `claim.pred` and `claim.args`.
-- Evidence MAY vary without changing the proved fact, as long as the verifier accepts.
-- If a rule declares evidence required, the verifier MUST reject nodes with missing or ill-typed evidence.
-
-Evidence MUST NOT be used to smuggle non-determinism into verification:
-- verifiers MUST NOT perform network I/O,
-- MUST NOT depend on time,
-- MUST NOT depend on randomized choices.
+The verifier rejects any rule id that is not present in the active ruleset or not implemented by the verifier.
 
 ---
 
-## 5. Proof ordering and premises (normative)
+## 3. Rule ids and versioning
 
-`proof.facts[]` MUST be topologically ordered (see `overview.md`).
+Rule ids are stable and versioned, for example:
 
-For each fact node:
-- Every premise id MUST refer to a fact node that appears **strictly earlier** in the array.
-- The verifier MUST reject forward references.
+```text
+disc.QQ.compute@1
+factorization.QQ.monic@1
+nonsquare.QQ.isqrt@2
+galois_group.QQ.deg5.S5@1
+radical_roots.QQ.deg4.ferrari.depressed_monic@2
+```
 
-Premises are passed to the rule checker as *already-verified claims*.
-
----
-
-## 6. Rule families (verification styles)
-
-OpenGalois distinguishes two verification styles.
-
-### 6.1 Computational rules
-
-Computational rules verify a claim by performing local deterministic computations over objects.
-
-Two common subcases:
-
-1. **Recompute-and-compare**:
-   - The verifier recomputes the claimed value and compares.
-   - Evidence is typically not required.
-   - Example: `disc.compute@1` verifies `DiscEq(f, D)`.
-
-2. **Verify-evidence**:
-   - The verifier checks the evidence with local computations.
-   - Evidence is required.
-   - Example: a factorization rule verifies that `f = unit * Π factors` by multiplying exactly.
-
-A computational rule MUST define:
-- the precise decoding and canonicality requirements of objects it consumes,
-- the exact operations to execute,
-- the equality notion used for comparisons.
-
-### 6.2 Theorem rules
-
-Theorem rules justify a *fixed theorem conclusion* by checking:
-- that required premises are present,
-- that premise bindings are consistent (e.g., the same input polynomial),
-- that any side-conditions are met (e.g., degree constraints).
-
-Theorem rules MUST NOT implement global decision procedures.
-In particular, theorem rules MUST NOT:
-- perform searches over a global decision tree,
-- consult large classifier tables to “discover” the conclusion,
-- factor polynomials as part of classification.
-
-Example: `galois.quintic.is_S5@1` verifies the claim `IsGaloisGroupS5($input)` when provided the
-required invariants as premises (e.g., irreducibility, non-square discriminant, resolvent property).
+If a rule's acceptance behavior changes in a way that could change accept/reject outcomes, the rule version must be bumped.
 
 ---
 
-## 7. Error handling and determinism (normative)
+## 4. Rule interface
 
-A verifier MUST:
-- reject a certificate upon the first rule failure (it MAY additionally report an error code),
-- produce deterministic accept/reject results for a fixed certificate + ruleset.
+Each rule specifies:
 
-Rules SHOULD define stable error codes to support reproducible debugging and fixtures.
+1. **Claim pattern**: predicate and argument kinds it can prove.
+2. **Premise patterns**: required premises and binding constraints.
+3. **Evidence schema**: whether evidence is required, and its shape.
+4. **Verifier obligations**: exact deterministic checks.
+5. **Failure codes**: stable diagnostic labels.
+
+These specifications must be precise enough for independent verifier implementations.
+
+---
+
+## 5. Evidence
+
+Evidence is computational fuel.
+
+- Evidence does not change the mathematical identity of the claim.
+- Evidence may vary while proving the same claim.
+- If a rule requires evidence, missing or ill-typed evidence causes rejection.
+- Evidence must not introduce nondeterminism.
 
 ---
 
-## 8. Rule documentation requirements (normative)
+## 6. Premises and proof order
 
-For each rule in a ruleset, the project MUST provide a normative rule document or machine-readable
-rule specification that includes:
+`proof.facts` must be topologically ordered.
 
-- Rule id and version
-- Claim pattern (predicate + argument kinds)
-- Premise patterns and binding constraints
-- Evidence requirements (schema)
-- Verifier algorithm (step-by-step)
-- Failure modes / error codes
-- At least one passing fixture and one failing fixture (see `ruleset.md`)
+Every premise id of a fact node must refer to a fact node that appears strictly earlier in the array.
 
-This documentation is part of the ruleset contract and is required for third-party verifier authors.
+The verifier rejects:
+
+- unknown premise ids;
+- forward references;
+- duplicated fact ids.
 
 ---
+
+## 7. Computational rules
+
+Computational rules verify a claim by local exact computation.
+
+Examples:
+
+- `disc.QQ.compute@1`: recompute a discriminant.
+- `factorization.QQ.monic@1`: multiply factors and compare.
+- `sqrt.QQ.check@1`: verify a rational square root.
+- `nonsquare.QQ.isqrt@2`: prove a rational is not a square.
+
+A computational rule must define:
+
+- decoding requirements;
+- exact operations;
+- exact equality notion;
+- evidence requirements, if any.
+
+---
+
+## 8. Theorem rules
+
+Theorem rules justify a fixed mathematical conclusion by checking premises and side conditions.
+
+Examples:
+
+- `galois_group.QQ.deg4.S4@2`;
+- `galois_group.QQ.deg5.F20@1`;
+- `solvable_by_radicals.QQ.from_galois_group@1`.
+
+A theorem rule must not run an unspecified global decision procedure. It only checks that the required certified premises are present and bound correctly.
+
+---
+
+## 9. Rule documentation
+
+Every rule in a public ruleset should have a document under:
+
+```text
+docs/rulesets/<ruleset_id>/<rule_id>.md
+```
+
+For `le5-core@1`, this means:
+
+```text
+docs/rulesets/le5-core@1/
+```
+
+Each rule document should include:
+
+- rule id;
+- claim;
+- premises;
+- evidence;
+- theoretical justification where relevant;
+- verifier algorithm;
+- failure codes;
+- fixtures.

@@ -1,82 +1,108 @@
-# OpenGalois v3 Facts (Predicate Catalog)
+# OpenGalois v3 Facts
 
-This document defines the *fact language* used by OpenGalois v3 certificates and the initial
-predicate catalog for the first ruleset.
-It is normative unless explicitly marked as non-normative.
+This document describes the generic fact language used by OpenGalois v3 certificates.
 
-## 1. Facts in v3
+Concrete predicate names, arities and argument kinds are defined by the active ruleset. For the current public ruleset, see:
 
-A **Fact** is a typed proposition:
+```text
+docs/rulesets/le5-core@1/facts.md
+rulesets/le5-core@1/facts.yaml
+```
 
-- `pred(args...)`
+---
 
-represented in JSON as:
+## 1. Facts
+
+A fact is a typed mathematical proposition:
+
+```text
+pred(args...)
+```
+
+In JSON, a claim is represented as:
 
 ```json
 {
   "pred": "SomePredicate",
-  "args": [{"ref":"$input"}, {"ref":"int:D"}]
+  "args": [{"ref": "$input"}, {"ref": "some:object"}]
 }
 ```
 
-### 1.1 Normative identity of a fact
-
-The mathematical identity of a fact depends **only** on:
-
-* `pred`
-* `args` (including the referenced object values)
-
-Evidence used by a rule does not change the statement being proven; it is computational fuel.
-
-### 1.2 Typing and arity
-
-* The active ruleset defines a **fact catalog** that assigns each `pred`:
-
-  * arity (number of args),
-  * expected object kinds per arg,
-  * semantic meaning.
-
-The verifier MUST reject any fact whose:
-
-* `pred` is not in the catalog, or
-* `args` length/types do not match the catalog.
-
-### 1.3 `$input` typing
-
-Within a ruleset for polynomials over Q, `$input` is treated as an implicit `PolyQQ` object whose
-coefficients are given by `input.coeffs_qq`.
-
-Rules may refer to `$input` directly in fact args.
+The verifier does not trust a claim merely because it appears in the certificate. A claim is accepted only when it is the claim of a fact node whose rule application verifies.
 
 ---
 
-## 2. Example facts (JSON)
+## 2. Fact identity
 
-### Example: discriminant and non-square
+The mathematical identity of a fact depends on:
+
+- `pred`;
+- `args`, including the referenced object values.
+
+Evidence does not change what is being claimed. Evidence is only computational fuel for the checker of a particular rule application.
+
+---
+
+## 3. Typing and arity
+
+The active ruleset assigns each predicate:
+
+- an arity;
+- expected object kinds for each argument;
+- a mathematical meaning.
+
+The verifier rejects any claim whose predicate is not in the ruleset catalog, whose arity is wrong, or whose referenced objects have incompatible kinds.
+
+`$input` is treated as an implicit `PolyQQ` object whose coefficients are given by `input.coeffs_qq`.
+
+---
+
+## 4. Examples for `le5-core@1`
+
+### Discriminant
 
 ```json
 {
-  "pred": "DiscEq",
-  "args": [{"ref":"$input"},{"ref":"int:D"}]
+  "pred": "Discriminant",
+  "args": [{"ref": "$input"}, {"ref": "rat:D"}]
 }
 ```
 
+### Non-square rational
+
 ```json
 {
-  "pred": "NonSquareZ",
-  "args": [{"ref":"int:D"}]
+  "pred": "NonSquareQQ",
+  "args": [{"ref": "rat:D"}]
 }
 ```
 
-### Example: final claim
+### Galois group
 
 ```json
 {
-  "pred": "IsGaloisGroupS5",
-  "args": [{"ref":"$input"}]
+  "pred": "GaloisGroup",
+  "args": [{"ref": "$input"}, {"ref": "group:S5"}]
+}
+```
+
+### Radical roots
+
+```json
+{
+  "pred": "RadicalRoots",
+  "args": [{"ref": "$input"}, {"ref": "rlist:roots"}]
 }
 ```
 
 ---
 
----
+## 5. Current predicate catalog
+
+The authoritative catalog for the current public ruleset is:
+
+```text
+docs/rulesets/le5-core@1/facts.md
+```
+
+This generic document should not duplicate every ruleset-local predicate. Its purpose is to explain how facts work structurally.

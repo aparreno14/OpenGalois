@@ -1,460 +1,246 @@
-\# OpenGalois v3 Certificate Format (Facts/Rules)
+# OpenGalois v3 Certificate Format
 
+This document describes the on-wire JSON format for OpenGalois certificates with schema version `3.0.0`.
 
+It is normative for the public schema. Rule-specific mathematical obligations live in the selected ruleset, currently `le5-core@1`.
 
-This document specifies the on-wire JSON format for schema version `3.0.0`.
+---
 
-It is normative.
-
-
-
-\## 1. Top-level structure
-
-
+## 1. Top-level structure
 
 A certificate is a JSON object with the following top-level keys:
 
+- `$schema` (optional): schema URI.
+- `meta` (required): generator metadata and ruleset selection.
+- `input` (required): the polynomial over `Q`.
+- `objects` (optional): object store for shared derived objects.
+- `proof` (required): proved facts, topologically ordered.
+- `extensions` (optional): namespaced extension point.
+- `summary` (optional): non-normative UX summary.
 
-
-\- `$schema` (optional): schema URI
-
-\- `meta` (required): generator metadata + ruleset selection
-
-\- `input` (required): the polynomial over Q (degree 1..5) + hash
-
-\- `objects` (optional): object store for shared derived objects
-
-\- `proof` (required): proved facts (topologically ordered)
-
-\- `extensions` (optional): namespaced extension point
-
-\- `summary` (optional): non-normative UX summary
-
-
-
-The verifier MUST ignore `summary` and any other non-normative fields for correctness.
-
-
+The verifier must ignore `summary` and all other non-normative fields when deciding correctness.
 
 ---
 
+## 2. `meta`
 
+`meta` is required and contains:
 
-\## 2. `meta`
+- `schema_version`: must equal `"3.0.0"`.
+- `generator`: non-empty string.
+- `backend`: non-empty string.
+- `ruleset_id`: non-empty string, for example `"le5-core@1"`.
 
-
-
-`meta` is required and MUST contain:
-
-
-
-\- `schema\_version`: MUST equal `"3.0.0"`
-
-\- `generator`: non-empty string
-
-\- `backend`: non-empty string
-
-\- `ruleset\_id`: non-empty string (e.g. `"quintic@1"`)
-
-
-
-`ruleset\_id` selects the set of allowed predicates and rules.
-
-The verifier MUST reject certificates referencing unknown rulesets.
-
-
+`ruleset_id` selects the set of allowed predicates and rules. The verifier rejects certificates referencing unknown or unsupported rulesets.
 
 ---
 
+## 3. `input`
 
+`input` describes the polynomial over `Q[x]`.
 
-\## 3. `input`
+Required fields:
 
+- `domain`: must be `"Q"`.
+- `variable`: must be `"x"`.
+- `ordering`: must be `"descending_degree"`.
+- `degree`: integer in `1..5`.
+- `coeffs_qq`: coefficients `[a_n, ..., a_0]` as canonical rational strings.
+- `canonicalization`: must be `"jcs-rfc8785"`.
+- `hash_alg`: must be `"sha256"`.
+- `hash_scope`: must be `"input_v1"`.
+- `hash`: SHA-256 hex digest of the scoped canonical input object.
 
+Coefficient constraints:
 
-`input` describes the polynomial over Q. Fields are as in v2:
-
-
-
-\- `domain`: MUST be `"Q"`
-
-\- `variable`: MUST be `"x"`
-
-\- `ordering`: MUST be `"descending\_degree"`
-
-\- `degree`: integer in `\[1..5]`
-
-\- `coeffs\_qq`: coefficients `\[a\_n, ..., a\_0]` as canonical Q strings
-
-\- `canonicalization`: MUST be `"jcs-rfc8785"`
-
-\- `hash\_alg`: MUST be `"sha256"`
-
-\- `hash\_scope`: MUST be `"input\_v1"`
-
-\- `hash`: sha256 hex of the scoped canonical input object
-
-
-
-\### Coefficient constraints
-
-
-
-\- `coeffs\_qq` MUST have length `degree + 1`.
-
-\- The first coefficient (`a\_n`) MUST be nonzero in canonical encoding.
-
-
+- `coeffs_qq` has length `degree + 1`.
+- The first coefficient `a_n` is nonzero in canonical encoding.
+- Coefficients are canonical rational strings:
+  - `"0"`;
+  - nonzero integers such as `"7"` or `"-3"`;
+  - reduced fractions such as `"5/2"` or `"-7/10"` with positive denominator greater than 1.
 
 ---
 
+## 4. `objects`
 
+`objects` is a map from stable object ids to object records.
 
-\## 4. `objects` (Object store)
+Object ids match:
 
+```text
+[A-Za-z0-9_.:-]+
+```
 
+Each object record contains:
 
-`objects` is an optional map from stable object ids to object records.
+- `kind`: non-empty string.
 
+Payload fields depend on the object kind. Canonical object encodings are specified in `docs/objects.md` and may be tightened by the active ruleset.
 
-
-\### 4.1 Object id
-
-
-
-Object ids MUST match:
-
-
-
-\- `\[A-Za-z0-9\_.:-]+`
-
-
-
-\### 4.2 Object record
-
-
-
-Each object record MUST contain:
-
-
-
-\- `kind`: non-empty string
-
-
-
-It MAY contain additional properties (payload), but their semantics are defined by:
-
-\- the object kind’s canonical encoding rules (spec + ruleset), and
-
-\- the rules that consume the object.
-
-
-
-Objects referenced by claims MUST be encoded canonically.
-
-
+Objects referenced by claims must be encoded canonically. A verifier rejects dangling object references.
 
 ---
 
+## 5. `proof`
 
+`proof` contains:
 
-\## 5. `proof` (Proved facts)
+- `version`: proof-container version, normally `"1.0"`.
+- `facts`: array of fact nodes, with at least one item.
+- `goals`: optional array of fact ids representing intended final conclusions.
 
+### 5.1 Fact nodes
 
+Each item of `proof.facts` is a fact node.
 
-`proof` MUST contain:
+Required fields:
 
-
-
-\- `version`: string (format version of the proof container; default `"1.0"`)
-
-\- `facts`: array of fact nodes (minItems = 1)
-
-\- `goals`: optional array of fact node ids (intended final conclusions)
-
-
-
-\### 5.1 FactNode
-
-
-
-Each element of `proof.facts\[]` is a FactNode with required fields:
-
-
-
-\- `id`: unique stable identifier for this node
-
-\- `claim`: a Fact (predicate + object references)
-
-\- `rule`: a versioned rule identifier defined by the ruleset
-
-
+- `id`: unique stable identifier for this node.
+- `claim`: a fact, namely a predicate and object references.
+- `rule`: a versioned rule identifier defined by the active ruleset.
 
 Optional fields:
 
+- `premises`: array of earlier fact ids; default is empty.
+- `evidence`: rule-defined object; required only when the rule requires it.
+- `statement`: non-normative string.
+- `data`: non-normative object.
 
+### 5.2 Claims
 
-\- `premises`: array of fact node ids (default empty)
-
-\- `evidence`: object (rule-defined) (optional unless required by the rule)
-
-\- `statement`: string (non-normative)
-
-\- `data`: object (non-normative)
-
-
-
-\#### 5.1.1 `claim` (Fact)
-
-
-
-A Fact is an object:
-
-
-
-\- `pred`: predicate symbol (string) from the ruleset’s fact catalog
-
-\- `args`: ordered array of object references (`ObjectRef`)
-
-
-
-The verifier MUST type-check `pred` and the arity/types of `args` against the ruleset’s fact catalog.
-
-
-
-\#### 5.1.2 `rule`
-
-
-
-`rule` is a string, e.g.:
-
-
-
-\- `"disc.compute@1"`
-
-\- `"factorization.QQ.monic@1"`
-
-\- `"galois.quintic.is\_S5@1"`
-
-
-
-The verifier MUST reject unknown rules (not present in the selected ruleset).
-
-
-
-\#### 5.1.3 `premises` and ordering (normative)
-
-
-
-`proof.facts\[]` MUST be \*\*topologically ordered\*\*.
-
-
-
-A fact node MAY ONLY reference in its `premises` the ids of fact nodes that appear \*\*strictly earlier\*\* in the `proof.facts\[]` array.
-
-
-
-The verifier MUST reject the certificate immediately if a forward reference is detected.
-
-
-
-This rule ensures:
-
-\- the dependency graph is acyclic by construction,
-
-\- a verifier can operate in a single forward pass without building a full dependency graph.
-
-
-
-\#### 5.1.4 `evidence` (normative semantics)
-
-
-
-Evidence is rule-defined computational fuel.
-
-
-
-\- If a rule declares evidence required, then the verifier MUST reject nodes with missing/ill-typed evidence.
-
-\- The mathematical identity of the proved fact depends strictly on `claim.pred` and `claim.args`, not on `evidence`.
-
-
-
-\#### 5.1.5 Non-normative fields
-
-
-
-\- `statement` and `data` are non-normative and MUST NOT affect acceptance.
-
-
-
----
-
-
-
-\## 6. `goals`
-
-
-
-`proof.goals` (if present) is a list of fact ids that represent the intended final claims.
-
-
-
-\- Verifiers MAY use `goals` to determine which conclusions to report.
-
-\- Correctness MUST NOT depend on `goals`; they are a convenience for tooling.
-
-
-
----
-
-
-
-\## 7. `summary` (Non-normative)
-
-
-
-`summary` MAY contain UX fields such as:
-
-
-
-\- `status`
-
-\- `galois\_group`
-
-\- `transitive\_group\_id`
-
-\- `solvable\_by\_radicals`
-
-
-
-The verifier MUST ignore `summary` when deciding acceptance.
-
-
-
----
-
-
-
-\## 8. Minimal example certificate (structure only)
-
-
+A claim has the form:
 
 ```json
-
 {
-
-&nbsp; "meta": {
-
-&nbsp;   "schema\_version": "3.0.0",
-
-&nbsp;   "generator": "opengalois",
-
-&nbsp;   "backend": "sympy",
-
-&nbsp;   "ruleset\_id": "quintic@1"
-
-&nbsp; },
-
-&nbsp; "input": {
-
-&nbsp;   "domain": "Q",
-
-&nbsp;   "variable": "x",
-
-&nbsp;   "ordering": "descending\_degree",
-
-&nbsp;   "degree": 5,
-
-&nbsp;   "coeffs\_qq": \["1","0","0","-1","0","-1"],
-
-&nbsp;   "canonicalization": "jcs-rfc8785",
-
-&nbsp;   "hash\_alg": "sha256",
-
-&nbsp;   "hash\_scope": "input\_v1",
-
-&nbsp;   "hash": "0000000000000000000000000000000000000000000000000000000000000000"
-
-&nbsp; },
-
-&nbsp; "objects": {
-
-&nbsp;   "int:D": {"kind": "IntZ", "value": "-283"}
-
-&nbsp; },
-
-&nbsp; "proof": {
-
-&nbsp;   "version": "1.0",
-
-&nbsp;   "facts": \[
-
-&nbsp;     {
-
-&nbsp;       "id": "F2",
-
-&nbsp;       "claim": {
-
-&nbsp;         "pred": "DiscEq",
-
-&nbsp;         "args": \[{"ref":"$input"},{"ref":"int:D"}]
-
-&nbsp;       },
-
-&nbsp;       "rule": "disc.compute@1",
-
-&nbsp;       "premises": \[]
-
-&nbsp;     }
-
-&nbsp;   ],
-
-&nbsp;   "goals": \["F2"]
-
-&nbsp; }
-
+  "pred": "Discriminant",
+  "args": [{"ref": "$input"}, {"ref": "rat:disc"}]
 }
+```
 
+The verifier type-checks `pred` and the arity and kinds of `args` against the active ruleset's fact catalog.
 
+For `le5-core@1`, examples include:
 
-(Note: the `hash` above is placeholder; a real certificate MUST have the correct hash.)
+```text
+IrreducibleQQ(f)
+FactorizationMonicQQ(f, factors, unit)
+DepressedMonicEq(f, g)
+Degree(f, n)
+Discriminant(f, D)
+IsSquareQQ(q)
+NonSquareQQ(q)
+ResolventQQ(R, f, p)
+GaloisGroup(f, G)
+SolvableByRadicals(f)
+NonSolvableByRadicals(f)
+RadicalRoots(f, roots)
+```
 
+### 5.3 Rules
 
+`rule` is a string such as:
+
+```text
+disc.QQ.compute@1
+factorization.QQ.monic@1
+galois_group.QQ.deg5.S5@1
+radical_roots.QQ.deg4.ferrari.depressed_monic@2
+```
+
+The verifier rejects unknown rules and rules not supported by the selected ruleset.
+
+### 5.4 Premises and proof order
+
+`proof.facts` must be topologically ordered.
+
+A fact node may only reference, in `premises`, fact ids that appear strictly earlier in `proof.facts`.
+
+The verifier rejects:
+
+- unknown premise ids;
+- forward premise references;
+- duplicated fact ids.
+
+This makes the proof graph acyclic by construction and permits single-pass verification.
+
+### 5.5 Evidence
+
+Evidence is computational fuel for rule checkers.
+
+If a rule declares evidence required, the verifier rejects nodes with missing or ill-typed evidence.
+
+The mathematical identity of a proved fact depends on `claim.pred` and `claim.args`, not on `evidence`.
+
+### 5.6 Non-normative fields
+
+The fields `statement`, `data`, `summary`, rendered explanations and UI metadata are non-normative. They do not affect verification.
 
 ---
 
+## 6. `goals`
 
+`proof.goals`, when present, is a list of fact ids representing the intended final claims.
 
-\## 9. Required verifier pipeline (normative behavior)
-
-
-
-A conforming verifier MUST:
-
-
-
-1\. Validate JSON against the schema.
-
-2\. Validate input hash according to `hash\_alg` and `hash\_scope`.
-
-3\. Load the ruleset specified by `meta.ruleset\_id`.
-
-4\. Validate that each claim predicate exists in the ruleset’s fact catalog and type-check its arguments.
-
-5\. Verify `proof.facts\[]` in order:
-
-
-
-&nbsp;  \* for each node, validate that all `premises` reference earlier nodes,
-
-&nbsp;  \* dispatch to the referenced rule checker using already-verified premises,
-
-&nbsp;  \* reject immediately on the first failure.
-
-6\. Accept the certificate iff all fact nodes verify successfully.
-
-
+Tools may use goals to decide what to display, but verification of the fact list itself does not depend on goals.
 
 ---
 
+## 7. Minimal structural example
+
+```json
+{
+  "meta": {
+    "schema_version": "3.0.0",
+    "generator": "opengalois",
+    "backend": "python",
+    "ruleset_id": "le5-core@1"
+  },
+  "input": {
+    "domain": "Q",
+    "variable": "x",
+    "ordering": "descending_degree",
+    "degree": 5,
+    "coeffs_qq": ["1", "0", "0", "0", "-1", "-1"],
+    "canonicalization": "jcs-rfc8785",
+    "hash_alg": "sha256",
+    "hash_scope": "input_v1",
+    "hash": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "objects": {
+    "rat:disc": {"kind": "RatQQ", "value": "-283"}
+  },
+  "proof": {
+    "version": "1.0",
+    "facts": [
+      {
+        "id": "F1",
+        "claim": {
+          "pred": "Discriminant",
+          "args": [{"ref": "$input"}, {"ref": "rat:disc"}]
+        },
+        "rule": "disc.QQ.compute@1",
+        "premises": []
+      }
+    ],
+    "goals": ["F1"]
+  }
+}
+```
+
+The hash above is a placeholder. A real certificate must contain the correct input hash.
+
+---
+
+## 8. Required verifier pipeline
+
+A conforming verifier:
+
+1. validates the JSON shape against the certificate schema;
+2. recomputes and checks the input hash;
+3. loads the ruleset specified by `meta.ruleset_id`;
+4. validates object references and object canonicality as required;
+5. validates fact predicate arity and argument kinds;
+6. checks proof ordering and premise references;
+7. verifies each fact node by dispatching to its rule checker;
+8. accepts iff all normative checks succeed.
